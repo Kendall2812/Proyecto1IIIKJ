@@ -5,6 +5,8 @@
  */
 package proyectoicuatriiii;
 
+import VistaUsuario.loginAdminUsuario;
+
 /**
  *
  * @author Kendall
@@ -15,7 +17,8 @@ public class ProyectoICuatriIII {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        loginAdminUsuario user = new loginAdminUsuario();
+        user.setVisible(true);
     }
     
 }
