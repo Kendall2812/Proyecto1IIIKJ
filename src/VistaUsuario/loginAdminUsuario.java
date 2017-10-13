@@ -40,7 +40,7 @@ public class loginAdminUsuario extends javax.swing.JFrame {
                 accesoAdminstrador acceso = new accesoAdminstrador();
                 acceso.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog(null, "Error de Datos");
+                JOptionPane.showMessageDialog(null, "Usuario o Contraseña no Validos o No se encuentra Registrado");
             }
         } else {
             verificarDatos datosUser = new verificarDatos();
@@ -49,7 +49,7 @@ public class loginAdminUsuario extends javax.swing.JFrame {
             if (valores == true) {
                 System.out.println("Entro a el programa");
             } else {
-                JOptionPane.showMessageDialog(null, "Error de Datos");
+                JOptionPane.showMessageDialog(null, "Usuario o Contraseña no Validos o No se encuentra Registrado");
             }
         }
         

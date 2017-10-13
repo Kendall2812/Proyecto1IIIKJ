@@ -22,7 +22,7 @@ public class archivosProyecto {
         
         File administrador;
         try{
-            administrador = new File("archivoAdministrador");
+            administrador = new File("archivoAdministrador.txt");
             if(administrador.createNewFile()){
                 
             }
@@ -31,7 +31,7 @@ public class archivosProyecto {
             JOptionPane.showMessageDialog(null, "No se creo el archio" + e);
         }
         
-        File direccion = new File("archivoAdministrador");
+        File direccion = new File("archivoAdministrador.txt");
 
         try {
             FileReader leer = new FileReader(direccion);
@@ -58,7 +58,7 @@ public class archivosProyecto {
         
         File usuarios;
         try {
-            usuarios = new File("archivoUser");
+            usuarios = new File("archivoUser.txt");
             if (usuarios.createNewFile()) {
 
             }
@@ -67,7 +67,7 @@ public class archivosProyecto {
             JOptionPane.showMessageDialog(null, "No se creo el archio" + e);
         }
 
-        File direccion = new File("archivoUser");
+        File direccion = new File("archivoUser.txt");
 
         try {
             FileReader leer = new FileReader(direccion);
@@ -80,5 +80,56 @@ public class archivosProyecto {
             System.out.println("Error al leer el archivo: " + e);
         }
         return datos1; 
+    }
+    public void registrarDiscoMusica(String nombreDisco, String autor, String genero, String precio, String cantidadDisponible, String cancion1, String cancion2){
+        //Se crea el archivo para registrar la infomacion de los discos de musica.
+        File DiscosMusica;
+        try {
+            DiscosMusica = new File("archivoDiscosMusica.txt");
+            if (DiscosMusica.createNewFile()) {
+
+            }
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "No se creo el archio" + e);
+        }
+        //se escribe la informacion de los discos de musica.
+        File direccion = new File("archivoDiscosMusica.txt");
+        
+        try{
+            try(FileWriter escribir = new FileWriter(direccion,true)){
+                escribir.write(nombreDisco + " ");
+                escribir.write(autor + " ");
+                escribir.write(genero + " ");
+                escribir.write(precio + " ");
+                escribir.write(cantidadDisponible + " ");
+                escribir.write(cancion1 + " ");
+                escribir.write(cancion2 + " ");
+                escribir.close();
+                
+                JOptionPane.showMessageDialog(null, "Se registro con exito");
+            }
+            
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error no se pudo registrar la informacion en el archivo" + e);
+        }
+    }
+    public void registrosUsuarios(String nombre, String Clave, String Cedula, String correo){
+        File direccion = new File("archivoUser.txt");
+        
+        try{
+            try(FileWriter escribir = new FileWriter(direccion,true)){
+                escribir.write(nombre + " ");
+                escribir.write(Clave + " ");
+                escribir.write(Cedula + " ");
+                escribir.write(correo + " ");
+                escribir.close();
+                
+                JOptionPane.showMessageDialog(null, "Se registro con exito");
+            }
+            
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error no se pudo leer el archivo" + e);
+        }
     }
 }
