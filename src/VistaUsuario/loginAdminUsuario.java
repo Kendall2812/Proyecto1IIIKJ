@@ -24,6 +24,8 @@ public class loginAdminUsuario extends javax.swing.JFrame {
         initComponents();
         this.getContentPane().setBackground(Color.gray);
         this.setTitle("LOGIN");
+        this.setBounds(10, 15, 394, 240);
+        setLocationRelativeTo(null);
     }
     public void datosUsuarios(){
         nombre = txtnombre.getText();
@@ -35,6 +37,8 @@ public class loginAdminUsuario extends javax.swing.JFrame {
 
             if (valores == true) {
                 System.out.println("Entro a el programa");
+                accesoAdminstrador acceso = new accesoAdminstrador();
+                acceso.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "Error de Datos");
             }
