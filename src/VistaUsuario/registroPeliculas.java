@@ -16,7 +16,7 @@ public class registroPeliculas extends javax.swing.JFrame {
     /**
      * Creates new form registroPeliculas
      */
-    //String nombre,
+    //String nombre, autor
     public registroPeliculas() {
         initComponents();
         this.getContentPane().setBackground(Color.gray);
