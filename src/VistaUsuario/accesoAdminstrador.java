@@ -66,8 +66,10 @@ public class accesoAdminstrador extends javax.swing.JFrame {
             jRbEliminarPelicula.setEnabled(true);
             btnIr.setEnabled(true);
             
-        }else if(Catalogo.equals("Selecionar")){
+        }else if(Catalogo.equals("Seleccionar")){
             JOptionPane.showMessageDialog(null, "Item no Valido");
+            bG1CatalogoPeliculas.clearSelection();
+            bG1CatalogoMusica.clearSelection();
         } 
         else {
             JOptionPane.showMessageDialog(null, "Error de Seleccion");
@@ -121,6 +123,7 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         jRbModificarPelicula = new javax.swing.JRadioButton();
         jRbEliminarPelicula = new javax.swing.JRadioButton();
         btnIr = new javax.swing.JButton();
+        btnCerrarCesión = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -136,7 +139,7 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Tipo de Catalogos");
 
-        MenuCatalogos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Musica", "Peliculas" }));
+        MenuCatalogos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Musica", "Peliculas" }));
         MenuCatalogos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuCatalogosActionPerformed(evt);
@@ -182,10 +185,22 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         jRbEliminarPelicula.setText("Eliminar Pelicula");
 
         btnIr.setBackground(new java.awt.Color(51, 204, 0));
+        btnIr.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnIr.setForeground(new java.awt.Color(255, 255, 255));
         btnIr.setText("Ir");
         btnIr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIrActionPerformed(evt);
+            }
+        });
+
+        btnCerrarCesión.setBackground(new java.awt.Color(255, 0, 0));
+        btnCerrarCesión.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnCerrarCesión.setForeground(new java.awt.Color(255, 255, 255));
+        btnCerrarCesión.setText("Cerrar Cesión");
+        btnCerrarCesión.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarCesiónActionPerformed(evt);
             }
         });
 
@@ -238,11 +253,15 @@ public class accesoAdminstrador extends javax.swing.JFrame {
                             .addComponent(jRbModificarPelicula)
                             .addComponent(jRbEliminarPelicula))))
                 .addGap(22, 22, 22))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnCerrarCesión))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addComponent(btnCerrarCesión)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -280,6 +299,12 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         opcionesMusica();
         opcionesPeliculas();
     }//GEN-LAST:event_btnIrActionPerformed
+
+    private void btnCerrarCesiónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarCesiónActionPerformed
+        loginAdminUsuario login = new loginAdminUsuario();
+        login.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnCerrarCesiónActionPerformed
 
     /**
      * @param args the command line arguments
@@ -320,6 +345,7 @@ public class accesoAdminstrador extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> MenuCatalogos;
     private javax.swing.ButtonGroup bG1CatalogoMusica;
     private javax.swing.ButtonGroup bG1CatalogoPeliculas;
+    private javax.swing.JButton btnCerrarCesión;
     private javax.swing.JButton btnIr;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

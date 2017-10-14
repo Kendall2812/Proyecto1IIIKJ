@@ -70,8 +70,9 @@ public class verificarDatos {
         datosMusica.registrarDiscoMusica(nombreDisco, autor, genero, precio, cantidadDisponible, cancion1, cancion2);
     }
 
-    public void registrarPelicula() {
-
+    public void registrarPelicula(String nombre, String autor, String categoria, String precio, String cantidad) {
+        archivosProyecto registroPelicula = new archivosProyecto();
+        registroPelicula.registrarPeliculas(nombre, autor, categoria, precio, cantidad);
     }
 
     public void buscarArchivo(String genero, DefaultTableModel tabla) {//busca los generos en el archivo

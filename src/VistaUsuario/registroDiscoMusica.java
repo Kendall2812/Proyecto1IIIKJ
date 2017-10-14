@@ -34,6 +34,14 @@ public class registroDiscoMusica extends javax.swing.JFrame {
         cancion2 = txtCancion2.getText();
         verificarDatos registroMusica = new verificarDatos();
         registroMusica.registrarDiscoMusica(nombreDisco,autor,genero,precio,cantidadDisponible,cancion1,cancion2);
+        txtNombreDisco.setText(" ");
+        txtNombreAutor.setText(" ");
+        //jCbGenero
+        txtPrecioDisco.setText(" ");
+        txtDisponibleCantidDisco.setText(" ");
+        txtCancion1.setText(" ");
+        txtCancion1.setText(" ");
+        
     }
 
     /**
@@ -61,7 +69,7 @@ public class registroDiscoMusica extends javax.swing.JFrame {
         txtCancion1 = new javax.swing.JTextField();
         txtCancion2 = new javax.swing.JTextField();
         btnRegistrarDisco = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,12 +116,12 @@ public class registroDiscoMusica extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(255, 0, 0));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Volver");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnRegresar.setBackground(new java.awt.Color(255, 0, 0));
+        btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnRegresarActionPerformed(evt);
             }
         });
 
@@ -154,7 +162,7 @@ public class registroDiscoMusica extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnRegistrarDisco)
                         .addGap(41, 41, 41)
-                        .addComponent(jButton2)))
+                        .addComponent(btnRegresar)))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -196,7 +204,7 @@ public class registroDiscoMusica extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrarDisco)
-                    .addComponent(jButton2))
+                    .addComponent(btnRegresar))
                 .addContainerGap())
         );
 
@@ -207,12 +215,11 @@ public class registroDiscoMusica extends javax.swing.JFrame {
        registrarDisco();
     }//GEN-LAST:event_btnRegistrarDiscoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         accesoAdminstrador acceso= new accesoAdminstrador();
         acceso.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -251,7 +258,7 @@ public class registroDiscoMusica extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrarDisco;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> jCbGenero;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -5,6 +5,7 @@
  */
 package VistaUsuario;
 
+import NegocioVeficarDatos.verificarDatos;
 import java.awt.Color;
 
 /**
@@ -16,7 +17,7 @@ public class registroPeliculas extends javax.swing.JFrame {
     /**
      * Creates new form registroPeliculas
      */
-    //String nombre, autor
+    String nombre, autor, categoria, precio, cantidad; 
     public registroPeliculas() {
         initComponents();
         this.getContentPane().setBackground(Color.gray);
@@ -24,7 +25,17 @@ public class registroPeliculas extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
     public void registroPelicula(){
-        
+        nombre = txtNombrePelicula.getText();
+        autor = txtAutorPelicula.getText();
+        categoria = jCbCategoriaPelicula.getSelectedItem().toString();
+        precio = txtPrecioPelicula.getText();
+        cantidad = txtPeliculasDiponibles.getText();
+        verificarDatos peliculas = new verificarDatos();
+        peliculas.registrarPelicula(nombre,autor,categoria,precio,cantidad);
+        txtNombrePelicula.setText(" ");
+        txtAutorPelicula.setText(" ");
+        txtPrecioPelicula.setText(" ");
+        txtPeliculasDiponibles.setText(" ");
     }
 
     /**
@@ -63,7 +74,7 @@ public class registroPeliculas extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Categoria");
 
-        jCbCategoriaPelicula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCbCategoriaPelicula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Comedia", "Terror", "Romantias", "Accion", "Suspenso" }));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -157,7 +168,9 @@ public class registroPeliculas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        // TODO add your handling code here:
+        accesoAdminstrador regresar = new accesoAdminstrador();
+        regresar.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnRegistrarPeliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPeliculaActionPerformed

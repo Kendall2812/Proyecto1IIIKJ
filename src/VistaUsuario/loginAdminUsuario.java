@@ -51,6 +51,7 @@ public class loginAdminUsuario extends javax.swing.JFrame {
                 System.out.println("Entro a el programa");
                 vistaUsuario vista= new vistaUsuario();
                 vista.setVisible(true);
+                dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario o Contraseña no Validos o No se encuentra Registrado");
             }

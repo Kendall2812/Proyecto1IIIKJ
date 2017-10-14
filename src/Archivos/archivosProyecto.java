@@ -129,7 +129,34 @@ public class archivosProyecto {
             }
             
         }catch(IOException e){
-            JOptionPane.showMessageDialog(null, "Error no se pudo leer el archivo" + e);
+            JOptionPane.showMessageDialog(null, "Error no se pudo registrar la informacion en el archivo" + e);
+        }
+    }
+    public void registrarPeliculas(String nombre, String autor, String categoria, String precio, String cantidad){
+        File Peliculas;
+        try{
+            Peliculas = new File("archivoPeliculas.txt");
+            if(Peliculas.createNewFile()){
+                
+            }
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error no se pudo crear el archivo" + e);
+        }
+        
+        File direccion = new File("archivoPeliculas.txt");
+        try{
+            try(FileWriter escribir = new FileWriter(direccion,true)){
+                escribir.write(nombre + " ");
+                escribir.write(autor + " ");
+                escribir.write(categoria + " ");
+                escribir.write(precio + " ");
+                escribir.write(cantidad + "\n");
+                escribir.close();
+                
+                JOptionPane.showMessageDialog(null, "Se registro con exito");
+            }
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error no se pudo registrar la informacion en el archivo" + e);
         }
     }
 }
