@@ -21,7 +21,7 @@ public class registroPeliculas extends javax.swing.JFrame {
         initComponents();
         this.getContentPane().setBackground(Color.gray);
         this.setTitle("Registro de Peliculas");
-        setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
     }
     public void registroPelicula(){
         

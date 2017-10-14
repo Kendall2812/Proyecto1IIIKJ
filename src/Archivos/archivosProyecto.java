@@ -98,13 +98,13 @@ public class archivosProyecto {
         
         try{
             try(FileWriter escribir = new FileWriter(direccion,true)){
-                escribir.write(nombreDisco + " ");
-                escribir.write(autor + " ");
-                escribir.write(genero + " ");
-                escribir.write(precio + " ");
-                escribir.write(cantidadDisponible + " ");
-                escribir.write(cancion1 + " ");
-                escribir.write(cancion2 + " ");
+                escribir.write(nombreDisco + ",");
+                escribir.write(autor + ",");
+                escribir.write(genero + ",");
+                escribir.write(precio + ",");
+                escribir.write(cantidadDisponible + ",");
+                escribir.write(cancion1 + ",");
+                escribir.write(cancion2 +"\n");
                 escribir.close();
                 
                 JOptionPane.showMessageDialog(null, "Se registro con exito");
@@ -122,7 +122,7 @@ public class archivosProyecto {
                 escribir.write(nombre + " ");
                 escribir.write(Clave + " ");
                 escribir.write(Cedula + " ");
-                escribir.write(correo + " ");
+                escribir.write(correo+"\n");
                 escribir.close();
                 
                 JOptionPane.showMessageDialog(null, "Se registro con exito");

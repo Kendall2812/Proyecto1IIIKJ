@@ -39,6 +39,7 @@ public class loginAdminUsuario extends javax.swing.JFrame {
                 System.out.println("Entro a el programa");
                 accesoAdminstrador acceso = new accesoAdminstrador();
                 acceso.setVisible(true);
+                dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario o Contraseña no Validos o No se encuentra Registrado");
             }
@@ -48,6 +49,8 @@ public class loginAdminUsuario extends javax.swing.JFrame {
             valores = datosUser.datosUsuarios(nombre, Clave);
             if (valores == true) {
                 System.out.println("Entro a el programa");
+                vistaUsuario vista= new vistaUsuario();
+                vista.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario o Contraseña no Validos o No se encuentra Registrado");
             }
@@ -160,6 +163,7 @@ public class loginAdminUsuario extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         registroUsuario registro = new registroUsuario();
         registro.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**

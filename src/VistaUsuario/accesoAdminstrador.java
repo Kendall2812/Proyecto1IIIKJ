@@ -78,6 +78,7 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         if(jrbRegistroDisco.isSelected()){
             registroDiscoMusica registroM = new registroDiscoMusica();
             registroM.setVisible(true);
+            dispose();
                     
         }else if(jRbModificarDisco.isSelected()){
             
@@ -90,6 +91,7 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         if(jrbRegistroPelicula.isSelected()){
             registroPeliculas registroP = new registroPeliculas();
             registroP.setVisible(true);
+            dispose();
             
         }else if(jRbModificarPelicula.isSelected()){
             
@@ -134,7 +136,7 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Tipo de Catalogos");
 
-        MenuCatalogos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecionar", "Musica", "Peliculas" }));
+        MenuCatalogos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Musica", "Peliculas" }));
         MenuCatalogos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuCatalogosActionPerformed(evt);

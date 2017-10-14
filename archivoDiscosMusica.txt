@@ -1,1 +1,3 @@
-Cumbias2018 kendall Cumbia 15000 5 El popo La coloreteada 
+Perdido,andres,Merengue,3000,19,hola1,hola2
+Saturday Night Fever,Bee Gees,Clasica,40000,5,Stayin' Alive,Night Fever
+regreso,elvis crespo,Merengue,10000,10,suavemente,bailar

@@ -25,7 +25,6 @@ public class registroDiscoMusica extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
     public void registrarDisco(){
-        
         nombreDisco = txtNombreDisco.getText();
         autor = txtNombreAutor.getText();
         genero = jCbGenero.getSelectedItem().toString();
@@ -74,7 +73,7 @@ public class registroDiscoMusica extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Autor");
 
-        jCbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Merengue", "Clasica", "Salsa", "PasoDoble", "Cumbia" }));
+        jCbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Merengue", "Clasica", "Salsa", "PasoDoble", "Cumbia" }));
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -112,6 +111,11 @@ public class registroDiscoMusica extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(255, 0, 0));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Volver");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -202,6 +206,13 @@ public class registroDiscoMusica extends javax.swing.JFrame {
     private void btnRegistrarDiscoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarDiscoActionPerformed
        registrarDisco();
     }//GEN-LAST:event_btnRegistrarDiscoActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        accesoAdminstrador acceso= new accesoAdminstrador();
+        acceso.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
