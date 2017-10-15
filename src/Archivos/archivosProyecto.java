@@ -8,6 +8,7 @@ package Archivos;
 import java.io.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -158,5 +159,47 @@ public class archivosProyecto {
         }catch(IOException e){
             JOptionPane.showMessageDialog(null, "Error no se pudo registrar la informacion en el archivo" + e);
         }
+    }
+    public void buscarGeneroMusicaPelicual(String genero,DefaultTableModel tabla){
+        DefaultTableModel tempo = (DefaultTableModel) tabla;
+        String temp = "";
+        try {
+            try (BufferedReader bf = new BufferedReader(new FileReader("archivoDiscosMusica.txt"))) {
+                String bfRead;
+                while ((bfRead = bf.readLine()) != null) {
+                    temp = bfRead;
+                    String lista = temp;
+                    String[] lista1 = lista.split(",");
+                    if (genero.equals(lista1[2])) {
+                        Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3], lista1[4], lista1[5], lista1[6]};
+                        tempo.addRow(nuevo);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null ,"No se encontro ningun disco con el genero que selecciono" + e);
+        }
+    }
+    public ArrayList leerDatosMusica(){
+        String linea7, linea8; 
+        String[] nombreDisco;
+        ArrayList datosDisco = new ArrayList();
+       
+        File direccion = new File("archivoDiscosMusica.txt");
+        try{
+            FileReader leer = new FileReader(direccion);
+            BufferedReader archivo = new BufferedReader(leer);
+      
+            while((linea7 = archivo.readLine())!= null){
+                nombreDisco = linea7.split(",");
+                
+                for(int x = 0; x < nombreDisco.length; x++){
+                    datosDisco.add(nombreDisco[x]);
+                }
+            }
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
+        }
+        return datosDisco;
     }
 }

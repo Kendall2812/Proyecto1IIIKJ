@@ -8,6 +8,7 @@ package NegocioVeficarDatos;
 import Archivos.archivosProyecto;
 import java.io.*;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,6 +21,7 @@ public class verificarDatos {
     String nombre1, clave1;
     String[] datosUser;
     ArrayList Usuario = new ArrayList();
+    ArrayList datosDisco = new ArrayList();
     boolean valor;
 
     public boolean datosAdministrador(String nombre, String Clave) {//verifica el usuario y clave del administrador
@@ -76,23 +78,13 @@ public class verificarDatos {
     }
 
     public void buscarArchivo(String genero, DefaultTableModel tabla) {//busca los generos en el archivo
-        DefaultTableModel tempo = (DefaultTableModel) tabla;
-        String temp = "";
-        try {
-            try (BufferedReader bf = new BufferedReader(new FileReader("archivoDiscosMusica.txt"))) {
-                String bfRead;
-                while ((bfRead = bf.readLine()) != null) {
-                    temp = bfRead;
-                    String lista = temp;
-                    String[] lista1 = lista.split(",");
-                    if (genero.equals(lista1[2])) {
-                        Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3], lista1[4], lista1[5], lista1[6]};
-                        tempo.addRow(nuevo);
-                    }
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("No se encontro el archivo" + e);
-        }
+        archivosProyecto buscarInfo = new archivosProyecto();
+        buscarInfo.buscarGeneroMusicaPelicual(genero, (DefaultTableModel) tabla);   
+    }
+    public ArrayList editarMusica(){
+        ArrayList nombre = new ArrayList();
+        archivosProyecto buscarNombreDisco = new archivosProyecto();
+        datosDisco = buscarNombreDisco.leerDatosMusica();
+        return datosDisco;
     }
 }

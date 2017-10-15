@@ -23,12 +23,13 @@ public class vistaUsuario extends javax.swing.JFrame {
         initComponents();
         this.getContentPane().setBackground(Color.gray);
         this.setLocationRelativeTo(null);
+        this.setTitle("Vista Usuario");
         ComboxCateg.setEnabled(false);
 //        table.setVisible(false);
     }
 
     public void mostrarDatosComb() {
-        if (jMenu1.isSelected()) {
+        if (menuMusica.isSelected()) {
             ComboxCateg.setEnabled(true);
             ComboxCateg.removeAllItems();
             ComboxCateg.addItem("Merengue");
@@ -36,10 +37,10 @@ public class vistaUsuario extends javax.swing.JFrame {
             ComboxCateg.addItem("Salsa");
             ComboxCateg.addItem("PasoDoble");
             ComboxCateg.addItem("Cumbia");
-            jMenu1.setEnabled(false);
-            jMenu2.setEnabled(true);
+            menuMusica.setEnabled(false);
+            menuPeliculas.setEnabled(true);
         
-        } else if (jMenu2.isSelected()) {
+        } else if (menuPeliculas.isSelected()) {
             ComboxCateg.setEnabled(true);
             ComboxCateg.removeAllItems();
             ComboxCateg.addItem("1");
@@ -47,8 +48,8 @@ public class vistaUsuario extends javax.swing.JFrame {
             ComboxCateg.addItem("3");
             ComboxCateg.addItem("4");
             ComboxCateg.addItem("5");
-            jMenu1.setEnabled(true);
-            jMenu2.setEnabled(false);
+            menuMusica.setEnabled(true);
+            menuPeliculas.setEnabled(false);
         }
     }
     
@@ -77,10 +78,10 @@ public class vistaUsuario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        btnBuscarCategorias = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        menuMusica = new javax.swing.JMenu();
+        menuPeliculas = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -144,34 +145,34 @@ public class vistaUsuario extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Monto Total:");
 
-        jButton4.setBackground(new java.awt.Color(51, 204, 0));
-        jButton4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Mostrar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarCategorias.setBackground(new java.awt.Color(51, 204, 0));
+        btnBuscarCategorias.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnBuscarCategorias.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscarCategorias.setText("Mostrar");
+        btnBuscarCategorias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnBuscarCategoriasActionPerformed(evt);
             }
         });
 
         jMenuBar1.setBorder(null);
         jMenuBar1.setForeground(java.awt.Color.lightGray);
 
-        jMenu1.setText("MUSICA");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+        menuMusica.setText("MUSICA");
+        menuMusica.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu1MouseClicked(evt);
+                menuMusicaMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menuMusica);
 
-        jMenu2.setText("PELICULA");
-        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+        menuPeliculas.setText("PELICULA");
+        menuPeliculas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu2MouseClicked(evt);
+                menuPeliculasMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(menuPeliculas);
 
         setJMenuBar(jMenuBar1);
 
@@ -210,7 +211,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(ComboxCateg, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(31, 31, 31)
-                                .addComponent(jButton4)
+                                .addComponent(btnBuscarCategorias)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
@@ -228,7 +229,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ComboxCateg, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
+                    .addComponent(btnBuscarCategorias))
                 .addGap(59, 59, 59)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
@@ -253,23 +254,20 @@ public class vistaUsuario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        // TODO add your handling code here:
+    private void menuMusicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMusicaMouseClicked
         mostrarDatosComb();
-    }//GEN-LAST:event_jMenu1MouseClicked
+    }//GEN-LAST:event_menuMusicaMouseClicked
 
-    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
-        // TODO add your handling code here
+    private void menuPeliculasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPeliculasMouseClicked
         mostrarDatosComb();
-    }//GEN-LAST:event_jMenu2MouseClicked
+    }//GEN-LAST:event_menuPeliculasMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+    private void btnBuscarCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCategoriasActionPerformed
         TableModel tabla = table.getModel();
         String texto = ComboxCateg.getSelectedItem().toString();
         verificarDatos verificar= new verificarDatos();
         verificar.buscarArchivo(texto, (DefaultTableModel) tabla);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnBuscarCategoriasActionPerformed
 
     private void btnCerrarCesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarCesionActionPerformed
         loginAdminUsuario login = new loginAdminUsuario();
@@ -315,18 +313,18 @@ public class vistaUsuario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> ComboxCateg;
     private javax.swing.JRadioButton autor;
+    private javax.swing.JButton btnBuscarCategorias;
     private javax.swing.JButton btnCerrarCesion;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenu menuMusica;
+    private javax.swing.JMenu menuPeliculas;
     private javax.swing.JRadioButton nombre;
     private javax.swing.JRadioButton precio;
     private javax.swing.JTable table;

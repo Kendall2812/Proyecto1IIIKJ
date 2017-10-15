@@ -83,6 +83,8 @@ public class accesoAdminstrador extends javax.swing.JFrame {
             dispose();
                     
         }else if(jRbModificarDisco.isSelected()){
+            verEditarInfoMusica editar = new verEditarInfoMusica();
+            editar.setVisible(true);
             
         }else if(jRbEliminarDisco.isSelected()){
             

@@ -84,7 +84,7 @@ public class registroPeliculas extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Disponibles");
 
-        btnRegistrarPelicula.setBackground(new java.awt.Color(51, 255, 0));
+        btnRegistrarPelicula.setBackground(new java.awt.Color(51, 204, 0));
         btnRegistrarPelicula.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnRegistrarPelicula.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarPelicula.setText("Registrar");
