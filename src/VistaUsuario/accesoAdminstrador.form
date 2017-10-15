@@ -84,7 +84,6 @@
                           <Component id="jrbRegistroDisco" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <Component id="jRbModificarDisco" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRbEliminarDisco" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="btnIr" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
@@ -92,7 +91,6 @@
                           <Component id="jrbRegistroPelicula" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <Component id="jRbModificarPelicula" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRbEliminarPelicula" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -122,18 +120,14 @@
                       <Component id="jrbRegistroPelicula" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jRbModificarPelicula" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jRbEliminarPelicula" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jrbRegistroDisco" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       <Component id="jRbModificarDisco" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jRbEliminarDisco" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="40" max="32767" attributes="0"/>
+              <EmptySpace pref="66" max="32767" attributes="0"/>
               <Component id="btnIr" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
           </Group>
@@ -216,22 +210,11 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Modificar Disco"/>
+        <Property name="text" type="java.lang.String" value="Modificar/Eliminar Disco"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="jRbEliminarDisco">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
-        </Property>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="bG1CatalogoMusica"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Eliminar Disco"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRbModificarDiscoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jrbRegistroPelicula">
       <Properties>
@@ -258,21 +241,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Modificar Informacion"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JRadioButton" name="jRbEliminarPelicula">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
-        </Property>
-        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="bG1CatalogoPeliculas"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Eliminar Pelicula"/>
+        <Property name="text" type="java.lang.String" value="Modificar/Eliminar Informacion"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnIr">

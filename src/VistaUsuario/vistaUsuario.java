@@ -25,7 +25,6 @@ public class vistaUsuario extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Vista Usuario");
         ComboxCateg.setEnabled(false);
-//        table.setVisible(false);
     }
 
     public void mostrarDatosComb() {

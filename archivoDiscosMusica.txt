@@ -1,3 +1,2 @@
 Perdido,andres,Merengue,3000,19,hola1,hola2,*,
 Saturday Night Fever,Bee Gees,Clasica,40000,5,Stayin' Alive,Night Fever,*,
-Torero,el macho,PasoDoble,5000,5,el toro,guayacan,*,

@@ -27,12 +27,12 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         jrbRegistroDisco.setEnabled(false);
         
         jRbModificarDisco.setEnabled(false);
-        jRbEliminarDisco.setEnabled(false);
+    
         //Desactiva las Opciones de Pelicula
         jrbRegistroPelicula.setEnabled(false);
         
         jRbModificarPelicula.setEnabled(false);
-        jRbEliminarPelicula.setEnabled(false);
+      
         //Desactiva el boton
         btnIr.setEnabled(false);
     }
@@ -44,12 +44,12 @@ public class accesoAdminstrador extends javax.swing.JFrame {
             jrbRegistroDisco.setEnabled(true);
            
             jRbModificarDisco.setEnabled(true);
-            jRbEliminarDisco.setEnabled(true);
+          
             //Desactiva las Opciones de Pelicula
             jrbRegistroPelicula.setEnabled(false);
             
             jRbModificarPelicula.setEnabled(false);
-            jRbEliminarPelicula.setEnabled(false);
+            
             btnIr.setEnabled(true);
                        
         } else if (Catalogo.equals("Peliculas")) {
@@ -58,12 +58,12 @@ public class accesoAdminstrador extends javax.swing.JFrame {
             jrbRegistroDisco.setEnabled(false);
            
             jRbModificarDisco.setEnabled(false);
-            jRbEliminarDisco.setEnabled(false);
+           
             //activa las Opciones de Pelicula
             jrbRegistroPelicula.setEnabled(true);
            
             jRbModificarPelicula.setEnabled(true);
-            jRbEliminarPelicula.setEnabled(true);
+            
             btnIr.setEnabled(true);
             
         }else if(Catalogo.equals("Seleccionar")){
@@ -87,8 +87,6 @@ public class accesoAdminstrador extends javax.swing.JFrame {
             editar.setVisible(true);
             dispose();
             
-        }else if(jRbEliminarDisco.isSelected()){
-            
         }
     }
     public void opcionesPeliculas(){
@@ -99,8 +97,6 @@ public class accesoAdminstrador extends javax.swing.JFrame {
             dispose();
             
         }else if(jRbModificarPelicula.isSelected()){
-            
-        }else if(jRbEliminarPelicula.isSelected()){
             
         }
     }
@@ -121,10 +117,8 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jrbRegistroDisco = new javax.swing.JRadioButton();
         jRbModificarDisco = new javax.swing.JRadioButton();
-        jRbEliminarDisco = new javax.swing.JRadioButton();
         jrbRegistroPelicula = new javax.swing.JRadioButton();
         jRbModificarPelicula = new javax.swing.JRadioButton();
-        jRbEliminarPelicula = new javax.swing.JRadioButton();
         btnIr = new javax.swing.JButton();
         btnCerrarCesión = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -165,12 +159,12 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         jRbModificarDisco.setBackground(java.awt.Color.gray);
         bG1CatalogoMusica.add(jRbModificarDisco);
         jRbModificarDisco.setForeground(new java.awt.Color(255, 255, 255));
-        jRbModificarDisco.setText("Modificar Disco");
-
-        jRbEliminarDisco.setBackground(java.awt.Color.gray);
-        bG1CatalogoMusica.add(jRbEliminarDisco);
-        jRbEliminarDisco.setForeground(new java.awt.Color(255, 255, 255));
-        jRbEliminarDisco.setText("Eliminar Disco");
+        jRbModificarDisco.setText("Modificar/Eliminar Disco");
+        jRbModificarDisco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRbModificarDiscoActionPerformed(evt);
+            }
+        });
 
         jrbRegistroPelicula.setBackground(java.awt.Color.gray);
         bG1CatalogoPeliculas.add(jrbRegistroPelicula);
@@ -180,12 +174,7 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         jRbModificarPelicula.setBackground(java.awt.Color.gray);
         bG1CatalogoPeliculas.add(jRbModificarPelicula);
         jRbModificarPelicula.setForeground(new java.awt.Color(255, 255, 255));
-        jRbModificarPelicula.setText("Modificar Informacion");
-
-        jRbEliminarPelicula.setBackground(java.awt.Color.gray);
-        bG1CatalogoPeliculas.add(jRbEliminarPelicula);
-        jRbEliminarPelicula.setForeground(new java.awt.Color(255, 255, 255));
-        jRbEliminarPelicula.setText("Eliminar Pelicula");
+        jRbModificarPelicula.setText("Modificar/Eliminar Informacion");
 
         btnIr.setBackground(new java.awt.Color(51, 204, 0));
         btnIr.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -247,14 +236,12 @@ public class accesoAdminstrador extends javax.swing.JFrame {
                             .addComponent(jrbRegistroDisco)
                             .addComponent(jLabel2)
                             .addComponent(jRbModificarDisco)
-                            .addComponent(jRbEliminarDisco)
                             .addComponent(btnIr, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jrbRegistroPelicula)
                             .addComponent(jLabel3)
-                            .addComponent(jRbModificarPelicula)
-                            .addComponent(jRbEliminarPelicula))))
+                            .addComponent(jRbModificarPelicula))))
                 .addGap(22, 22, 22))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -276,16 +263,12 @@ public class accesoAdminstrador extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jrbRegistroPelicula)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRbModificarPelicula)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRbEliminarPelicula))
+                        .addComponent(jRbModificarPelicula))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jrbRegistroDisco)
                         .addGap(6, 6, 6)
-                        .addComponent(jRbModificarDisco)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRbEliminarDisco)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addComponent(jRbModificarDisco)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(btnIr)
                 .addGap(23, 23, 23))
         );
@@ -308,6 +291,10 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         login.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCerrarCesiónActionPerformed
+
+    private void jRbModificarDiscoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRbModificarDiscoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRbModificarDiscoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -361,8 +348,6 @@ public class accesoAdminstrador extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JRadioButton jRbEliminarDisco;
-    private javax.swing.JRadioButton jRbEliminarPelicula;
     private javax.swing.JRadioButton jRbModificarDisco;
     private javax.swing.JRadioButton jRbModificarPelicula;
     private javax.swing.JRadioButton jrbRegistroDisco;
