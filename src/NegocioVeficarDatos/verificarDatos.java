@@ -67,7 +67,6 @@ public class verificarDatos {
     }
 
     public void registrarDiscoMusica(String nombreDisco, String autor, String genero, String precio, String cantidadDisponible, String cancion1, String cancion2) {
-
         archivosProyecto datosMusica = new archivosProyecto();
         datosMusica.registrarDiscoMusica(nombreDisco, autor, genero, precio, cantidadDisponible, cancion1, cancion2);
     }
@@ -86,5 +85,9 @@ public class verificarDatos {
         archivosProyecto buscarNombreDisco = new archivosProyecto();
         datosDisco = buscarNombreDisco.leerDatosMusica();
         return datosDisco;
+    }
+    public void guardarMusicaEdidata(ArrayList datosNuevos){
+        archivosProyecto guardar = new archivosProyecto();
+        guardar.editarInfoMusica(datosNuevos);
     }
 }

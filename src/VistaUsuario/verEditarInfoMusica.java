@@ -38,7 +38,7 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
     }
     public void datos(){
         
-        for(int x =0; x < datosDisco.size(); x = x+7){
+        for(int x =0; x < datosDisco.size(); x = x + 8){
             nombre = (String) datosDisco.get(x);
             jCb1NombreDiscos.addItem(nombre);
         }   
@@ -46,7 +46,7 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
     public void VerInformacion(){
         nombreDisco = jCb1NombreDiscos.getSelectedItem().toString();
         
-        for(int y = 0; y < datosDisco.size(); y = y+7){
+        for(int y = 0; y < datosDisco.size(); y = y + 8){
             if(datosDisco.get(y).equals(nombreDisco)){
                 valor = true;
                 txtNombre.setText(datosDisco.get(y).toString());
@@ -64,7 +64,48 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
         }
     }
     public void editarInformacion(){
-        
+        nombred = txtNombre.getText();
+        autor = txtAutor.getText();
+        categoria = txtCategoria.getText();
+        precio = txtPrecio.getText();
+        disponibles = txtDisponibles.getText();
+        cancion1 = txtCancion1.getText();
+        cancion2 = txtCancion2.getText();
+        if(categoria.equals("Merengue") || categoria.equals("Clasica") || categoria.equals("Salsa") || categoria.equals("PasoDoble") || categoria.equals("Cumbia")){
+            for(int x = 0; x < datosDisco.size(); x = x + 8){
+                if(datosDisco.get(x).equals(nombreDisco)){
+                    
+                    int y = datosDisco.indexOf(nombreDisco);
+                    int cont = 0;
+                    while (cont != 8) {
+                        datosDisco.remove(y);
+                        cont++;
+                    }
+
+                    datosDisco.add(nombred);
+                    datosDisco.add(autor);
+                    datosDisco.add(categoria);
+                    datosDisco.add(precio);
+                    datosDisco.add(disponibles);
+                    datosDisco.add(cancion1);
+                    datosDisco.add(cancion2);
+                    datosDisco.add("*");
+                    verificarDatos editar = new verificarDatos();
+                    editar.guardarMusicaEdidata(datosDisco);
+                    break;
+                }
+            }                           
+        }else{
+            JOptionPane.showMessageDialog(null, "Esa Genero de musica no se encuentra registrado");
+        }
+        txtNombre.setEnabled(false);
+        txtAutor.setEnabled(false);
+        txtCategoria.setEnabled(false);
+        txtPrecio.setEnabled(false);
+        txtDisponibles.setEnabled(false);
+        txtCancion1.setEnabled(false);
+        txtCancion2.setEnabled(false);
+        btnGuardar.setEnabled(false);
     }
 
     /**
@@ -144,6 +185,11 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
         txtCategoria.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtCategoria.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtCategoria.setEnabled(false);
+        txtCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCategoriaActionPerformed(evt);
+            }
+        });
 
         txtPrecio.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtPrecio.setDisabledTextColor(new java.awt.Color(0, 0, 0));
@@ -297,12 +343,23 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVerificarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        txtNombre.setEnabled(true);
+        txtAutor.setEnabled(true);
+        txtCategoria.setEnabled(true);
+        txtPrecio.setEnabled(true);
+        txtDisponibles.setEnabled(true);
+        txtCancion1.setEnabled(true);
+        txtCancion2.setEnabled(true);
         btnGuardar.setEnabled(true);
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         editarInformacion();
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void txtCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCategoriaActionPerformed
+
+    }//GEN-LAST:event_txtCategoriaActionPerformed
 
     /**
      * @param args the command line arguments

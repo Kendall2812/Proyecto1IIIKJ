@@ -105,7 +105,8 @@ public class archivosProyecto {
                 escribir.write(precio + ",");
                 escribir.write(cantidadDisponible + ",");
                 escribir.write(cancion1 + ",");
-                escribir.write(cancion2 +"\n");
+                escribir.write(cancion2 +",");
+                escribir.write("*" + "\n");
                 escribir.close();
                 
                 JOptionPane.showMessageDialog(null, "Se registro con exito");
@@ -201,5 +202,27 @@ public class archivosProyecto {
             JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
         }
         return datosDisco;
+    }
+    public void editarInfoMusica(ArrayList datosNuevos){
+        //FALTA ARREGLAR Y TERMINAR
+        File direccion = new File("archivoDiscosMusica.txt");
+        try{
+            try(FileWriter escribir = new FileWriter(direccion)){
+                for(int x = 0; x < datosNuevos.size(); x++){
+                   escribir.write(datosNuevos.get(x).toString());
+                   escribir.write(",");
+                   
+                   if(datosNuevos.get(x).equals("*")){
+                       escribir.write("\n");
+                   }
+                }
+                escribir.close();
+                
+                JOptionPane.showMessageDialog(null, "Se registro con exito");
+            }
+            
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error no se pudo registrar la informacion en el archivo" + e);
+        }
     }
 }
