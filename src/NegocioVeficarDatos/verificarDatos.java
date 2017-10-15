@@ -90,4 +90,8 @@ public class verificarDatos {
         archivosProyecto guardar = new archivosProyecto();
         guardar.editarInfoMusica(datosNuevos);
     }
+    public void eliminarDisco(ArrayList datosEliminar){
+        archivosProyecto eliminar = new archivosProyecto();
+        eliminar.eliminarInfoMusica(datosEliminar);
+    }
 }

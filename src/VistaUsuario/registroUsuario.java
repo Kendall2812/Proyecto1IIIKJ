@@ -7,6 +7,7 @@ package VistaUsuario;
 
 import NegocioVeficarDatos.verificarDatos;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,14 +31,17 @@ public class registroUsuario extends javax.swing.JFrame {
         Clave = txtClave.getText();
         cedula = txtCedula.getText();
         Email = txtEmail.getText();
-        
-        verificarDatos registro = new verificarDatos();
-        registro.guardarInfoRegistro(nombre, Clave, cedula, Email);
-        
-        txtCedula.setText(" ");
-        txtClave.setText(" ");
-        txtEmail.setText(" ");
-        txtNombre.setText(" ");
+        if (nombre.equals("") || Clave.equals("") || cedula.equals("") || Email.equals("")) {
+            JOptionPane.showMessageDialog(null, "Todos los espacios deben estar Completos");
+        }else{
+            verificarDatos registro = new verificarDatos();
+            registro.guardarInfoRegistro(nombre, Clave, cedula, Email);
+
+            txtCedula.setText(" ");
+            txtClave.setText(" ");
+            txtEmail.setText(" ");
+            txtNombre.setText(" ");
+        }
     }
 
     /**
@@ -91,6 +95,11 @@ public class registroUsuario extends javax.swing.JFrame {
         btnRegresar.setBackground(new java.awt.Color(255, 51, 51));
         btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -162,6 +171,12 @@ public class registroUsuario extends javax.swing.JFrame {
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
         registro();
     }//GEN-LAST:event_btnRegistroActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        loginAdminUsuario login = new loginAdminUsuario();
+        login.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     /**
      * @param args the command line arguments

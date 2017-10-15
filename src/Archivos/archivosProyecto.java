@@ -204,7 +204,6 @@ public class archivosProyecto {
         return datosDisco;
     }
     public void editarInfoMusica(ArrayList datosNuevos){
-        //FALTA ARREGLAR Y TERMINAR
         File direccion = new File("archivoDiscosMusica.txt");
         try{
             try(FileWriter escribir = new FileWriter(direccion)){
@@ -223,6 +222,27 @@ public class archivosProyecto {
             
         }catch(IOException e){
             JOptionPane.showMessageDialog(null, "Error no se pudo registrar la informacion en el archivo" + e);
+        }
+    }
+     public void eliminarInfoMusica(ArrayList datosEliminar){
+        File direccion = new File("archivoDiscosMusica.txt");
+        try{
+            try(FileWriter escribir = new FileWriter(direccion)){
+                for(int x = 0; x < datosEliminar.size(); x++){
+                   escribir.write(datosEliminar.get(x).toString());
+                   escribir.write(",");
+                   
+                   if(datosEliminar.get(x).equals("*")){
+                       escribir.write("\n");
+                   }
+                }
+                escribir.close();
+                
+                JOptionPane.showMessageDialog(null, "Se elimino con exito");
+            }
+            
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error no se pudo eliminar la informacion en el archivo" + e);
         }
     }
 }
