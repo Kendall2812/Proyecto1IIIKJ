@@ -163,6 +163,7 @@ public class vistaUsuario extends javax.swing.JFrame {
         } catch (IOException e) {
             System.out.println("No se encontro el archivo" + e);
         }
+
         
     }
     public void verificarCantidad(int precio, int cantidad, int cantiUsu){
