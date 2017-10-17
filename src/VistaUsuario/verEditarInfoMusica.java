@@ -27,6 +27,7 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
         initComponents();
         this.getContentPane().setBackground(Color.gray);
         this.setTitle("Vista de Datos y Edicion");
+        this.setBounds(0, 0, 700, 410);
         setLocationRelativeTo(null);
         editarMusica();
     }
@@ -37,7 +38,7 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
         datos();
     }
     public void datos(){
-        
+        jCb1NombreDiscos.addItem("Seleccionar");
         for(int x =0; x < datosDisco.size(); x = x + 8){
             nombre = (String) datosDisco.get(x);
             jCb1NombreDiscos.addItem(nombre);
@@ -48,7 +49,6 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
         
         for(int y = 0; y < datosDisco.size(); y = y + 8){
             if(datosDisco.get(y).equals(nombreDisco)){
-                valor = true;
                 txtNombre.setText(datosDisco.get(y).toString());
                 txtAutor.setText(datosDisco.get(y + 1).toString());
                 txtCategoria.setText(datosDisco.get(y + 2).toString());
@@ -57,10 +57,15 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
                 txtCancion1.setText(datosDisco.get(y + 5).toString());
                 txtCancion2.setText(datosDisco.get(y + 6).toString());
                 break;
+            }else if(nombreDisco.equals("Seleccionar")){
+                txtNombre.setText("");
+                txtAutor.setText("");
+                txtCategoria.setText("");
+                txtPrecio.setText("");
+                txtDisponibles.setText("");
+                txtCancion1.setText("");
+                txtCancion2.setText("");
             }
-        }
-        if(valor == false){
-            JOptionPane.showMessageDialog(null, "No se encontro el nombre de el disco que seleciono");
         }
     }
     public void editarInformacion(){
@@ -98,13 +103,13 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Esa Genero de musica no se encuentra registrado");
         }
-        txtNombre.setEnabled(false);
-        txtAutor.setEnabled(false);
-        txtCategoria.setEnabled(false);
-        txtPrecio.setEnabled(false);
-        txtDisponibles.setEnabled(false);
-        txtCancion1.setEnabled(false);
-        txtCancion2.setEnabled(false);
+        txtNombre.setEditable(false);
+        txtAutor.setEditable(false);
+        txtCategoria.setEditable(false);
+        txtPrecio.setEditable(false);
+        txtDisponibles.setEditable(false);
+        txtCancion1.setEditable(false);
+        txtCancion2.setEditable(false);
         btnGuardar.setEnabled(false);
     }
     public void eliminarDiscoMusica(){
@@ -120,6 +125,7 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
                 }
                 verificarDatos editar = new verificarDatos();
                 editar.eliminarDisco(datosDisco);
+                jCb1NombreDiscos.removeItem(nombreDisco);
                 break;
             }
         }
@@ -275,53 +281,47 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCb1NombreDiscos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jCb1NombreDiscos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(62, 62, 62)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtDisponibles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                                    .addComponent(txtPrecio, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtCategoria, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtAutor, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel8))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCancion2, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                                    .addComponent(txtCancion1))))
-                        .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnRegresar))
-                        .addContainerGap(48, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDisponibles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                            .addComponent(txtPrecio, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCategoria, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtAutor, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtCancion2, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                            .addComponent(txtCancion1))))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegresar))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(btnEditar))
+                .addGap(42, 42, 42)
+                .addComponent(jLabel1)
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -354,7 +354,8 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtCancion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRegresar))
+                    .addComponent(btnRegresar)
+                    .addComponent(btnEditar))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -362,13 +363,13 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        txtNombre.setEnabled(true);
-        txtAutor.setEnabled(true);
-        txtCategoria.setEnabled(true);
-        txtPrecio.setEnabled(true);
-        txtDisponibles.setEnabled(true);
-        txtCancion1.setEnabled(true);
-        txtCancion2.setEnabled(true);
+        txtNombre.setEditable(true);
+        txtAutor.setEditable(true);
+        txtCategoria.setEditable(true);
+        txtPrecio.setEditable(true);
+        txtDisponibles.setEditable(true);
+        txtCancion1.setEditable(true);
+        txtCancion2.setEditable(true);
         btnGuardar.setEnabled(true);
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -391,7 +392,6 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void jCb1NombreDiscosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCb1NombreDiscosActionPerformed
-        // TODO add your handling code here:
         VerInformacion();
     }//GEN-LAST:event_jCb1NombreDiscosActionPerformed
 

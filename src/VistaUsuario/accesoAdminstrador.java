@@ -25,14 +25,10 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         //Desactiva las Opciones de Musica
         jrbRegistroDisco.setEnabled(false);
-        
         jRbModificarDisco.setEnabled(false);
-    
         //Desactiva las Opciones de Pelicula
         jrbRegistroPelicula.setEnabled(false);
-        
         jRbModificarPelicula.setEnabled(false);
-      
         //Desactiva el boton
         btnIr.setEnabled(false);
     }
@@ -41,29 +37,24 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         if (Catalogo.equals("Musica")) {
             //activa las Opciones de musica
             bG1CatalogoPeliculas.clearSelection();//limpia las opcion seleciona en pelicula
+            //Desactiva las Opciones de Pelicula
             jrbRegistroDisco.setEnabled(true);
-           
             jRbModificarDisco.setEnabled(true);
           
             //Desactiva las Opciones de Pelicula
             jrbRegistroPelicula.setEnabled(false);
-            
             jRbModificarPelicula.setEnabled(false);
-            
             btnIr.setEnabled(true);
                        
         } else if (Catalogo.equals("Peliculas")) {
             bG1CatalogoMusica.clearSelection();//limpia las opcion seleciona en musica
             //Desactiva las Opciones de Musica
             jrbRegistroDisco.setEnabled(false);
-           
             jRbModificarDisco.setEnabled(false);
            
             //activa las Opciones de Pelicula
             jrbRegistroPelicula.setEnabled(true);
-           
             jRbModificarPelicula.setEnabled(true);
-            
             btnIr.setEnabled(true);
             
         }else if(Catalogo.equals("Seleccionar")){
@@ -97,7 +88,9 @@ public class accesoAdminstrador extends javax.swing.JFrame {
             dispose();
             
         }else if(jRbModificarPelicula.isSelected()){
-            
+            verEditarInfoPeliculas editar = new verEditarInfoPeliculas();
+            editar.setVisible(true);
+            dispose();
         }
     }
     /**
@@ -293,7 +286,7 @@ public class accesoAdminstrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarCesiónActionPerformed
 
     private void jRbModificarDiscoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRbModificarDiscoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jRbModificarDiscoActionPerformed
 
     /**

@@ -152,7 +152,8 @@ public class archivosProyecto {
                 escribir.write(autor + " ");
                 escribir.write(categoria + " ");
                 escribir.write(precio + " ");
-                escribir.write(cantidad + "\n");
+                escribir.write(cantidad + " ");
+                escribir.write("*" + "\n");
                 escribir.close();
                 
                 JOptionPane.showMessageDialog(null, "Se registro con exito");
@@ -217,7 +218,7 @@ public class archivosProyecto {
                 }
                 escribir.close();
                 
-                JOptionPane.showMessageDialog(null, "Se registro con exito");
+                JOptionPane.showMessageDialog(null, "El cambio se realizo con exito");
             }
             
         }catch(IOException e){
@@ -233,6 +234,70 @@ public class archivosProyecto {
                    escribir.write(",");
                    
                    if(datosEliminar.get(x).equals("*")){
+                       escribir.write("\n");
+                   }
+                }
+                escribir.close();
+                
+                JOptionPane.showMessageDialog(null, "Se elimino con exito");
+            }
+            
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error no se pudo eliminar la informacion en el archivo" + e);
+        }
+    }
+    public ArrayList leerDatosPeliculas(){ // lee el archivo de musica para extraer la informacion y agregarla en una lista para retornarla negocios
+        String linea7, linea8; 
+        String[] nombrePeliculas;
+        ArrayList datosPelicula = new ArrayList();
+       
+        File direccion = new File("archivoPeliculas.txt");
+        try{
+            FileReader leer = new FileReader(direccion);
+            BufferedReader archivo = new BufferedReader(leer);
+      
+            while((linea7 = archivo.readLine())!= null){
+                nombrePeliculas = linea7.split(" ");
+                
+                for(int x = 0; x < nombrePeliculas.length; x++){
+                    datosPelicula.add(nombrePeliculas[x]);
+                }
+            }
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
+        }
+        return datosPelicula;
+    }
+    public void guardarInfoPelicEditada(ArrayList datosNuevos){
+        File direccion = new File("archivoPeliculas.txt");
+        try{
+            try(FileWriter escribir = new FileWriter(direccion)){
+                for(int x = 0; x < datosNuevos.size(); x++){
+                   escribir.write(datosNuevos.get(x).toString());
+                   escribir.write(" ");
+                   
+                   if(datosNuevos.get(x).equals("*")){
+                       escribir.write("\n");
+                   }
+                }
+                escribir.close();
+                
+                JOptionPane.showMessageDialog(null, "El cambio se realizo con exito");
+            }
+            
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error no se pudo registrar la informacion en el archivo" + e);
+        }
+    }
+    public void eliminarPelicula(ArrayList datosEliminarMovie){
+        File direccion = new File("archivoPeliculas.txt");
+        try{
+            try(FileWriter escribir = new FileWriter(direccion)){
+                for(int x = 0; x < datosEliminarMovie.size(); x++){
+                   escribir.write(datosEliminarMovie.get(x).toString());
+                   escribir.write(" ");
+                   
+                   if(datosEliminarMovie.get(x).equals("*")){
                        escribir.write("\n");
                    }
                 }

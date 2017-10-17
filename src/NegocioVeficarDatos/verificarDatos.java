@@ -94,4 +94,18 @@ public class verificarDatos {
         archivosProyecto eliminar = new archivosProyecto();
         eliminar.eliminarInfoMusica(datosEliminar);
     }
+    public ArrayList eidtarPeliculas(){
+        ArrayList datosPelicula = new ArrayList();
+        archivosProyecto buscarNombrePelicula = new archivosProyecto();
+        datosPelicula = buscarNombrePelicula.leerDatosPeliculas();
+        return datosPelicula;
+    }
+    public void guardarPeliculaEditada(ArrayList datosMovieNuevos){
+        archivosProyecto guardar = new archivosProyecto();
+        guardar.guardarInfoPelicEditada(datosMovieNuevos);
+    }
+    public void eliminarPelicula(ArrayList elimarDateMovie){
+        archivosProyecto eliminarMovie = new archivosProyecto();
+        eliminarMovie.eliminarPelicula(elimarDateMovie);
+    }
 }

@@ -138,7 +138,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                 controles.setLocation(50, 400);
                 controles.setSize(150, 25);
             }
-//            reproductor.start();
+            reproductor.start();
         } catch (IOException e) {
             System.out.println("Se encontro un error" + e);
         }
@@ -427,7 +427,6 @@ public class vistaUsuario extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         try {
-            // TODO add your handling code here:
             filtroBusqueda();
         } catch (NoPlayerException ex) {
             Logger.getLogger(vistaUsuario.class.getName()).log(Level.SEVERE, null, ex);
@@ -437,7 +436,6 @@ public class vistaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
         ComboxCateg.setEnabled(true);
         ComboxCateg.removeAllItems();
         ComboxCateg.addItem("Merengue");
@@ -448,7 +446,6 @@ public class vistaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
         ComboxCateg.setEnabled(true);
         ComboxCateg.removeAllItems();
         ComboxCateg.addItem("1");
@@ -459,7 +456,6 @@ public class vistaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         TableModel tablaModelo;
         tablaModelo = (TableModel) table.getModel();
         int row = table.getSelectedRow();
