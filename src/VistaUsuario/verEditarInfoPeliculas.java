@@ -73,7 +73,7 @@ public class verEditarInfoPeliculas extends javax.swing.JFrame {
         if (nombreP.equals("") || autor.equals("") || categoria.equals("") || precio.equals("") || cantidad.equals("")) {
             JOptionPane.showMessageDialog(null, "No puede dejar ningun espacio en blanco");
         }else{
-           if (categoria.equals("Comedia") || categoria.equals("Terror") || categoria.equals("Romantias") || categoria.equals("Accion") || categoria.equals("Suspenso")) {
+           if (categoria.equals("Comedia") || categoria.equals("Terror") || categoria.equals("Romanticas") || categoria.equals("Accion") || categoria.equals("Suspenso")) {
                 for (int x = 0; x < editarPelicula.size(); x = x + 6) {
                     if (editarPelicula.get(x).equals(nombrePelicula)) {
                         int Y = editarPelicula.indexOf(nombrePelicula);

@@ -74,7 +74,7 @@ public class registroPeliculas extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Categoria");
 
-        jCbCategoriaPelicula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Comedia", "Terror", "Romantias", "Accion", "Suspenso" }));
+        jCbCategoriaPelicula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Comedia", "Terror", "Romanticas", "Accion", "Suspenso" }));
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
