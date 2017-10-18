@@ -102,8 +102,8 @@ public class vistaUsuario extends javax.swing.JFrame {
                             tempo.setRowCount(0);
                             Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3], lista1[4], lista1[5], lista1[6]};
                             tempo.addRow(nuevo);
-                            if (lista1[5].equals("Stayin Alive") || lista1[6].equals("Stayin Alive")) {
-                                direccion = "file:/C:/Users/jenni/Documents/GitHub/Proyecto1IIIKJ/src/canciones/Stayin-Alive.wav";
+                            if (lista1[5].equals("stayin alive") || lista1[6].equals("stayin alive")) {
+                                direccion = "src/canciones/Stayin-Alive.wav";//src\canciones
                                 reproducirMusica(direccion);
                             } else if (lista1[5].equals("pasodobles") || lista1[6].equals("pasodobles")) {
                                 direccion = "file:/C:/Users/jenni/Documents/GitHub/Proyecto1IIIKJ/src/canciones/Pasodobles.wav";
@@ -145,28 +145,6 @@ public class vistaUsuario extends javax.swing.JFrame {
         }
     }
 
-    public void buscarPrecioMusica(String disco) {
-        String temp = "";
-        try {
-            try (BufferedReader bf = new BufferedReader(new FileReader("archivoDiscosMusica.txt"))) {
-                String bfRead;
-                while ((bfRead = bf.readLine()) != null) {
-                    temp = bfRead;
-                    String lista = temp;
-                    String[] lista1 = lista.split(",");
-                    if (lista1[0].equals(disco)) {
-                        precio1 = Integer.parseInt(lista1[3]);
-                        cantidad =Integer.parseInt(lista1[4]); 
-                        verificarCantidad(precio1, cantidad, canti);
-                    }
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("No se encontro el archivo" + e);
-        }
-
-        
-    }
     public void verificarCantidad(int precio, int cantidad, int cantiUsu){
         if (cantiUsu<=cantidad){
             int total= cantiUsu*precio;
@@ -212,7 +190,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                         compra.setVisible(true);
                         dispose();
 
-                        buscarPrecioMusica(strResultado);
+                        //buscarPrecioMusica(strResultado);
                     }
 
                 }
