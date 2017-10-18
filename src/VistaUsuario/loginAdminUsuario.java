@@ -52,7 +52,7 @@ public class loginAdminUsuario extends javax.swing.JFrame {
                 vistaUsuario vista= new vistaUsuario();
                 vista.setVisible(true);
                 vista.compraDiscosMusicaPeliculas(nombre);
-                //dispose();
+                dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario o Contraseña no Validos o No se encuentra Registrado");
             }

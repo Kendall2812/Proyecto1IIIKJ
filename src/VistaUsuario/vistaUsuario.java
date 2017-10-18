@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.media.CannotRealizeException;
@@ -26,11 +27,13 @@ import javax.swing.table.TableModel;
  *
  * @author jenni
  */
+
 public class vistaUsuario extends javax.swing.JFrame {
 
     /**
      * Creates new form vistaUsuario
      */
+    ArrayList nombreUser = new ArrayList();
     URL urlArchivoMusica;
     Player reproductor;
     String direccion = "";
@@ -145,17 +148,8 @@ public class vistaUsuario extends javax.swing.JFrame {
         }
     }
 
-    public void verificarCantidad(int precio, int cantidad, int cantiUsu){
-        if (cantiUsu<=cantidad){
-            int total= cantiUsu*precio;
-            txtTotal.setText(String.valueOf(total));
-        }else{
-            JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad menor");
-            txtCantidad.setText("");
-            txtTotal.setText("");
-        }
-    }
-    public void compraDiscosMusicaPeliculas(String nombre){
+    public void compraDiscosMusicaPeliculas(String nombreU){
+        nombreUser.add(nombreU);
         int row = 0;
         String numero;
         TableModel tablaModelo;
@@ -177,11 +171,12 @@ public class vistaUsuario extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "En este momento se encuntra agotado");//verifica que si la cantidad del disco este en 0
                     } else if (canti > disponible) {
                         JOptionPane.showMessageDialog(null, "Esa cantidad no se encuentra disponible"); //verifica que la cantidad que se digito no sea mayor a la que esta en el archivo
+                        txtCantidad.setText("");
                     }else if(canti == 0){
                         JOptionPane.showMessageDialog(null, "La compra no puede ser 0 discos tiene que ser por lo menos 1 disco");
                     }
                     else if (canti <= disponible) { //validad que la cantidad que se digito sea menor o igual a la wue se encuentra en el archivo
-
+                        String User = (String) nombreUser.get(0);
                         String strResultado = tablaModelo.getValueAt(row, 0).toString();
                         String Precio = tablaModelo.getValueAt(row, 3).toString();
 
