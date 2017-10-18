@@ -7,6 +7,7 @@ package VistaUsuario;
 
 import NegocioVeficarDatos.verificarDatos;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,16 +33,18 @@ public class registroDiscoMusica extends javax.swing.JFrame {
         cantidadDisponible = txtDisponibleCantidDisco.getText();
         cancion1 = txtCancion1.getText();
         cancion2 = txtCancion2.getText();
-        verificarDatos registroMusica = new verificarDatos();
-        registroMusica.registrarDiscoMusica(nombreDisco,autor,genero,precio,cantidadDisponible,cancion1,cancion2);
-        txtNombreDisco.setText(" ");
-        txtNombreAutor.setText(" ");
-        //jCbGenero
-        txtPrecioDisco.setText(" ");
-        txtDisponibleCantidDisco.setText(" ");
-        txtCancion1.setText(" ");
-        txtCancion1.setText(" ");
-        
+        if(genero.equals("Seleccionar")){
+            JOptionPane.showMessageDialog(null, "Error de Item");
+        }else{
+            verificarDatos registroMusica = new verificarDatos();
+            registroMusica.registrarDiscoMusica(nombreDisco,autor,genero,precio,cantidadDisponible,cancion1,cancion2);
+            txtNombreDisco.setText(" ");
+            txtNombreAutor.setText(" ");
+            txtPrecioDisco.setText(" ");
+            txtDisponibleCantidDisco.setText(" ");
+            txtCancion1.setText(" ");
+            txtCancion1.setText(" ");
+        }
     }
 
     /**
@@ -81,7 +84,7 @@ public class registroDiscoMusica extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Autor");
 
-        jCbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Merengue", "Clasica", "Salsa", "PasoDoble", "Cumbia" }));
+        jCbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Merengue", "Clasica", "Salsa", "PasoDoble", "Cumbia" }));
 
         jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));

@@ -108,4 +108,8 @@ public class verificarDatos {
         archivosProyecto eliminarMovie = new archivosProyecto();
         eliminarMovie.eliminarPelicula(elimarDateMovie);
     }
+    public void controlCompras(String nombre, String precio, String cantidad){
+        archivosProyecto compras = new archivosProyecto();
+        compras.guardarCompras(nombre, precio, cantidad);
+    }
 }

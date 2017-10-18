@@ -30,12 +30,15 @@
             <Property name="text" type="java.lang.String" value="Compras Usuarios"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="menuDiscosMusica">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Discos Musica"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuDiscosMusicaActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+            <MenuItem class="javax.swing.JMenuItem" name="menuPeliculas">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Discos Peliculas"/>
               </Properties>

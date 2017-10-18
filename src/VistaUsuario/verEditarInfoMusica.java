@@ -76,32 +76,36 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
         disponibles = txtDisponibles.getText();
         cancion1 = txtCancion1.getText();
         cancion2 = txtCancion2.getText();
-        if (categoria.equals("Merengue") || categoria.equals("Clasica") || categoria.equals("Salsa") || categoria.equals("PasoDoble") || categoria.equals("Cumbia")) {
-            for (int x = 0; x < datosDisco.size(); x = x + 8) {
-                if (datosDisco.get(x).equals(nombreDisco)) {
-
-                    int y = datosDisco.indexOf(nombreDisco);
-                    int cont = 0;
-                    while (cont != 8) {
-                        datosDisco.remove(y);
-                        cont++;
-                    }
-
-                    datosDisco.add(nombred);
-                    datosDisco.add(autor);
-                    datosDisco.add(categoria);
-                    datosDisco.add(precio);
-                    datosDisco.add(disponibles);
-                    datosDisco.add(cancion1);
-                    datosDisco.add(cancion2);
-                    datosDisco.add("*");
-                    verificarDatos editar = new verificarDatos();
-                    editar.guardarMusicaEdidata(datosDisco);
-                    break;
-                }
-            }
+        if (nombred.equals("") || autor.equals("") || categoria.equals("") || precio.equals("") || disponibles.equals("") ||cancion1.equals("") || cancion2.equals("")) {
+            JOptionPane.showMessageDialog(null, "No puede dejar ningun espacio en blanco");
         } else {
-            JOptionPane.showMessageDialog(null, "Esa Genero de musica no se encuentra registrado");
+            if (categoria.equals("Merengue") || categoria.equals("Clasica") || categoria.equals("Salsa") || categoria.equals("PasoDoble") || categoria.equals("Cumbia")) {
+                for (int x = 0; x < datosDisco.size(); x = x + 8) {
+                    if (datosDisco.get(x).equals(nombreDisco)) {
+
+                        int y = datosDisco.indexOf(nombreDisco);
+                        int cont = 0;
+                        while (cont != 8) {
+                            datosDisco.remove(y);
+                            cont++;
+                        }
+
+                        datosDisco.add(nombred);
+                        datosDisco.add(autor);
+                        datosDisco.add(categoria);
+                        datosDisco.add(precio);
+                        datosDisco.add(disponibles);
+                        datosDisco.add(cancion1);
+                        datosDisco.add(cancion2);
+                        datosDisco.add("*");
+                        verificarDatos editar = new verificarDatos();
+                        editar.guardarMusicaEdidata(datosDisco);
+                        break;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Esa Genero de musica no se encuentra registrado");
+            }
         }
         txtNombre.setEditable(false);
         txtAutor.setEditable(false);

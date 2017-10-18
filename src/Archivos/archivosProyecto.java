@@ -310,4 +310,8 @@ public class archivosProyecto {
             JOptionPane.showMessageDialog(null, "Error no se pudo eliminar la informacion en el archivo" + e);
         }
     }
+    public void guardarCompras(String nombre, String precio, String cantidad){
+        
+    }
+   
 }

@@ -5,3 +5,4 @@ guayacan,carlos,PasoDoble,10000,20,pasodobles,cada dia que pasa,*,
 azul vivo,los angeles azules,Cumbia,5000,5,como te voy a olvidar,el liston de tu pelo,*
 noches de fantasia,joseph,Merengue,20000,6,que levante la mano,noche de fantasia,*
 en vivo,oscar,Salsa,9000,7,lloraras,yo quisiera,*
+music1990,madona,Clasica,12000,4,Isla Bonita,Hung Up,*

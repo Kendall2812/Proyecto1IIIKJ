@@ -119,8 +119,8 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        menuDiscosMusica = new javax.swing.JMenuItem();
+        menuPeliculas = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -201,11 +201,16 @@ public class accesoAdminstrador extends javax.swing.JFrame {
 
         jMenu2.setText("Compras Usuarios");
 
-        jMenuItem1.setText("Discos Musica");
-        jMenu2.add(jMenuItem1);
+        menuDiscosMusica.setText("Discos Musica");
+        menuDiscosMusica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDiscosMusicaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuDiscosMusica);
 
-        jMenuItem2.setText("Discos Peliculas");
-        jMenu2.add(jMenuItem2);
+        menuPeliculas.setText("Discos Peliculas");
+        jMenu2.add(menuPeliculas);
 
         jMenuBar1.add(jMenu2);
 
@@ -289,6 +294,10 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jRbModificarDiscoActionPerformed
 
+    private void menuDiscosMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDiscosMusicaActionPerformed
+        
+    }//GEN-LAST:event_menuDiscosMusicaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -337,13 +346,13 @@ public class accesoAdminstrador extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JRadioButton jRbModificarDisco;
     private javax.swing.JRadioButton jRbModificarPelicula;
     private javax.swing.JRadioButton jrbRegistroDisco;
     private javax.swing.JRadioButton jrbRegistroPelicula;
+    private javax.swing.JMenuItem menuDiscosMusica;
+    private javax.swing.JMenuItem menuPeliculas;
     // End of variables declaration//GEN-END:variables
 }

@@ -27,6 +27,7 @@ public class loginAdminUsuario extends javax.swing.JFrame {
         this.setBounds(10, 15, 394, 240);
         setLocationRelativeTo(null);
     }
+
     public void datosUsuarios(){
         nombre = txtnombre.getText();
         Clave = jPassword1.getText();
@@ -36,7 +37,7 @@ public class loginAdminUsuario extends javax.swing.JFrame {
             valores = datosAmin.datosAdministrador(nombre, Clave);
 
             if (valores == true) {
-                System.out.println("Entro a el programa");
+                //System.out.println("Entro a el programa");
                 accesoAdminstrador acceso = new accesoAdminstrador();
                 acceso.setVisible(true);
                 dispose();
@@ -48,16 +49,15 @@ public class loginAdminUsuario extends javax.swing.JFrame {
             
             valores = datosUser.datosUsuarios(nombre, Clave);
             if (valores == true) {
-                System.out.println("Entro a el programa");
                 vistaUsuario vista= new vistaUsuario();
                 vista.setVisible(true);
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario o Contraseña no Validos o No se encuentra Registrado");
             }
-        }
-        
+        } 
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

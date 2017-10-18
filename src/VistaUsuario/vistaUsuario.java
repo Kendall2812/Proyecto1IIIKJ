@@ -37,6 +37,7 @@ public class vistaUsuario extends javax.swing.JFrame {
     int precio1;
     int cantidad;
     int canti;
+    String nombreUsuario;
 
     public vistaUsuario() {
         initComponents();
@@ -49,7 +50,7 @@ public class vistaUsuario extends javax.swing.JFrame {
         precio.setEnabled(false);
         txtSeleccion.setEditable(false);
         btnBuscar.setEnabled(false);
-        
+    
     }
 
     public void filtroBusqueda() throws NoPlayerException, CannotRealizeException {
@@ -176,6 +177,52 @@ public class vistaUsuario extends javax.swing.JFrame {
             txtTotal.setText("");
         }
     }
+    public void compraDiscosMusicaPeliculas(String nombre){
+        int row = 0;
+        String numero;
+        TableModel tablaModelo;
+        tablaModelo = (TableModel) table.getModel();
+        row = table.getSelectedRow();
+        numero = String.valueOf(row);
+        try {
+            try {
+                if (numero.equals("-1")) {//validad que se aya seleccionado una cancion en el Jtable
+                    JOptionPane.showMessageDialog(null, "Debe seleccionar un disco y la cantidad que desea comprar");
+                    //falta ver como hacer para que se solicite la pre orden
+                } else {
+
+                    String cantidadDisponible = tablaModelo.getValueAt(row, 4).toString();//obtiene la cantidad de los dicos disponibles
+                    int disponible = Integer.parseInt(cantidadDisponible);//transforma la variable "cantidadDisponible" a Integer
+                    canti = Integer.parseInt(txtCantidad.getText());
+
+                    if (disponible == 0) {
+                        JOptionPane.showMessageDialog(null, "En este momento se encuntra agotado");//verifica que si la cantidad del disco este en 0
+                    } else if (canti > disponible) {
+                        JOptionPane.showMessageDialog(null, "Esa cantidad no se encuentra disponible"); //verifica que la cantidad que se digito no sea mayor a la que esta en el archivo
+                    }else if(canti == 0){
+                        JOptionPane.showMessageDialog(null, "La compra no puede ser 0 discos tiene que ser por lo menos 1 disco");
+                    }
+                    else if (canti <= disponible) { //validad que la cantidad que se digito sea menor o igual a la wue se encuentra en el archivo
+
+                        String strResultado = tablaModelo.getValueAt(row, 0).toString();
+                        String Precio = tablaModelo.getValueAt(row, 3).toString();
+
+                        ventanaCompras compra = new ventanaCompras(); //llama ventana compra
+                        compra.registrarCompra(strResultado, Precio, canti);
+                        compra.setVisible(true);
+                        dispose();
+
+                        buscarPrecioMusica(strResultado);
+                    }
+
+                }
+            } catch (java.lang.NullPointerException e) {
+                JOptionPane.showMessageDialog(null, "Debe colocar la cantidad que desea comprar");
+            }
+        } catch (java.lang.NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Debe colocar la cantidad que desea comprar");
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -195,8 +242,8 @@ public class vistaUsuario extends javax.swing.JFrame {
         autor = new javax.swing.JRadioButton();
         precio = new javax.swing.JRadioButton();
         txtSeleccion = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnCompra = new javax.swing.JButton();
+        btnPrecompra = new javax.swing.JButton();
         btnCerrarCesion = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JTextField();
@@ -204,9 +251,9 @@ public class vistaUsuario extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         txtTotal = new javax.swing.JTextField();
         jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        menuOpciones = new javax.swing.JMenu();
+        menuItemMusica = new javax.swing.JMenuItem();
+        menuItemPeliculas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -248,20 +295,20 @@ public class vistaUsuario extends javax.swing.JFrame {
         precio.setForeground(new java.awt.Color(255, 255, 255));
         precio.setText("Precio");
 
-        jButton1.setBackground(new java.awt.Color(51, 204, 0));
-        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("COMPRAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCompra.setBackground(new java.awt.Color(51, 204, 0));
+        btnCompra.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnCompra.setForeground(new java.awt.Color(255, 255, 255));
+        btnCompra.setText("COMPRAR");
+        btnCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCompraActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(51, 204, 0));
-        jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("PRE-ORDENAR");
+        btnPrecompra.setBackground(new java.awt.Color(51, 204, 0));
+        btnPrecompra.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        btnPrecompra.setForeground(new java.awt.Color(255, 255, 255));
+        btnPrecompra.setText("PRE-ORDENAR");
 
         btnCerrarCesion.setBackground(new java.awt.Color(255, 0, 51));
         btnCerrarCesion.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -288,25 +335,25 @@ public class vistaUsuario extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("Opciones");
+        menuOpciones.setText("Opciones");
 
-        jMenuItem1.setText("MUSICA");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuItemMusica.setText("MUSICA");
+        menuItemMusica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuItemMusicaActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        menuOpciones.add(menuItemMusica);
 
-        jMenuItem2.setText("PELICULAS");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        menuItemPeliculas.setText("PELICULAS");
+        menuItemPeliculas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                menuItemPeliculasActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        menuOpciones.add(menuItemPeliculas);
 
-        jMenuBar2.add(jMenu1);
+        jMenuBar2.add(menuOpciones);
 
         setJMenuBar(jMenuBar2);
 
@@ -323,11 +370,11 @@ public class vistaUsuario extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(precio)
                                 .addGap(104, 104, 104)
-                                .addComponent(jButton1)))
+                                .addComponent(btnCompra)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(30, 30, 30)
-                                .addComponent(jButton2))
+                                .addComponent(btnPrecompra))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(160, 160, 160)
                                 .addComponent(jLabel3)
@@ -396,8 +443,8 @@ public class vistaUsuario extends javax.swing.JFrame {
                             .addComponent(jLabel3))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnCompra)
+                    .addComponent(btnPrecompra))
                 .addGap(72, 72, 72))
         );
 
@@ -411,7 +458,6 @@ public class vistaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarCesionActionPerformed
 
     private void ComboxCategActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboxCategActionPerformed
-        // TODO add your handling code here:
         DefaultTableModel tempo = (DefaultTableModel) table.getModel();
         tempo.setRowCount(0);
         TableModel tabla = table.getModel();
@@ -435,7 +481,7 @@ public class vistaUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menuItemMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMusicaActionPerformed
         ComboxCateg.setEnabled(true);
         ComboxCateg.removeAllItems();
         ComboxCateg.addItem("Merengue");
@@ -443,9 +489,9 @@ public class vistaUsuario extends javax.swing.JFrame {
         ComboxCateg.addItem("Salsa");
         ComboxCateg.addItem("PasoDoble");
         ComboxCateg.addItem("Cumbia");
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_menuItemMusicaActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void menuItemPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemPeliculasActionPerformed
         ComboxCateg.setEnabled(true);
         ComboxCateg.removeAllItems();
         ComboxCateg.addItem("1");
@@ -453,26 +499,12 @@ public class vistaUsuario extends javax.swing.JFrame {
         ComboxCateg.addItem("3");
         ComboxCateg.addItem("4");
         ComboxCateg.addItem("5");
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_menuItemPeliculasActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        TableModel tablaModelo;
-        tablaModelo = (TableModel) table.getModel();
-        int row = table.getSelectedRow();
-        try {
-            try {
-                String strResultado = tablaModelo.getValueAt(row, 0).toString();
-                canti= Integer.parseInt(txtCantidad.getText());
-                JOptionPane.showMessageDialog(null, "Disco seleccionado: " + strResultado);
-                buscarPrecioMusica(strResultado);
-            } catch (java.lang.NullPointerException e) {
-                JOptionPane.showMessageDialog(null, "Debe colocar la cantidad que desea comprar");
-            }
-        } catch (java.lang.NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Debe colocar la cantidad que desea comprar");
-        }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompraActionPerformed
+        String nombre = "";
+        compraDiscosMusicaPeliculas(nombre);
+    }//GEN-LAST:event_btnCompraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -514,17 +546,17 @@ public class vistaUsuario extends javax.swing.JFrame {
     private javax.swing.JRadioButton autor;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCerrarCesion;
+    private javax.swing.JButton btnCompra;
+    private javax.swing.JButton btnPrecompra;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenuItem menuItemMusica;
+    private javax.swing.JMenuItem menuItemPeliculas;
+    private javax.swing.JMenu menuOpciones;
     private javax.swing.JRadioButton nombre;
     private javax.swing.JRadioButton precio;
     private javax.swing.JTable table;
