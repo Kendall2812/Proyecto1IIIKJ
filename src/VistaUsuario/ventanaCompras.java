@@ -27,7 +27,7 @@ public class ventanaCompras extends javax.swing.JFrame {
         this.setTitle("Ventana Compra");
     }
     
-    public void registrarCompra(String nombre,String precio, int cantidadCompra){//, String catalogo
+    public void registrarCompra(String nombre,String precio, int cantidadCompra, String nombreUsuario){//String catalogo
        cantidad = String.valueOf(cantidadCompra);
        int costo = Integer.parseInt(precio);
        costoTotal = cantidadCompra* costo;
@@ -35,7 +35,7 @@ public class ventanaCompras extends javax.swing.JFrame {
        txtNombreDisco.setText(nombre);
        txtPrecio.setText(preciofacturado);
        txtCantidadCompra.setText(cantidad);
-       txtnombreUsuario.setText(nombreUser);
+       txtnombreUsuario.setText(nombreUsuario);
     }
     
 
@@ -58,6 +58,7 @@ public class ventanaCompras extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
         btnCancelarCompra = new javax.swing.JButton();
         txtnombreUsuario = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,6 +106,14 @@ public class ventanaCompras extends javax.swing.JFrame {
         btnCancelarCompra.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelarCompra.setText("Cancelar Compra");
 
+        txtnombreUsuario.setEditable(false);
+        txtnombreUsuario.setBackground(new java.awt.Color(255, 255, 255));
+        txtnombreUsuario.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Facturar a");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,14 +123,14 @@ public class ventanaCompras extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtnombreUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                        .addComponent(txtCantidadCompra)
-                        .addComponent(txtNombreDisco)))
+                    .addComponent(txtPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                    .addComponent(txtCantidadCompra)
+                    .addComponent(txtNombreDisco))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnConfirmarCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -152,8 +161,10 @@ public class ventanaCompras extends javax.swing.JFrame {
                         .addGap(4, 4, 4)
                         .addComponent(btnCancelarCompra)))
                 .addGap(18, 18, 18)
-                .addComponent(txtnombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtnombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(btnRegresar)
                 .addContainerGap())
         );
@@ -163,8 +174,9 @@ public class ventanaCompras extends javax.swing.JFrame {
 
     private void btnConfirmarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarCompraActionPerformed
         nombre = txtNombreDisco.getText();
+        String nombreuser = txtnombreUsuario.getText();
         verificarDatos confirmaCompra = new verificarDatos();
-        confirmaCompra.controlCompras(nombre,preciofacturado,cantidad);
+        confirmaCompra.controlCompras(nombre,preciofacturado,cantidad,nombreuser);
     }//GEN-LAST:event_btnConfirmarCompraActionPerformed
 
     /**
@@ -209,6 +221,7 @@ public class ventanaCompras extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField txtCantidadCompra;
     private javax.swing.JTextField txtNombreDisco;
     private javax.swing.JTextField txtPrecio;

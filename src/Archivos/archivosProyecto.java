@@ -18,6 +18,13 @@ public class archivosProyecto {
     String[] datos1;
     String nombre2, clave2, valores;
     ArrayList datos2 = new ArrayList();
+    ArrayList nombreUser = new ArrayList();
+    ArrayList dateMusic = new ArrayList();
+    String nombre3,cedula3,correo3;
+    String nombred,autor,categoria,precio4,disponibles,cancion1,cancion2;
+    int restaCantidad = 0;
+    int catidadResta = 0;
+    int cambioCantidad = 0;
     
     public String datosAdmin(){ //Lee el archivo del administrador
         
@@ -205,6 +212,7 @@ public class archivosProyecto {
         return datosDisco;
     }
     public void editarInfoMusica(ArrayList datosNuevos){
+        boolean valor = false;
         File direccion = new File("archivoDiscosMusica.txt");
         try{
             try(FileWriter escribir = new FileWriter(direccion)){
@@ -214,11 +222,15 @@ public class archivosProyecto {
                    
                    if(datosNuevos.get(x).equals("*")){
                        escribir.write("\n");
+                       valor = true;
                    }
                 }
                 escribir.close();
-                
-                JOptionPane.showMessageDialog(null, "El cambio se realizo con exito");
+                if (valor == true) {
+                    JOptionPane.showMessageDialog(null, "El cambio se realizo con exito");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Se realizo la compra con exito");
+                }
             }
             
         }catch(IOException e){
@@ -310,8 +322,100 @@ public class archivosProyecto {
             JOptionPane.showMessageDialog(null, "Error no se pudo eliminar la informacion en el archivo" + e);
         }
     }
-    public void guardarCompras(String nombre, String precio, String cantidad){
-        
+    public void guardarCompras(String nombre, String precio, String cantidad, String nameUser){
+        boolean valor1 = false;
+        File direccion = new File("archivoUser.txt");
+
+        try {
+            FileReader leer = new FileReader(direccion);
+            BufferedReader archivo2 = new BufferedReader(leer);
+            String linea6;
+            while ((linea6 = archivo2.readLine()) != null) {
+                datos1 = linea6.split(" "); 
+                
+                for(int x = 0; x < datos1.length; x++){
+                    nombreUser.add(datos1[x]);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e);
+        }
+        for(int y = 0; y < nombreUser.size(); y = y+4){
+            if(nombreUser.get(y).equals(nameUser)){
+                nombre3 = (String) nombreUser.get(y);
+                cedula3 = (String) nombreUser.get(y+2);
+                correo3 = (String) nombreUser.get(y+3);
+                valor1 = true;
+                break;
+            }
+        }
+        if (valor1 == true) {
+            File Compras;
+            try {
+                Compras = new File("archivoCompras.txt");
+                if (Compras.createNewFile()) {
+
+                }
+
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "No se creo el archio" + e);
+            }
+            //se escribe la informacion de las compras.
+            File direccion2 = new File("archivoCompras.txt");
+
+            try {
+                try (FileWriter escribir = new FileWriter(direccion, true)) {
+                    escribir.write(nombre3 + ",");
+                    escribir.write(cedula3 + ",");
+                    escribir.write(correo3 + ",");
+                    escribir.write(nombre + ",");
+                    escribir.write(cantidad + ",");
+                    escribir.write("*" + "\n");
+                    escribir.close();
+
+                    JOptionPane.showMessageDialog(null, "Se registro con exito");
+                }
+
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error no se pudo registrar la informacion en el archivo" + e);
+            }
+            //nombred,autor,categoria,precio4,disponibles,cancion1,cancion2
+            dateMusic = leerDatosMusica();
+            for(int t = 0; t < dateMusic.size(); t++){
+                if(dateMusic.get(t).equals(nombre)){
+                    
+                    nombred = (String) dateMusic.get(t);
+                    autor = (String) dateMusic.get(t+1);
+                    categoria = (String) dateMusic.get(t+2);
+                    precio4 = (String) dateMusic.get(t+3);
+                    disponibles = (String) dateMusic.get(t+4);
+                    cancion1 = (String) dateMusic.get(t+5);
+                    cancion2 = (String) dateMusic.get(t+6);
+                    
+                    catidadResta = Integer.parseInt(disponibles);
+                    cambioCantidad = Integer.parseInt(cantidad);
+                    restaCantidad = catidadResta - cambioCantidad;
+                    
+                        int y = dateMusic.indexOf(nombre);
+                        int cont = 0;
+                        while (cont != 8) {
+                            dateMusic.remove(y);
+                            cont++;
+                        }
+                        
+                    dateMusic.add(nombred);
+                    dateMusic.add(autor);
+                    dateMusic.add(categoria);
+                    dateMusic.add(precio4);
+                    dateMusic.add(restaCantidad);
+                    dateMusic.add(cancion1);
+                    dateMusic.add(cancion2);
+                    dateMusic.add("*");
+                    editarInfoMusica(dateMusic);
+                    break;
+                }
+            }
+        }
     }
    
 }

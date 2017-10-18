@@ -148,7 +148,7 @@ public class vistaUsuario extends javax.swing.JFrame {
         }
     }
 
-    public void compraDiscosMusicaPeliculas(String nombreU){
+    public void compraDiscosMusicaPeliculas(String nombreU,boolean valor){
         nombreUser.add(nombreU);
         int row = 0;
         String numero;
@@ -158,36 +158,37 @@ public class vistaUsuario extends javax.swing.JFrame {
         numero = String.valueOf(row);
         try {
             try {
-                if (numero.equals("-1")) {//validad que se aya seleccionado una cancion en el Jtable
-                    JOptionPane.showMessageDialog(null, "Debe seleccionar un disco y la cantidad que desea comprar");
-                    //falta ver como hacer para que se solicite la pre orden
+                if(valor == false){
+                    System.out.println("hola");
                 } else {
 
-                    String cantidadDisponible = tablaModelo.getValueAt(row, 4).toString();//obtiene la cantidad de los dicos disponibles
-                    int disponible = Integer.parseInt(cantidadDisponible);//transforma la variable "cantidadDisponible" a Integer
-                    canti = Integer.parseInt(txtCantidad.getText());
+                    if (numero.equals("-1")) {//validad que se aya seleccionado una cancion en el Jtable
+                        JOptionPane.showMessageDialog(null, "Debe seleccionar un disco y la cantidad que desea comprar");
+                        //falta ver como hacer para que se solicite la pre orden
+                    } else {
 
-                    if (disponible == 0) {
-                        JOptionPane.showMessageDialog(null, "En este momento se encuntra agotado");//verifica que si la cantidad del disco este en 0
-                    } else if (canti > disponible) {
-                        JOptionPane.showMessageDialog(null, "Esa cantidad no se encuentra disponible"); //verifica que la cantidad que se digito no sea mayor a la que esta en el archivo
-                        txtCantidad.setText("");
-                    }else if(canti == 0){
-                        JOptionPane.showMessageDialog(null, "La compra no puede ser 0 discos tiene que ser por lo menos 1 disco");
+                        String cantidadDisponible = tablaModelo.getValueAt(row, 4).toString();//obtiene la cantidad de los dicos disponibles
+                        int disponible = Integer.parseInt(cantidadDisponible);//transforma la variable "cantidadDisponible" a Integer
+                        canti = Integer.parseInt(txtCantidad.getText());
+
+                        if (disponible == 0) {
+                            JOptionPane.showMessageDialog(null, "En este momento se encuntra agotado");//verifica que si la cantidad del disco este en 0
+                        } else if (canti > disponible) {
+                            JOptionPane.showMessageDialog(null, "Esa cantidad no se encuentra disponible"); //verifica que la cantidad que se digito no sea mayor a la que esta en el archivo
+                            txtCantidad.setText("");
+                        } else if (canti == 0) {
+                            JOptionPane.showMessageDialog(null, "La compra no puede ser 0 discos tiene que ser por lo menos 1 disco");
+                        } else if (canti <= disponible) { //validad que la cantidad que se digito sea menor o igual a la wue se encuentra en el archivo
+                            String User = (String) nombreUser.get(0);
+                            String strResultado = tablaModelo.getValueAt(row, 0).toString();
+                            String Precio = tablaModelo.getValueAt(row, 3).toString();
+
+                            ventanaCompras compra = new ventanaCompras(); //llama ventana compra
+                            compra.registrarCompra(strResultado, Precio, canti, User);
+                            compra.setVisible(true);
+                            dispose();
+                        }
                     }
-                    else if (canti <= disponible) { //validad que la cantidad que se digito sea menor o igual a la wue se encuentra en el archivo
-                        String User = (String) nombreUser.get(0);
-                        String strResultado = tablaModelo.getValueAt(row, 0).toString();
-                        String Precio = tablaModelo.getValueAt(row, 3).toString();
-
-                        ventanaCompras compra = new ventanaCompras(); //llama ventana compra
-                        compra.registrarCompra(strResultado, Precio, canti);
-                        compra.setVisible(true);
-                        dispose();
-
-                        //buscarPrecioMusica(strResultado);
-                    }
-
                 }
             } catch (java.lang.NullPointerException e) {
                 JOptionPane.showMessageDialog(null, "Debe colocar la cantidad que desea comprar");
@@ -476,7 +477,8 @@ public class vistaUsuario extends javax.swing.JFrame {
 
     private void btnCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompraActionPerformed
         String nombre = "";
-        compraDiscosMusicaPeliculas(nombre);
+        boolean valor1 = true;
+        compraDiscosMusicaPeliculas(nombre,valor1);
     }//GEN-LAST:event_btnCompraActionPerformed
 
     /**
