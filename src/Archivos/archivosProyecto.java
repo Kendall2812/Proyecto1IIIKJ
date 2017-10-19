@@ -26,6 +26,7 @@ public class archivosProyecto {
     ArrayList datos2 = new ArrayList();
     ArrayList nombreUser = new ArrayList();
     ArrayList dateMusic = new ArrayList();
+    ArrayList dateMovie = new ArrayList();
     String nombre3, cedula3, correo3;
     String nombred, autor, categoria, precio4, disponibles, cancion1, cancion2;
     int restaCantidad = 0;
@@ -34,7 +35,7 @@ public class archivosProyecto {
     public static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     public static Date date = new Date();
     Correo c = new Correo();
-    String usuario, nombreDisco, mensaje, asunto;
+    String usuario, nombreDisco, mensaje, asunto,nombrePelicula;
 
     public String datosAdmin() { //Lee el archivo del administrador
 
@@ -322,7 +323,7 @@ public class archivosProyecto {
         return datosPelicula;
     }
 
-    public void guardarInfoPelicEditada(ArrayList datosNuevos) {
+    public void guardarInfoPelicEditada(ArrayList datosNuevos, boolean valor) {
         File direccion = new File("archivoPeliculas.txt");
         try {
             try (FileWriter escribir = new FileWriter(direccion)) {
@@ -335,8 +336,12 @@ public class archivosProyecto {
                     }
                 }
                 escribir.close();
-
-                JOptionPane.showMessageDialog(null, "El cambio se realizo con exito");
+                if(valor == true){
+                    JOptionPane.showMessageDialog(null, "El cambio se realizo con exito");
+                }
+                if(valor == false){
+                    JOptionPane.showMessageDialog(null,"Se realizo la compra con exito");
+                }
             }
 
         } catch (IOException e) {
@@ -367,7 +372,7 @@ public class archivosProyecto {
     }
 
     public void guardarCompras(String nombre, String precio, String cantidad, String nameUser, String verificar) {
-        if ("Musica".equals(verificar)) {
+
             boolean valor1 = false;
             File direccion = new File("archivoUser.txt");
 
@@ -394,19 +399,97 @@ public class archivosProyecto {
                     break;
                 }
             }
+            if ("Musica".equals(verificar)) {
+                
+                if (valor1 == true) {
+                    File Compras;
+                    try {
+                        Compras = new File("archivoCompras.txt");
+                        if (Compras.createNewFile()) {
+
+                        }
+
+                    } catch (IOException e) {
+                        JOptionPane.showMessageDialog(null, "No se creo el archio" + e);
+                    }
+                    //se escribe la informacion de las compras.
+                    File direccion2 = new File("archivoCompras.txt");
+
+                    try {
+                        try (FileWriter escribir = new FileWriter(direccion2, true)) {
+                            escribir.write(nombre3 + ",");
+                            escribir.write(cedula3 + ",");
+                            escribir.write(correo3 + ",");
+                            escribir.write(nombre + ",");
+                            escribir.write(cantidad + "," + dateFormat.format(date) + ",");
+                            escribir.write("*" + "\n");
+                            escribir.close();
+                            usuario = correo3;
+                            nombreDisco = nombre;
+                            mensaje = "La compra de su disco: " + nombre + " fue exitosa, gracias por preferirnos";
+                            asunto = "Compra existosa";
+                            enviarCorreo(usuario, mensaje, asunto);
+
+                            //JOptionPane.showMessageDialog(null, "Se registro con exito");
+                        }
+                    } catch (IOException e) {
+                        JOptionPane.showMessageDialog(null, "Error no se pudo registrar la informacion en el archivo" + e);
+                    }
+                    //nombred,autor,categoria,precio4,disponibles,cancion1,cancion2
+                    dateMusic = leerDatosMusica();   
+                    for (int t = 0; t < dateMusic.size(); t = t+8) {
+                        if (dateMusic.get(t).equals(nombre)) {
+
+                            nombred = (String) dateMusic.get(t);
+                            autor = (String) dateMusic.get(t + 1);
+                            categoria = (String) dateMusic.get(t + 2);
+                            precio4 = (String) dateMusic.get(t + 3);
+
+                            disponibles = (String) dateMusic.get(t + 4);
+                            cancion1 = (String) dateMusic.get(t + 5);
+                            cancion2 = (String) dateMusic.get(t + 6);
+
+                            catidadResta = Integer.parseInt(disponibles);
+                            cambioCantidad = Integer.parseInt(cantidad);
+                            restaCantidad = catidadResta - cambioCantidad;
+
+                            int y = dateMusic.indexOf(nombre);
+                            int cont = 0;
+                            while (cont != 8) {
+                                dateMusic.remove(y);
+                                cont++;
+                            }
+
+                            dateMusic.add(nombred);
+                            dateMusic.add(autor);
+                            dateMusic.add(categoria);
+                            dateMusic.add(precio4);
+                            dateMusic.add(restaCantidad);
+                            dateMusic.add(cancion1);
+                            dateMusic.add(cancion2);
+                            dateMusic.add("*");
+                            editarInfoMusica(dateMusic, false);
+                            break;
+                        }
+                    }
+                }
+        }
+        if ("Pelicula".equals(verificar)) {
+            //System.out.println("entro a comprar peliculas");
             if (valor1 == true) {
-                File Compras;
+                File ComprasPeliculas;
+                
                 try {
-                    Compras = new File("archivoCompras.txt");
-                    if (Compras.createNewFile()) {
+                    ComprasPeliculas = new File("archivoComprasPeliculas.txt");
+                    if (ComprasPeliculas.createNewFile()) {
 
                     }
 
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(null, "No se creo el archio" + e);
                 }
-                //se escribe la informacion de las compras.
-                File direccion2 = new File("archivoCompras.txt");
+
+                File direccion2 = new File("archivoComprasPeliculas.txt");
 
                 try {
                     try (FileWriter escribir = new FileWriter(direccion2, true)) {
@@ -418,8 +501,8 @@ public class archivosProyecto {
                         escribir.write("*" + "\n");
                         escribir.close();
                         usuario = correo3;
-                        nombreDisco = nombre;
-                        mensaje = "La compra de su disco: " + nombre + " fue exitosa, gracias por preferirnos";
+                        nombrePelicula = nombre;
+                        mensaje = "La compra de su Pelicula: " + nombre + " fue exitosa, gracias por preferirnos";
                         asunto = "Compra existosa";
                         enviarCorreo(usuario, mensaje, asunto);
 
@@ -429,45 +512,39 @@ public class archivosProyecto {
                     JOptionPane.showMessageDialog(null, "Error no se pudo registrar la informacion en el archivo" + e);
                 }
                 //nombred,autor,categoria,precio4,disponibles,cancion1,cancion2
-                dateMusic = leerDatosMusica();
-                for (int t = 0; t < dateMusic.size(); t++) {
-                    if (dateMusic.get(t).equals(nombre)) {
+                dateMovie = leerDatosPeliculas();
+                for (int t = 0; t < dateMovie.size(); t = t + 6) {
+                    if (dateMovie.get(t).equals(nombre)) {
 
-                        nombred = (String) dateMusic.get(t);
-                        autor = (String) dateMusic.get(t + 1);
-                        categoria = (String) dateMusic.get(t + 2);
-                        precio4 = (String) dateMusic.get(t + 3);
-
-                        disponibles = (String) dateMusic.get(t + 4);
-                        cancion1 = (String) dateMusic.get(t + 5);
-                        cancion2 = (String) dateMusic.get(t + 6);
+                        //Enrredados james Comedia 15000 10 * 
+                        nombred = (String) dateMovie.get(t);
+                        autor = (String) dateMovie.get(t + 1);
+                        categoria = (String) dateMovie.get(t + 2);
+                        precio4 = (String) dateMovie.get(t + 3);
+                        disponibles = (String) dateMovie.get(t + 4);
 
                         catidadResta = Integer.parseInt(disponibles);
                         cambioCantidad = Integer.parseInt(cantidad);
                         restaCantidad = catidadResta - cambioCantidad;
 
-                        int y = dateMusic.indexOf(nombre);
+                        int y = dateMovie.indexOf(nombre);
                         int cont = 0;
-                        while (cont != 8) {
-                            dateMusic.remove(y);
+                        while (cont != 6) {
+                            dateMovie.remove(y);
                             cont++;
                         }
 
-                        dateMusic.add(nombred);
-                        dateMusic.add(autor);
-                        dateMusic.add(categoria);
-                        dateMusic.add(precio4);
-                        dateMusic.add(restaCantidad);
-                        dateMusic.add(cancion1);
-                        dateMusic.add(cancion2);
-                        dateMusic.add("*");
-                        editarInfoMusica(dateMusic, false);
+                        dateMovie.add(nombred);
+                        dateMovie.add(autor);
+                        dateMovie.add(categoria);
+                        dateMovie.add(precio4);
+                        dateMovie.add(restaCantidad);
+                        dateMovie.add("*");
+                        guardarInfoPelicEditada(dateMovie, false);
                         break;
                     }
                 }
             }
-        }if ("Pelicula".equals(verificar)){
-            System.out.println("entro a comprar peliculas");
         }
     }
 

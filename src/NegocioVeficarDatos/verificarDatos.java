@@ -102,7 +102,7 @@ public class verificarDatos {
     }
     public void guardarPeliculaEditada(ArrayList datosMovieNuevos){
         archivosProyecto guardar = new archivosProyecto();
-        guardar.guardarInfoPelicEditada(datosMovieNuevos);
+        guardar.guardarInfoPelicEditada(datosMovieNuevos,true);
     }
     public void eliminarPelicula(ArrayList elimarDateMovie){
         archivosProyecto eliminarMovie = new archivosProyecto();
