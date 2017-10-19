@@ -88,7 +88,7 @@ public class verificarDatos {
     }
     public void guardarMusicaEdidata(ArrayList datosNuevos){
         archivosProyecto guardar = new archivosProyecto();
-        guardar.editarInfoMusica(datosNuevos);
+        guardar.editarInfoMusica(datosNuevos,true);
     }
     public void eliminarDisco(ArrayList datosEliminar){
         archivosProyecto eliminar = new archivosProyecto();

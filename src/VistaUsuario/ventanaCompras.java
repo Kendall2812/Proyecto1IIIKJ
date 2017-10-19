@@ -55,7 +55,6 @@ public class ventanaCompras extends javax.swing.JFrame {
         txtCantidadCompra = new javax.swing.JTextField();
         txtPrecio = new javax.swing.JTextField();
         btnConfirmarCompra = new javax.swing.JButton();
-        btnRegresar = new javax.swing.JButton();
         btnCancelarCompra = new javax.swing.JButton();
         txtnombreUsuario = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -96,15 +95,15 @@ public class ventanaCompras extends javax.swing.JFrame {
             }
         });
 
-        btnRegresar.setBackground(new java.awt.Color(51, 204, 0));
-        btnRegresar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegresar.setText("Regresar");
-
         btnCancelarCompra.setBackground(new java.awt.Color(255, 0, 0));
         btnCancelarCompra.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCancelarCompra.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelarCompra.setText("Cancelar Compra");
+        btnCancelarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarCompraActionPerformed(evt);
+            }
+        });
 
         txtnombreUsuario.setEditable(false);
         txtnombreUsuario.setBackground(new java.awt.Color(255, 255, 255));
@@ -134,7 +133,6 @@ public class ventanaCompras extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnConfirmarCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRegresar)
                     .addComponent(btnCancelarCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -164,21 +162,43 @@ public class ventanaCompras extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtnombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(btnRegresar)
-                .addContainerGap())
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarCompraActionPerformed
+        btnCancelarCompra.setEnabled(false);
         nombre = txtNombreDisco.getText();
         String nombreuser = txtnombreUsuario.getText();
         verificarDatos confirmaCompra = new verificarDatos();
         confirmaCompra.controlCompras(nombre,preciofacturado,cantidad,nombreuser);
+
+        btnCancelarCompra.setEnabled(true);
+        txtNombreDisco.setText("");
+        txtPrecio.setText("");
+        txtCantidadCompra.setText("");
+        txtnombreUsuario.setText("");
+        vistaUsuario regresar = new vistaUsuario();
+        regresar.setVisible(true);
+        regresar.compraDiscosMusicaPeliculas(nombreUser, false);
+        dispose();
         
     }//GEN-LAST:event_btnConfirmarCompraActionPerformed
+
+    private void btnCancelarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCompraActionPerformed
+       nombreUser = txtnombreUsuario.getText();
+       txtNombreDisco.setText("");
+       txtPrecio.setText("");
+       txtCantidadCompra.setText("");
+       txtnombreUsuario.setText("");
+       btnConfirmarCompra.setEnabled(false);
+       vistaUsuario regresar = new vistaUsuario();
+       regresar.setVisible(true);
+       regresar.compraDiscosMusicaPeliculas(nombreUser, false);
+       dispose();
+    }//GEN-LAST:event_btnCancelarCompraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,7 +238,6 @@ public class ventanaCompras extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelarCompra;
     private javax.swing.JButton btnConfirmarCompra;
-    private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

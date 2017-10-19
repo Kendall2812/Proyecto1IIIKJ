@@ -227,8 +227,8 @@ public class archivosProyecto {
         return datosDisco;
     }
 
-    public void editarInfoMusica(ArrayList datosNuevos) {
-        boolean valor = false;
+    public void editarInfoMusica(ArrayList datosNuevos,boolean valor) {
+        
         File direccion = new File("archivoDiscosMusica.txt");
         try {
             try (FileWriter escribir = new FileWriter(direccion)) {
@@ -238,13 +238,13 @@ public class archivosProyecto {
 
                     if (datosNuevos.get(x).equals("*")) {
                         escribir.write("\n");
-                        valor = true;
                     }
                 }
                 escribir.close();
                 if (valor == true) {
                     JOptionPane.showMessageDialog(null, "El cambio se realizo con exito");
-                } else {
+                }
+                if(valor == false){
                     JOptionPane.showMessageDialog(null, "Se realizo la compra con exito");
                 }
             }
@@ -399,7 +399,7 @@ public class archivosProyecto {
                     asunto = "Compra existosa";
                     enviarCorreo(usuario, mensaje, asunto);
 
-                    JOptionPane.showMessageDialog(null, "Se registro con exito");
+                    //JOptionPane.showMessageDialog(null, "Se registro con exito");
                 }
 
             } catch (IOException e) {
@@ -438,7 +438,7 @@ public class archivosProyecto {
                     dateMusic.add(cancion1);
                     dateMusic.add(cancion2);
                     dateMusic.add("*");
-                    editarInfoMusica(dateMusic);
+                    editarInfoMusica(dateMusic,false);
                     break;
                 }
             }
