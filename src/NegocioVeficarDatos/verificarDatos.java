@@ -88,7 +88,7 @@ public class verificarDatos {
     }
     public void guardarMusicaEdidata(ArrayList datosNuevos){
         archivosProyecto guardar = new archivosProyecto();
-        guardar.editarInfoMusica(datosNuevos);
+        guardar.editarInfoMusica(datosNuevos,true);
     }
     public void eliminarDisco(ArrayList datosEliminar){
         archivosProyecto eliminar = new archivosProyecto();
@@ -108,8 +108,8 @@ public class verificarDatos {
         archivosProyecto eliminarMovie = new archivosProyecto();
         eliminarMovie.eliminarPelicula(elimarDateMovie);
     }
-    public void controlCompras(String nombre, String precio, String cantidad,String nameUser){
+    public void controlCompras(String nombre, String precio, String cantidad,String nameUser,String verificar){
         archivosProyecto compras = new archivosProyecto();
-        compras.guardarCompras(nombre, precio, cantidad, nameUser);
+        compras.guardarCompras(nombre, precio, cantidad, nameUser,verificar);
     }
 }

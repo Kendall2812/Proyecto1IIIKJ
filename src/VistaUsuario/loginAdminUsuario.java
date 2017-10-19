@@ -18,7 +18,7 @@ public class loginAdminUsuario extends javax.swing.JFrame {
     /**
      * Creates new form loginAdminUsuario
      */
-    String nombre, Clave;
+    String nombre, Clave, verificar;
     boolean valores;
     public loginAdminUsuario() {
         initComponents();
@@ -52,7 +52,7 @@ public class loginAdminUsuario extends javax.swing.JFrame {
                 boolean valor1 = false;
                 vistaUsuario vista= new vistaUsuario();
                 vista.setVisible(true);
-                vista.compraDiscosMusicaPeliculas(nombre,valor1);
+                vista.compraDiscosMusicaPeliculas(nombre,valor1,verificar);
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario o Contraseña no Validos o No se encuentra Registrado");

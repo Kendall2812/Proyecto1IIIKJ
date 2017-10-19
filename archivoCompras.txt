@@ -1,4 +1,10 @@
 kendall,207620167,kendallandreyr@gmail.com,guayacan,5,18/10/2017,*
 daniel,20963145,danielor@gmail.com,noches de fantasia,2,18/10/2017,*
 jeniffer,207500700,jennim24@hotmail.com,saturday night Fever,1,18/10/2017,*
-jeniffer,207500700,jennim24@hotmail.com,Enrredados,3,18/10/2017,*
+kendall,207620167,kendallandreyr@gmail.com,muevelo,2,18/10/2017,*
+kendall,207620167,kendallandreyr@gmail.com,perdido,2,18/10/2017,*
+kendall,207620167,kendallandreyr@gmail.com,noches de fantasia,1,18/10/2017,*
+kendall,207620167,kendallandreyr@gmail.com,music1990,1,18/10/2017,*
+kendall,207620167,kendallandreyr@gmail.com,guayacan,1,18/10/2017,*
+kendall,207620167,kendallandreyr@gmail.com,noches de fantasia,2,18/10/2017,*
+kendall,207620167,kendallandreyr@gmail.com,guayacan,2,18/10/2017,*

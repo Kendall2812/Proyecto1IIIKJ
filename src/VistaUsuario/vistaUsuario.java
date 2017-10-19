@@ -39,7 +39,7 @@ public class vistaUsuario extends javax.swing.JFrame {
     int precio1;
     int cantidad;
     int canti;
-    String nombreUsuario;
+    String nombreUsuario, verificar;
     boolean bus;
 
     public vistaUsuario() {
@@ -154,7 +154,7 @@ public class vistaUsuario extends javax.swing.JFrame {
         }
     }
 
-    public void compraDiscosMusicaPeliculas(String nombreU, boolean valor) {
+    public void compraDiscosMusicaPeliculas(String nombreU, boolean valor, String verificar) {
         nombreUser.add(nombreU);
         int row = 0;
         String numero;
@@ -190,7 +190,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                             String Precio = tablaModelo.getValueAt(row, 3).toString();
 
                             ventanaCompras compra = new ventanaCompras(); //llama ventana compra
-                            compra.registrarCompra(strResultado, Precio, canti, User);
+                            compra.registrarCompra(strResultado, Precio, canti, User, verificar);
                             compra.setVisible(true);
                             dispose();
                         }
@@ -465,6 +465,7 @@ public class vistaUsuario extends javax.swing.JFrame {
 
     private void menuItemMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMusicaActionPerformed
         bus= true;
+        verificar="Musica";
 //        ComboxCateg.setEnabled(true);
         ComboxCateg.removeAllItems();
         ComboxCateg.addItem("Merengue");
@@ -482,6 +483,7 @@ public class vistaUsuario extends javax.swing.JFrame {
 
     private void menuItemPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemPeliculasActionPerformed
         bus=false;
+        verificar="Pelicula";
 //        ComboxCateg.setEnabled(true);
         ComboxCateg.removeAllItems();
         ComboxCateg.addItem("Comedia");
@@ -501,7 +503,7 @@ public class vistaUsuario extends javax.swing.JFrame {
     private void btnCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompraActionPerformed
         String nombre = "";
         boolean valor1 = true;
-        compraDiscosMusicaPeliculas(nombre, valor1);
+        compraDiscosMusicaPeliculas(nombre, valor1, verificar);
     }//GEN-LAST:event_btnCompraActionPerformed
 
     /**
