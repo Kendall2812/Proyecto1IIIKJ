@@ -142,7 +142,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                 controles.setLocation(50, 400);
                 controles.setSize(150, 25);
             }
-            reproductor.start();
+//            reproductor.start();
         } catch (IOException e) {
             System.out.println("Se encontro un error" + e);
         }
