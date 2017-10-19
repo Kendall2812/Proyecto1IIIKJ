@@ -183,24 +183,46 @@ public class archivosProyecto {
         }
     }
 
-    public void buscarGeneroMusicaPelicual(String genero, DefaultTableModel tabla) {
-        DefaultTableModel tempo = (DefaultTableModel) tabla;
-        String temp = "";
-        try {
-            try (BufferedReader bf = new BufferedReader(new FileReader("archivoDiscosMusica.txt"))) {
-                String bfRead;
-                while ((bfRead = bf.readLine()) != null) {
-                    temp = bfRead;
-                    String lista = temp;
-                    String[] lista1 = lista.split(",");
-                    if (genero.equals(lista1[2])) {
-                        Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3], lista1[4], lista1[5], lista1[6]};
-                        tempo.addRow(nuevo);
+    public void buscarGeneroMusicaPelicual(String genero, DefaultTableModel tabla, boolean bus) {
+        if (bus) {
+            DefaultTableModel tempo = (DefaultTableModel) tabla;
+            String temp = "";
+            try {
+                try (BufferedReader bf = new BufferedReader(new FileReader("archivoDiscosMusica.txt"))) {
+                    String bfRead;
+                    while ((bfRead = bf.readLine()) != null) {
+                        temp = bfRead;
+                        String lista = temp;
+                        String[] lista1 = lista.split(",");
+                        if (genero.equals(lista1[2])) {
+                            Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3], lista1[4], lista1[5], lista1[6]};
+                            tempo.addRow(nuevo);
+                        }
                     }
                 }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "No se encontro ningun disco con el genero que selecciono" + e);
             }
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "No se encontro ningun disco con el genero que selecciono" + e);
+        }if (!bus){
+            System.out.println("entro a buscar peliculas");
+            DefaultTableModel tempo = (DefaultTableModel) tabla;
+            String temp = "";
+            try {
+                try (BufferedReader bf = new BufferedReader(new FileReader("archivoPeliculas.txt"))) {
+                    String bfRead;
+                    while ((bfRead = bf.readLine()) != null) {
+                        temp = bfRead;
+                        String lista = temp;
+                        String[] lista1 = lista.split(" ");
+                        if (genero.equals(lista1[2])) {
+                            Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3], lista1[4]};
+                            tempo.addRow(nuevo);
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "No se encontro ningun disco con el genero que selecciono" + e);
+            }
         }
     }
 

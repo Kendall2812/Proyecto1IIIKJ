@@ -27,7 +27,6 @@ import javax.swing.table.TableModel;
  *
  * @author jenni
  */
-
 public class vistaUsuario extends javax.swing.JFrame {
 
     /**
@@ -41,19 +40,26 @@ public class vistaUsuario extends javax.swing.JFrame {
     int cantidad;
     int canti;
     String nombreUsuario;
+    boolean bus;
 
     public vistaUsuario() {
         initComponents();
         this.getContentPane().setBackground(Color.gray);
         this.setLocationRelativeTo(null);
         this.setTitle("Vista Usuario");
-        ComboxCateg.setEnabled(false);
+//        ComboxCateg.setEnabled(false);
         nombre.setEnabled(false);
         autor.setEnabled(false);
         precio.setEnabled(false);
         txtSeleccion.setEditable(false);
         btnBuscar.setEnabled(false);
-    
+        table.setModel(new DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "", "", "", "", ""
+                }
+        ));
+
     }
 
     public void filtroBusqueda() throws NoPlayerException, CannotRealizeException {
@@ -148,7 +154,7 @@ public class vistaUsuario extends javax.swing.JFrame {
         }
     }
 
-    public void compraDiscosMusicaPeliculas(String nombreU,boolean valor){
+    public void compraDiscosMusicaPeliculas(String nombreU, boolean valor) {
         nombreUser.add(nombreU);
         int row = 0;
         String numero;
@@ -158,7 +164,7 @@ public class vistaUsuario extends javax.swing.JFrame {
         numero = String.valueOf(row);
         try {
             try {
-                if(valor == false){
+                if (valor == false) {
                     System.out.println("hola");
                 } else {
 
@@ -435,14 +441,16 @@ public class vistaUsuario extends javax.swing.JFrame {
         DefaultTableModel tempo = (DefaultTableModel) table.getModel();
         tempo.setRowCount(0);
         TableModel tabla = table.getModel();
-        String texto = ComboxCateg.getSelectedItem().toString();
+        if (ComboxCateg.getSelectedIndex()!= -1){
+            String texto = ComboxCateg.getSelectedItem().toString();
         verificarDatos verificar = new verificarDatos();
-        verificar.buscarArchivo(texto, (DefaultTableModel) tabla);
+        verificar.buscarArchivo(texto, (DefaultTableModel) tabla,bus);
         nombre.setEnabled(true);
         autor.setEnabled(true);
         precio.setEnabled(true);
         txtSeleccion.setEditable(true);
         btnBuscar.setEnabled(true);
+        }
     }//GEN-LAST:event_ComboxCategActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -456,29 +464,44 @@ public class vistaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void menuItemMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMusicaActionPerformed
-        ComboxCateg.setEnabled(true);
+        bus= true;
+//        ComboxCateg.setEnabled(true);
         ComboxCateg.removeAllItems();
         ComboxCateg.addItem("Merengue");
         ComboxCateg.addItem("Clasica");
         ComboxCateg.addItem("Salsa");
         ComboxCateg.addItem("PasoDoble");
         ComboxCateg.addItem("Cumbia");
+        table.setModel(new DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "NOMBRE DISCO", "AUTOR", "GENERO", "PRECIO", "CANTIDAD","CANCION 1","CANCION 2"
+                }
+        ));
     }//GEN-LAST:event_menuItemMusicaActionPerformed
 
     private void menuItemPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemPeliculasActionPerformed
-        ComboxCateg.setEnabled(true);
+        bus=false;
+//        ComboxCateg.setEnabled(true);
         ComboxCateg.removeAllItems();
-        ComboxCateg.addItem("1");
-        ComboxCateg.addItem("2");
-        ComboxCateg.addItem("3");
-        ComboxCateg.addItem("4");
-        ComboxCateg.addItem("5");
+        ComboxCateg.addItem("Comedia");
+        ComboxCateg.addItem("Terror");
+        ComboxCateg.addItem("Romanticas");
+        ComboxCateg.addItem("Accion");
+        ComboxCateg.addItem("Suspenso");
+
+        table.setModel(new DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "NOMBRE PELICULA", "AUTOR", "CATEGORIA", "PRECIO", "CANTIDAD"
+                }
+        ));
     }//GEN-LAST:event_menuItemPeliculasActionPerformed
 
     private void btnCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompraActionPerformed
         String nombre = "";
         boolean valor1 = true;
-        compraDiscosMusicaPeliculas(nombre,valor1);
+        compraDiscosMusicaPeliculas(nombre, valor1);
     }//GEN-LAST:event_btnCompraActionPerformed
 
     /**

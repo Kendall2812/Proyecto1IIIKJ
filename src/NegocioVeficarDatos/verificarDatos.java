@@ -76,9 +76,9 @@ public class verificarDatos {
         registroPelicula.registrarPeliculas(nombre, autor, categoria, precio, cantidad);
     }
 
-    public void buscarArchivo(String genero, DefaultTableModel tabla) {//busca los generos en el archivo
+    public void buscarArchivo(String genero, DefaultTableModel tabla, boolean bus) {//busca los generos en el archivo
         archivosProyecto buscarInfo = new archivosProyecto();
-        buscarInfo.buscarGeneroMusicaPelicual(genero, (DefaultTableModel) tabla);   
+        buscarInfo.buscarGeneroMusicaPelicual(genero, (DefaultTableModel) tabla, bus);   
     }
     public ArrayList editarMusica(){
         ArrayList nombre = new ArrayList();
