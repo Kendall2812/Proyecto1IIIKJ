@@ -8,7 +8,9 @@ package VistaUsuario;
 import NegocioVeficarDatos.verificarDatos;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -66,11 +68,11 @@ public class vistaUsuario extends javax.swing.JFrame {
         String selec = txtSeleccion.getText();
         String genero = ComboxCateg.getSelectedItem().toString();
         if (nombre.isSelected()) {
-            String bus = "nom";
-            valida(genero, selec, bus);
+            String bus1 = "nom";
+            valida(genero, selec, bus1);
         } else if (autor.isSelected()) {
-            String bus = "aut";
-            valida(genero, selec, bus);
+            String bus1 = "aut";
+            valida(genero, selec, bus1);
         }
     }
 
@@ -90,19 +92,19 @@ public class vistaUsuario extends javax.swing.JFrame {
                             Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3], lista1[4], lista1[5], lista1[6]};
                             tempo.addRow(nuevo);
                             if (lista1[5].equals("Stayin Alive") || lista1[6].equals("Stayin Alive")) {
-                                direccion = "file:/C:/Users/jenni/Documents/GitHub/Proyecto1IIIKJ/src/canciones/Stayin-Alive.wav";
+                                direccion = "Stayin-Alive.wav";
                                 reproducirMusica(direccion);
                             } else if (lista1[5].equals("pasodobles") || lista1[6].equals("pasodobles")) {
-                                direccion = "file:/C:/Users/jenni/Documents/GitHub/Proyecto1IIIKJ/src/canciones/Pasodobles.wav";
+                                direccion = "Pasodobles.wav";
                                 reproducirMusica(direccion);
                             } else if (lista1[5].equals("como te voy a olvidar") || lista1[6].equals("como te voy a olvidar")) {
-                                direccion = "file:/C:/Users/jenni/Documents/GitHub/Proyecto1IIIKJ/src/canciones/como_te_voy_a_olvidar.wav";
+                                direccion = "como_te_voy_a_olvidar.wav";
                                 reproducirMusica(direccion);
                             } else if (lista1[5].equals("lloraras") || lista1[6].equals("lloraras")) {
-                                direccion = "file:/C:/Users/jenni/Documents/GitHub/Proyecto1IIIKJ/src/canciones/lloraras.wav";
+                                direccion = "lloraras.wav";
                                 reproducirMusica(direccion);
                             } else if (lista1[5].equals("noche de fantasia") || lista1[6].equals("noche de fantasia")) {
-                                direccion = "file:/C:/Users/jenni/Documents/GitHub/Proyecto1IIIKJ/src/canciones/noche_de_fantasia.wav";
+                                direccion = "noche_de_fantasia.wav";
                                 reproducirMusica(direccion);
                             }
                         }
@@ -112,19 +114,19 @@ public class vistaUsuario extends javax.swing.JFrame {
                             Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3], lista1[4], lista1[5], lista1[6]};
                             tempo.addRow(nuevo);
                             if (lista1[5].equals("stayin alive") || lista1[6].equals("stayin alive")) {
-                                direccion = "src/canciones/Stayin-Alive.wav";//src\canciones
+                                direccion = "Stayin-Alive.wav";//src\canciones
                                 reproducirMusica(direccion);
                             } else if (lista1[5].equals("pasodobles") || lista1[6].equals("pasodobles")) {
-                                direccion = "file:/C:/Users/jenni/Documents/GitHub/Proyecto1IIIKJ/src/canciones/Pasodobles.wav";
+                                direccion = "Pasodobles.wav";
                                 reproducirMusica(direccion);
                             } else if (lista1[5].equals("como te voy a olvidar") || lista1[6].equals("como te voy a olvidar")) {
-                                direccion = "file:/C:/Users/jenni/Documents/GitHub/Proyecto1IIIKJ/src/canciones/como_te_voy_a_olvidar.wav";
+                                direccion = "como_te_voy_a_olvidar.wav";
                                 reproducirMusica(direccion);
                             } else if (lista1[5].equals("lloraras") || lista1[6].equals("lloraras")) {
-                                direccion = "file:/C:/Users/jenni/Documents/GitHub/Proyecto1IIIKJ/src/canciones/lloraras.wav";
+                                direccion = "lloraras.wav";
                                 reproducirMusica(direccion);
                             } else if (lista1[5].equals("noche de fantasia") || lista1[6].equals("noche de fantasia")) {
-                                direccion = "file:/C:/Users/jenni/Documents/GitHub/Proyecto1IIIKJ/src/canciones/noche_de_fantasia.wav";
+                                direccion = "noche_de_fantasia.wav";
                                 reproducirMusica(direccion);
                             }
                         }
@@ -136,22 +138,10 @@ public class vistaUsuario extends javax.swing.JFrame {
         }
     }
 
-    public void reproducirMusica(String direccion) throws NoPlayerException, CannotRealizeException {
-        try {
-            urlArchivoMusica = new URL(direccion);
-
-            reproductor = Manager.createRealizedPlayer(urlArchivoMusica);
-
-            Component controles = reproductor.getControlPanelComponent();
-            if (controles != null) {
-                this.add(controles);
-                controles.setLocation(50, 400);
-                controles.setSize(150, 25);
-            }
-//            reproductor.start();
-        } catch (IOException e) {
-            System.out.println("Se encontro un error" + e);
-        }
+    public void reproducirMusica(String direccion) throws IOException {
+        String file = new String(direccion);
+        File path = new File(file);
+        Desktop.getDesktop().open(path);
     }
 
     public void compraDiscosMusicaPeliculas(String nombreU, boolean valor, String verificar) {
@@ -441,15 +431,15 @@ public class vistaUsuario extends javax.swing.JFrame {
         DefaultTableModel tempo = (DefaultTableModel) table.getModel();
         tempo.setRowCount(0);
         TableModel tabla = table.getModel();
-        if (ComboxCateg.getSelectedIndex()!= -1){
+        if (ComboxCateg.getSelectedIndex() != -1) {
             String texto = ComboxCateg.getSelectedItem().toString();
-        verificarDatos verificar = new verificarDatos();
-        verificar.buscarArchivo(texto, (DefaultTableModel) tabla,bus);
-        nombre.setEnabled(true);
-        autor.setEnabled(true);
-        precio.setEnabled(true);
-        txtSeleccion.setEditable(true);
-        btnBuscar.setEnabled(true);
+            verificarDatos verificar = new verificarDatos();
+            verificar.buscarArchivo(texto, (DefaultTableModel) tabla, bus);
+            nombre.setEnabled(true);
+            autor.setEnabled(true);
+            precio.setEnabled(true);
+            txtSeleccion.setEditable(true);
+            btnBuscar.setEnabled(true);
         }
     }//GEN-LAST:event_ComboxCategActionPerformed
 
@@ -464,8 +454,8 @@ public class vistaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void menuItemMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMusicaActionPerformed
-        bus= true;
-        verificar="Musica";
+        bus = true;
+        verificar = "Musica";
 //        ComboxCateg.setEnabled(true);
         ComboxCateg.removeAllItems();
         ComboxCateg.addItem("Merengue");
@@ -476,14 +466,14 @@ public class vistaUsuario extends javax.swing.JFrame {
         table.setModel(new DefaultTableModel(
                 new Object[][]{},
                 new String[]{
-                    "NOMBRE DISCO", "AUTOR", "GENERO", "PRECIO", "CANTIDAD","CANCION 1","CANCION 2"
+                    "NOMBRE DISCO", "AUTOR", "GENERO", "PRECIO", "CANTIDAD", "CANCION 1", "CANCION 2"
                 }
         ));
     }//GEN-LAST:event_menuItemMusicaActionPerformed
 
     private void menuItemPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemPeliculasActionPerformed
-        bus=false;
-        verificar="Pelicula";
+        bus = false;
+        verificar = "Pelicula";
 //        ComboxCateg.setEnabled(true);
         ComboxCateg.removeAllItems();
         ComboxCateg.addItem("Comedia");
