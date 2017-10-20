@@ -77,64 +77,125 @@ public class vistaUsuario extends javax.swing.JFrame {
     }
 
     public void valida(String genero, String dato, String bus) throws NoPlayerException, CannotRealizeException {
-        DefaultTableModel tempo = (DefaultTableModel) table.getModel();;
-        String temp = "";
-        try {
-            try (BufferedReader bf = new BufferedReader(new FileReader("archivoDiscosMusica.txt"))) {
-                String bfRead;
-                while ((bfRead = bf.readLine()) != null) {
-                    temp = bfRead;
-                    String lista = temp;
-                    String[] lista1 = lista.split(",");
-                    if (bus.equals("nom")) {
-                        if (lista1[2].equals(genero) && (lista1[5].equals(dato) || lista1[6].equals(dato))) {
-                            tempo.setRowCount(0);
-                            Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3], lista1[4], lista1[5], lista1[6]};
-                            tempo.addRow(nuevo);
-                            if (lista1[5].equals("Stayin Alive") || lista1[6].equals("Stayin Alive")) {
-                                direccion = "Stayin-Alive.wav";
-                                reproducirMusica(direccion);
-                            } else if (lista1[5].equals("pasodobles") || lista1[6].equals("pasodobles")) {
-                                direccion = "Pasodobles.wav";
-                                reproducirMusica(direccion);
-                            } else if (lista1[5].equals("como te voy a olvidar") || lista1[6].equals("como te voy a olvidar")) {
-                                direccion = "como_te_voy_a_olvidar.wav";
-                                reproducirMusica(direccion);
-                            } else if (lista1[5].equals("lloraras") || lista1[6].equals("lloraras")) {
-                                direccion = "lloraras.wav";
-                                reproducirMusica(direccion);
-                            } else if (lista1[5].equals("noche de fantasia") || lista1[6].equals("noche de fantasia")) {
-                                direccion = "noche_de_fantasia.wav";
-                                reproducirMusica(direccion);
+        DefaultTableModel tempo = (DefaultTableModel) table.getModel();
+        if (verificar.equals("Musica")) {
+            String temp = "";
+            try {
+                try (BufferedReader bf = new BufferedReader(new FileReader("archivoDiscosMusica.txt"))) {
+                    String bfRead;
+                    while ((bfRead = bf.readLine()) != null) {
+                        temp = bfRead;
+                        String lista = temp;
+                        String[] lista1 = lista.split(",");
+                        if (bus.equals("nom")) {
+                            if (lista1[2].equals(genero) && (lista1[5].equals(dato) || lista1[6].equals(dato))) {
+                                tempo.setRowCount(0);
+                                Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3], lista1[4], lista1[5], lista1[6]};
+                                tempo.addRow(nuevo);
+                                if (lista1[5].equals("Stayin Alive") || lista1[6].equals("Stayin Alive")) {
+                                    direccion = "Stayin-Alive.wav";
+                                    reproducirMusica(direccion);
+                                } else if (lista1[5].equals("pasodobles") || lista1[6].equals("pasodobles")) {
+                                    direccion = "Pasodobles.wav";
+                                    reproducirMusica(direccion);
+                                } else if (lista1[5].equals("como te voy a olvidar") || lista1[6].equals("como te voy a olvidar")) {
+                                    direccion = "como_te_voy_a_olvidar.wav";
+                                    reproducirMusica(direccion);
+                                } else if (lista1[5].equals("lloraras") || lista1[6].equals("lloraras")) {
+                                    direccion = "lloraras.wav";
+                                    reproducirMusica(direccion);
+                                } else if (lista1[5].equals("noche de fantasia") || lista1[6].equals("noche de fantasia")) {
+                                    direccion = "noche_de_fantasia.wav";
+                                    reproducirMusica(direccion);
+                                }
                             }
-                        }
-                    } else if (bus.equals("aut")) {
-                        if (lista1[1].equals(dato) & lista1[2].equals(genero)) {
-                            tempo.setRowCount(0);
-                            Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3], lista1[4], lista1[5], lista1[6]};
-                            tempo.addRow(nuevo);
-                            if (lista1[5].equals("stayin alive") || lista1[6].equals("stayin alive")) {
-                                direccion = "Stayin-Alive.wav";//src\canciones
-                                reproducirMusica(direccion);
-                            } else if (lista1[5].equals("pasodobles") || lista1[6].equals("pasodobles")) {
-                                direccion = "Pasodobles.wav";
-                                reproducirMusica(direccion);
-                            } else if (lista1[5].equals("como te voy a olvidar") || lista1[6].equals("como te voy a olvidar")) {
-                                direccion = "como_te_voy_a_olvidar.wav";
-                                reproducirMusica(direccion);
-                            } else if (lista1[5].equals("lloraras") || lista1[6].equals("lloraras")) {
-                                direccion = "lloraras.wav";
-                                reproducirMusica(direccion);
-                            } else if (lista1[5].equals("noche de fantasia") || lista1[6].equals("noche de fantasia")) {
-                                direccion = "noche_de_fantasia.wav";
-                                reproducirMusica(direccion);
+                        } else if (bus.equals("aut")) {
+                            if (lista1[1].equals(dato) & lista1[2].equals(genero)) {
+                                tempo.setRowCount(0);
+                                Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3], lista1[4], lista1[5], lista1[6]};
+                                tempo.addRow(nuevo);
+                                if (lista1[5].equals("stayin alive") || lista1[6].equals("stayin alive")) {
+                                    direccion = "Stayin-Alive.wav";//src\canciones
+                                    reproducirMusica(direccion);
+                                } else if (lista1[5].equals("pasodobles") || lista1[6].equals("pasodobles")) {
+                                    direccion = "Pasodobles.wav";
+                                    reproducirMusica(direccion);
+                                } else if (lista1[5].equals("como te voy a olvidar") || lista1[6].equals("como te voy a olvidar")) {
+                                    direccion = "como_te_voy_a_olvidar.wav";
+                                    reproducirMusica(direccion);
+                                } else if (lista1[5].equals("lloraras") || lista1[6].equals("lloraras")) {
+                                    direccion = "lloraras.wav";
+                                    reproducirMusica(direccion);
+                                } else if (lista1[5].equals("noche de fantasia") || lista1[6].equals("noche de fantasia")) {
+                                    direccion = "noche_de_fantasia.wav";
+                                    reproducirMusica(direccion);
+                                }
                             }
                         }
                     }
                 }
+            } catch (IOException e) {
+                System.out.println("No se encontro el archivo" + e);
             }
-        } catch (IOException e) {
-            System.out.println("No se encontro el archivo" + e);
+        }else if (verificar.equals("Pelicula")){
+            String temp = "";
+            try {
+                try (BufferedReader bf = new BufferedReader(new FileReader("archivoPeliculas.txt"))) {
+                    String bfRead;
+                    while ((bfRead = bf.readLine()) != null) {
+                        temp = bfRead;
+                        String lista = temp;
+                        String[] lista1 = lista.split(",");
+                        if (bus.equals("nom")) {
+                            if (lista1[2].equals(genero) && (lista1[0].equals(dato))) {
+                                tempo.setRowCount(0);
+                                Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3], lista1[4]};
+                                tempo.addRow(nuevo);
+                                if (lista1[0].equals("todo todo")) {
+                                    direccion = "TODO TODO   Trailer Banda Sonora   Oficial Warner Bros Pictures.mp4";
+                                    reproducirMusica(direccion);
+                                } else if (lista1[0].equals("guadianes de la galaxia 2") ) {
+                                    direccion = "Guardianes de la Galaxia Vol2   Nuevo Tráiler.mp4";
+                                    reproducirMusica(direccion);
+                                } else if (lista1[0].equals("saw 8") ) {
+                                    direccion = "Saw VIII Trailer Oficial Español.mp4";
+                                    reproducirMusica(direccion);
+                                } else if (lista1[0].equals("la mascara") ) {
+                                    direccion = "Trailer La Mascara.mp4";
+                                    reproducirMusica(direccion);
+                                } else if (lista1[0].equals("ruta equivocada")) {
+                                    direccion = "Wrong Turn (2003) Trailer.mp4";
+                                    reproducirMusica(direccion);
+                                }
+                            }
+                        } else if (bus.equals("aut")) {
+                            if (lista1[1].equals(dato) & lista1[2].equals(genero)) {
+                                tempo.setRowCount(0);
+                                Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3], lista1[4]};
+                                tempo.addRow(nuevo);
+                                if (lista1[0].equals("todo todo")) {
+                                    direccion = "TODO TODO   Trailer Banda Sonora   Oficial Warner Bros Pictures.mp4";
+                                    reproducirMusica(direccion);
+                                } else if (lista1[0].equals("guadianes de la galaxia 2") ) {
+                                    direccion = "Guardianes de la Galaxia Vol2   Nuevo Tráiler.mp4";
+                                    reproducirMusica(direccion);
+                                } else if (lista1[0].equals("saw                                     direccion = \"Saw VIII Trailer Oficial Español.mp4\";\n" +
+"8") ) {
+                                    reproducirMusica(direccion);
+                                } else if (lista1[0].equals("la mascara") ) {
+                                    direccion = "Trailer La Mascara.mp4";
+                                    reproducirMusica(direccion);
+                                } else if (lista1[0].equals("ruta equivocada")) {
+                                    direccion = "Wrong Turn (2003) Trailer.mp4";
+                                    reproducirMusica(direccion);
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                System.out.println("No se encontro el archivo" + e);
+            }
         }
     }
 
@@ -433,8 +494,8 @@ public class vistaUsuario extends javax.swing.JFrame {
         TableModel tabla = table.getModel();
         if (ComboxCateg.getSelectedIndex() != -1) {
             String texto = ComboxCateg.getSelectedItem().toString();
-            verificarDatos verificar = new verificarDatos();
-            verificar.buscarArchivo(texto, (DefaultTableModel) tabla, bus);
+            verificarDatos verifica = new verificarDatos();
+            verifica.buscarArchivo(texto, (DefaultTableModel) tabla, bus);
             nombre.setEnabled(true);
             autor.setEnabled(true);
             precio.setEnabled(true);

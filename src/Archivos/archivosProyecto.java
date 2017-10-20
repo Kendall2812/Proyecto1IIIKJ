@@ -169,11 +169,11 @@ public class archivosProyecto {
         File direccion = new File("archivoPeliculas.txt");
         try {
             try (FileWriter escribir = new FileWriter(direccion, true)) {
-                escribir.write(nombre + " ");
-                escribir.write(autor + " ");
-                escribir.write(categoria + " ");
-                escribir.write(precio + " ");
-                escribir.write(cantidad + " ");
+                escribir.write(nombre + ",");
+                escribir.write(autor + ",");
+                escribir.write(categoria + ",");
+                escribir.write(precio + ",");
+                escribir.write(cantidad + ",");
                 escribir.write("*" + "\n");
                 escribir.close();
 
@@ -185,10 +185,12 @@ public class archivosProyecto {
     }
 
     public void buscarGeneroMusicaPelicual(String genero, DefaultTableModel tabla, boolean bus) {
+        DefaultTableModel tempo = (DefaultTableModel) tabla;
         if (bus) {
-            DefaultTableModel tempo = (DefaultTableModel) tabla;
-            String temp = "";
+            
+            
             try {
+                String temp = "";
                 try (BufferedReader bf = new BufferedReader(new FileReader("archivoDiscosMusica.txt"))) {
                     String bfRead;
                     while ((bfRead = bf.readLine()) != null) {
@@ -207,18 +209,17 @@ public class archivosProyecto {
         }
         if (!bus) {
             System.out.println("entro a buscar peliculas");
-            DefaultTableModel tempo = (DefaultTableModel) tabla;
-            String temp = "";
             try {
+                String temp = "";
                 try (BufferedReader bf = new BufferedReader(new FileReader("archivoPeliculas.txt"))) {
                     String bfRead;
                     while ((bfRead = bf.readLine()) != null) {
                         temp = bfRead;
                         String lista = temp;
-                        String[] lista1 = lista.split(" ");
+                        String[] lista1 = lista.split(",");
                         if (genero.equals(lista1[2])) {
                             Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3], lista1[4]};
-                            tempo.addRow(nuevo);
+                            tempo.addRow(nuevo);                           
                         }
                     }
                 }
