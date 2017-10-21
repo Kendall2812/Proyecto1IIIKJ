@@ -91,7 +91,7 @@ public class accesoAdminstrador extends javax.swing.JFrame {
             verEditarInfoPeliculas editar = new verEditarInfoPeliculas();
             editar.setVisible(true);
             dispose();
-        }
+        }   
     }
     /**
      * This method is called from within the constructor to initialize the form.

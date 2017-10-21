@@ -8,3 +8,4 @@ kendall,207620167,kendallandreyr@gmail.com,music1990,1,18/10/2017,*
 kendall,207620167,kendallandreyr@gmail.com,guayacan,1,18/10/2017,*
 kendall,207620167,kendallandreyr@gmail.com,noches de fantasia,2,18/10/2017,*
 kendall,207620167,kendallandreyr@gmail.com,guayacan,2,18/10/2017,*
+kendall,207620167,kendallandreyr@gmail.com,guayacan,5,20/10/2017,*

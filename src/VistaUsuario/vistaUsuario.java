@@ -86,7 +86,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                                 tempo.setRowCount(0);
                                 Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3], lista1[4], lista1[5], lista1[6]};
                                 tempo.addRow(nuevo);
-                                if (lista1[5].equals("Stayin Alive") || lista1[6].equals("Stayin Alive")) {
+                                if (lista1[5].equals("stayin alive") || lista1[6].equals("stayin alive")) {
                                     direccion = "Stayin-Alive.wav";
                                     reproducirMusica(direccion);
                                 } else if (lista1[5].equals("pasodobles") || lista1[6].equals("pasodobles")) {
@@ -148,7 +148,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                                 if (lista1[0].equals("todo todo")) {
                                     direccion = "TODO TODO   Trailer Banda Sonora   Oficial Warner Bros Pictures.mp4";
                                     reproducirMusica(direccion);
-                                } else if (lista1[0].equals("guadianes de la galaxia 2")) {
+                                } else if (lista1[0].equals("guardianes de la galaxia")) {
                                     direccion = "Guardianes de la Galaxia Vol2   Nuevo Tráiler.mp4";
                                     reproducirMusica(direccion);
                                 } else if (lista1[0].equals("saw 8")) {
