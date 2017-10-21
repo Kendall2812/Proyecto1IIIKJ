@@ -7,7 +7,6 @@ package VistaUsuario;
 
 import NegocioVeficarDatos.verificarDatos;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,7 +17,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.media.CannotRealizeException;
-import javax.media.Manager;
 import javax.media.NoPlayerException;
 import javax.media.Player;
 import javax.swing.JOptionPane;
