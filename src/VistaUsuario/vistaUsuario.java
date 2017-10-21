@@ -14,8 +14,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -272,9 +272,7 @@ public class vistaUsuario extends javax.swing.JFrame {
         btnCerrarCesion = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
-        txtTotal = new javax.swing.JTextField();
         jMenuBar2 = new javax.swing.JMenuBar();
         menuOpciones = new javax.swing.JMenu();
         menuItemMusica = new javax.swing.JMenuItem();
@@ -349,10 +347,6 @@ public class vistaUsuario extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Cantidad de compra:");
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Monto Total:");
-
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -396,16 +390,9 @@ public class vistaUsuario extends javax.swing.JFrame {
                                 .addComponent(precio)
                                 .addGap(104, 104, 104)
                                 .addComponent(btnCompra)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(btnPrecompra))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(160, 160, 160)
-                                .addComponent(jLabel3)
-                                .addGap(29, 29, 29)
-                                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(51, Short.MAX_VALUE))
+                        .addGap(30, 30, 30)
+                        .addComponent(btnPrecompra)
+                        .addContainerGap(290, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(nombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -455,17 +442,10 @@ public class vistaUsuario extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(autor)
-                        .addGap(7, 7, 7)
-                        .addComponent(precio))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(autor)
+                .addGap(7, 7, 7)
+                .addComponent(precio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCompra)
@@ -506,6 +486,7 @@ public class vistaUsuario extends javax.swing.JFrame {
         bus = true;
         verificar = "Musica";
 //        ComboxCateg.setEnabled(true);
+        nombre.setLabel("Nombre de la Canción"); //Lo que hace es cambiar el nombre del label para colocar nombre Musica
         ComboxCateg.removeAllItems();
         ComboxCateg.addItem("Merengue");
         ComboxCateg.addItem("Clasica");
@@ -524,6 +505,7 @@ public class vistaUsuario extends javax.swing.JFrame {
         bus = false;
         verificar = "Pelicula";
 //        ComboxCateg.setEnabled(true);
+        nombre.setLabel("Nombre de la Pelicula");//Lo que hace es cambiar el nombre del label para colocar nombre Pelcula
         ComboxCateg.removeAllItems();
         ComboxCateg.addItem("Comedia");
         ComboxCateg.addItem("Terror");
@@ -590,7 +572,6 @@ public class vistaUsuario extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem menuItemMusica;
@@ -601,6 +582,5 @@ public class vistaUsuario extends javax.swing.JFrame {
     private javax.swing.JTable table;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtSeleccion;
-    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }
