@@ -44,6 +44,7 @@ public class vistaUsuario extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Vista Usuario");
 //        ComboxCateg.setEnabled(false);
+        btnPrecompra.setEnabled(false);
         nombre.setEnabled(false);
         autor.setEnabled(false);
         precio.setEnabled(false);
@@ -224,6 +225,7 @@ public class vistaUsuario extends javax.swing.JFrame {
 
                         if (disponible == 0) {
                             JOptionPane.showMessageDialog(null, "En este momento se encuntra agotado");//verifica que si la cantidad del disco este en 0
+                            btnPrecompra.setEnabled(true);
                         } else if (canti > disponible) {
                             JOptionPane.showMessageDialog(null, "Esa cantidad no se encuentra disponible"); //verifica que la cantidad que se digito no sea mayor a la que esta en el archivo
                             txtCantidad.setText("");
