@@ -16,9 +16,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.media.CannotRealizeException;
-import javax.media.NoPlayerException;
-import javax.media.Player;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -34,7 +31,6 @@ public class vistaUsuario extends javax.swing.JFrame {
      */
     ArrayList nombreUser = new ArrayList();
     URL urlArchivoMusica;
-    Player reproductor;
     String direccion = "";
     int precio1;
     int cantidad;
@@ -62,7 +58,7 @@ public class vistaUsuario extends javax.swing.JFrame {
 
     }
 
-    public void filtroBusqueda() throws NoPlayerException, CannotRealizeException {
+    public void filtroBusqueda() {
         String selec = txtSeleccion.getText();
         String genero = ComboxCateg.getSelectedItem().toString();
         if (nombre.isSelected()) {
@@ -74,7 +70,7 @@ public class vistaUsuario extends javax.swing.JFrame {
         }
     }
 
-    public void valida(String genero, String dato, String bus) throws NoPlayerException, CannotRealizeException {
+    public void valida(String genero, String dato, String bus) {
         DefaultTableModel tempo = (DefaultTableModel) table.getModel();
         if (verificar.equals("Musica")) {
             String temp = "";
@@ -503,13 +499,7 @@ public class vistaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_ComboxCategActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        try {
-            filtroBusqueda();
-        } catch (NoPlayerException ex) {
-            Logger.getLogger(vistaUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (CannotRealizeException ex) {
-            Logger.getLogger(vistaUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        filtroBusqueda();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void menuItemMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMusicaActionPerformed
