@@ -137,7 +137,7 @@ public class vistaUsuario extends javax.swing.JFrame {
             } catch (IOException e) {
                 System.out.println("No se encontro el archivo" + e);
             }
-        }else if (verificar.equals("Pelicula")){
+        } else if (verificar.equals("Pelicula")) {
             String temp = "";
             try {
                 try (BufferedReader bf = new BufferedReader(new FileReader("archivoPeliculas.txt"))) {
@@ -154,13 +154,13 @@ public class vistaUsuario extends javax.swing.JFrame {
                                 if (lista1[0].equals("todo todo")) {
                                     direccion = "TODO TODO   Trailer Banda Sonora   Oficial Warner Bros Pictures.mp4";
                                     reproducirMusica(direccion);
-                                } else if (lista1[0].equals("guadianes de la galaxia 2") ) {
+                                } else if (lista1[0].equals("guadianes de la galaxia 2")) {
                                     direccion = "Guardianes de la Galaxia Vol2   Nuevo Tráiler.mp4";
                                     reproducirMusica(direccion);
-                                } else if (lista1[0].equals("saw 8") ) {
+                                } else if (lista1[0].equals("saw 8")) {
                                     direccion = "Saw VIII Trailer Oficial Español.mp4";
                                     reproducirMusica(direccion);
-                                } else if (lista1[0].equals("la mascara") ) {
+                                } else if (lista1[0].equals("la mascara")) {
                                     direccion = "Trailer La Mascara.mp4";
                                     reproducirMusica(direccion);
                                 } else if (lista1[0].equals("ruta equivocada")) {
@@ -176,13 +176,13 @@ public class vistaUsuario extends javax.swing.JFrame {
                                 if (lista1[0].equals("todo todo")) {
                                     direccion = "TODO TODO   Trailer Banda Sonora   Oficial Warner Bros Pictures.mp4";
                                     reproducirMusica(direccion);
-                                } else if (lista1[0].equals("guadianes de la galaxia 2") ) {
+                                } else if (lista1[0].equals("guadianes de la galaxia 2")) {
                                     direccion = "Guardianes de la Galaxia Vol2   Nuevo Tráiler.mp4";
                                     reproducirMusica(direccion);
-                                } else if (lista1[0].equals("saw                                     direccion = \"Saw VIII Trailer Oficial Español.mp4\";\n" +
-"8") ) {
+                                } else if (lista1[0].equals("saw 8")) {
+                                    direccion = "Saw VIII Trailer Oficial Español.mp4";
                                     reproducirMusica(direccion);
-                                } else if (lista1[0].equals("la mascara") ) {
+                                } else if (lista1[0].equals("la mascara")) {
                                     direccion = "Trailer La Mascara.mp4";
                                     reproducirMusica(direccion);
                                 } else if (lista1[0].equals("ruta equivocada")) {

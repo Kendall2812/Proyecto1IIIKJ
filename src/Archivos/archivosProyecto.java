@@ -312,7 +312,7 @@ public class archivosProyecto {
             BufferedReader archivo = new BufferedReader(leer);
 
             while ((linea7 = archivo.readLine()) != null) {
-                nombrePeliculas = linea7.split(" ");
+                nombrePeliculas = linea7.split(",");
 
                 for (int x = 0; x < nombrePeliculas.length; x++) {
                     datosPelicula.add(nombrePeliculas[x]);
@@ -330,7 +330,7 @@ public class archivosProyecto {
             try (FileWriter escribir = new FileWriter(direccion)) {
                 for (int x = 0; x < datosNuevos.size(); x++) {
                     escribir.write(datosNuevos.get(x).toString());
-                    escribir.write(" ");
+                    escribir.write(",");
 
                     if (datosNuevos.get(x).equals("*")) {
                         escribir.write("\n");
@@ -356,7 +356,7 @@ public class archivosProyecto {
             try (FileWriter escribir = new FileWriter(direccion)) {
                 for (int x = 0; x < datosEliminarMovie.size(); x++) {
                     escribir.write(datosEliminarMovie.get(x).toString());
-                    escribir.write(" ");
+                    escribir.write(",");
 
                     if (datosEliminarMovie.get(x).equals("*")) {
                         escribir.write("\n");
