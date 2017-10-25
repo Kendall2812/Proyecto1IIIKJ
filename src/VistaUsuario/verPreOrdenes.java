@@ -5,7 +5,9 @@
  */
 package VistaUsuario;
 
+import Archivos.archivosProyecto;
 import java.awt.Color;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,6 +18,8 @@ public class verPreOrdenes extends javax.swing.JFrame {
     /**
      * Creates new form verPreOrdenes
      */
+    String correo;
+    
     public verPreOrdenes() {
         initComponents();
         this.getContentPane().setBackground(Color.gray);
@@ -38,13 +42,18 @@ public class verPreOrdenes extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "NOMBRE USUARIO", "CEDULA", "NOMBRE ARTICULO", "TIPO", "CANTIDAD SOLICITADA"
+                "NOMBRE USUARIO", "NOMBRE ARTICULO", "TIPO", "CANTIDAD SOLICITADA"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -77,6 +86,13 @@ public class verPreOrdenes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
+        archivosProyecto arc= new archivosProyecto();
+        arc.mostrarPreOrden((DefaultTableModel) tabla);
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

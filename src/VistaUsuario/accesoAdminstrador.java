@@ -182,7 +182,7 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         btnCerrarCesión.setBackground(new java.awt.Color(255, 0, 0));
         btnCerrarCesión.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnCerrarCesión.setForeground(new java.awt.Color(255, 255, 255));
-        btnCerrarCesión.setText("Cerrar Cesión");
+        btnCerrarCesión.setText("Cerrar Sesión");
         btnCerrarCesión.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarCesiónActionPerformed(evt);
@@ -215,6 +215,11 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Lista Pre Ordenes");
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu3MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -295,8 +300,17 @@ public class accesoAdminstrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jRbModificarDiscoActionPerformed
 
     private void menuDiscosMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDiscosMusicaActionPerformed
-        
+       controlComprasUserMusica ver= new controlComprasUserMusica();
+       ver.setVisible(true);
+       dispose();
     }//GEN-LAST:event_menuDiscosMusicaActionPerformed
+
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+        // TODO add your handling code here:
+        verPreOrdenes ver = new verPreOrdenes();
+        ver.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jMenu3MouseClicked
 
     /**
      * @param args the command line arguments
