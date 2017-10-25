@@ -210,6 +210,11 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         jMenu2.add(menuDiscosMusica);
 
         menuPeliculas.setText("Discos Peliculas");
+        menuPeliculas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuPeliculasActionPerformed(evt);
+            }
+        });
         jMenu2.add(menuPeliculas);
 
         jMenuBar1.add(jMenu2);
@@ -311,6 +316,13 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         ver.setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenu3MouseClicked
+
+    private void menuPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuPeliculasActionPerformed
+        // TODO add your handling code here:
+        controlComprasUserPelicula mostrar = new controlComprasUserPelicula();
+        mostrar.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_menuPeliculasActionPerformed
 
     /**
      * @param args the command line arguments

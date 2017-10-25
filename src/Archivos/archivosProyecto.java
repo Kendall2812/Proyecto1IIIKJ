@@ -633,4 +633,23 @@ public class archivosProyecto {
         }
         
     }
+    public void mostrarCompPeli(DefaultTableModel tabla){
+        DefaultTableModel tempo = (DefaultTableModel) tabla;
+        try {
+            String temp = "";
+            try (BufferedReader bf = new BufferedReader(new FileReader("archivoComprasPeliculas.txt"))) {
+                String bfRead;
+                while ((bfRead = bf.readLine()) != null) {
+                    temp = bfRead;
+                    String lista = temp;
+                    String[] lista1 = lista.split(",");
+                    Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3],lista1[4]};
+                    tempo.addRow(nuevo);
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "No se encontro ningun disco con el genero que selecciono" + e);
+        }
+        
+    }
 }

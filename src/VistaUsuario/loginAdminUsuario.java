@@ -101,6 +101,11 @@ public class loginAdminUsuario extends javax.swing.JFrame {
         jCBAdmin.setBackground(new java.awt.Color(153, 153, 153));
         jCBAdmin.setForeground(new java.awt.Color(255, 255, 255));
         jCBAdmin.setText("Adminstrador");
+        jCBAdmin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jCBAdminKeyPressed(evt);
+            }
+        });
 
         jMenuBar1.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -167,6 +172,11 @@ public class loginAdminUsuario extends javax.swing.JFrame {
         registro.setVisible(true);
         dispose();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jCBAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCBAdminKeyPressed
+        // TODO add your handling code here:
+        jCBAdmin.setSelected(true);
+    }//GEN-LAST:event_jCBAdminKeyPressed
 
     /**
      * @param args the command line arguments

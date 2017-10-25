@@ -11,18 +11,18 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Kendall
+ * @author jenni
  */
-public class controlComprasUserMusica extends javax.swing.JFrame {
+public class controlComprasUserPelicula extends javax.swing.JFrame {
 
     /**
-     * Creates new form controlComprasUserMusica
+     * Creates new form controlComprasUserPelicula
      */
-    public controlComprasUserMusica() {
+    public controlComprasUserPelicula() {
         initComponents();
         this.getContentPane().setBackground(Color.gray);
         this.setLocationRelativeTo(null);
-        this.setTitle("Compra De Musica Por Usuario");
+        this.setTitle("Compra De Peliculas Por Usuario");
     }
 
     /**
@@ -50,7 +50,7 @@ public class controlComprasUserMusica extends javax.swing.JFrame {
 
             },
             new String [] {
-                "NOMBRE USUARIO", "CEDULA", "CORREO", "NOMBRE DISCO", "CANTIDAD COMPRADA"
+                "NOMBRE ", "CEDULA", "CORREO", "NOMBRE PELICULA", "CANTIDAD COMPRADA"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -67,40 +67,40 @@ public class controlComprasUserMusica extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(346, 346, 346)
+                .addGap(345, 345, 345)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addComponent(jButton1)
-                .addGap(45, 45, 45))
+                .addGap(51, 51, 51))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        accesoAdminstrador ver = new accesoAdminstrador();
+        ver.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         DefaultTableModel tabla= (DefaultTableModel) jTable1.getModel();
-        archivosProyecto mostrar= new archivosProyecto();
-        mostrar.mostrarCompDisc(tabla);
+        archivosProyecto mostrar = new archivosProyecto();
+        mostrar.mostrarCompPeli(tabla);
     }//GEN-LAST:event_formWindowOpened
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        accesoAdminstrador acc = new accesoAdminstrador();
-        acc.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -119,20 +119,20 @@ public class controlComprasUserMusica extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(controlComprasUserMusica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(controlComprasUserPelicula.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(controlComprasUserMusica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(controlComprasUserPelicula.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(controlComprasUserMusica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(controlComprasUserPelicula.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(controlComprasUserMusica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(controlComprasUserPelicula.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new controlComprasUserMusica().setVisible(true);
+                new controlComprasUserPelicula().setVisible(true);
             }
         });
     }
