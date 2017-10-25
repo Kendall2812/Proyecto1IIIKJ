@@ -115,9 +115,9 @@ public class verificarDatos {
         archivosProyecto compras = new archivosProyecto();
         compras.guardarCompras(nombre, precio, cantidad, nameUser,verificar);
     }
-    public void registrarPreCompra(String usuario,String nombreArticulo,String cantida,String total){
+    public void registrarPreCompra(String usuario,String nombreArticulo,String cantida,String total,String genero){
         archivosProyecto precompra = new archivosProyecto();
-        precompra.registrarPreCompra2(usuario, nombreArticulo, cantida, total);
+        precompra.registrarPreCompra2(usuario, nombreArticulo, cantida, total, genero);
     }
     
     public void enviarCorreo2(String usuario, String mensaje, String asunt) { // enviar Correo

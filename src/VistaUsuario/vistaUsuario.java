@@ -263,7 +263,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                 String Precio = tablaModelo.getValueAt(row, 3).toString();
 
                 vetanaPreCompra preorden = new vetanaPreCompra();
-                preorden.preCompra(nombreDiscoPelicula, Precio, canti, User);
+                preorden.preCompra(nombreDiscoPelicula, Precio, canti, User,verificar);
                 preorden.setVisible(true);
                 dispose();
                 

@@ -19,6 +19,7 @@ public class vetanaPreCompra extends javax.swing.JFrame {
      * Creates new form vetanaPreCompra
      */
     String nombreUser;
+    String genero1 = "";
     String verificar = "";
     int precioTotal = 0;
     int multiplicarPrecio = 0;
@@ -30,8 +31,9 @@ public class vetanaPreCompra extends javax.swing.JFrame {
         this.setTitle("Pre Compra");
     }
     
-    public void preCompra(String nombreDisPeli,String precio, int cantidad,String User){
+    public void preCompra(String nombreDisPeli,String precio, int cantidad,String User,String Genero){
         cantida = String.valueOf(cantidad);
+        genero1 = Genero;
         multiplicarPrecio = Integer.parseInt(precio);
         precioTotal = multiplicarPrecio * cantidad;
         total = String.valueOf(precioTotal);
@@ -48,7 +50,7 @@ public class vetanaPreCompra extends javax.swing.JFrame {
         btnCancelar.setEnabled(false);
         
         verificarDatos registrar = new verificarDatos();//registrarPreCompra
-        registrar.registrarPreCompra(usuario,nombreArticulo,cantida,total);
+        registrar.registrarPreCompra(usuario,nombreArticulo,cantida,total,genero1);
         
         btnCancelar.setEnabled(true);
         txtNombreArticulo.setText("");

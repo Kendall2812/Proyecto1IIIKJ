@@ -553,7 +553,7 @@ public class archivosProyecto {
         }
     }
 
-    public void registrarPreCompra2(String usuario,String nombreArticulo,String cantidad,String total){
+    public void registrarPreCompra2(String usuario,String nombreArticulo,String cantidad,String total,String Genero){
         ArrayList usuario5 = new ArrayList();
         usuario5 = datosUser();
         String correo4 = ""; //nombre1 
@@ -586,6 +586,7 @@ public class archivosProyecto {
                     escribir.write(correo4 + ",");
                     escribir.write(nombreArticulo + ",");
                     escribir.write(cantidad + ",");
+                    escribir.write(Genero + ",");
                     escribir.write("*" + "\n");
                     escribir.close();
 
