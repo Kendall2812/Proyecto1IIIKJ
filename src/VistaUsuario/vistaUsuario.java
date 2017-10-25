@@ -37,6 +37,8 @@ public class vistaUsuario extends javax.swing.JFrame {
     int canti;
     String nombreUsuario, verificar;
     boolean bus;
+    TableModel tablaModelo;
+    
 
     public vistaUsuario() {
         initComponents();
@@ -204,19 +206,17 @@ public class vistaUsuario extends javax.swing.JFrame {
         nombreUser.add(nombreU);
         int row = 0;
         String numero;
-        TableModel tablaModelo;
         tablaModelo = (TableModel) table.getModel();
         row = table.getSelectedRow();
         numero = String.valueOf(row);
         try {
             try {
                 if (valor == false) {
-                    System.out.println("hola");
+                    //System.out.println("hola");
                 } else {
 
                     if (numero.equals("-1")) {//validad que se aya seleccionado una cancion en el Jtable
                         JOptionPane.showMessageDialog(null, "Debe seleccionar un disco y la cantidad que desea comprar");
-                        //falta ver como hacer para que se solicite la pre orden
                     } else {
 
                         String cantidadDisponible = tablaModelo.getValueAt(row, 4).toString();//obtiene la cantidad de los dicos disponibles
@@ -224,8 +224,9 @@ public class vistaUsuario extends javax.swing.JFrame {
                         canti = Integer.parseInt(txtCantidad.getText());
 
                         if (disponible == 0) {
-                            JOptionPane.showMessageDialog(null, "En este momento se encuntra agotado");//verifica que si la cantidad del disco este en 0
-                            btnPrecompra.setEnabled(true);
+                            JOptionPane.showMessageDialog(null, "En este momento se encuntra agotado el articulo. "
+                                    + "Si desea realizar una PreCompra presione el boton de PreCompra");//verifica que si la cantidad del disco este en 0
+                            btnPrecompra.setEnabled(true);//Activa el boton de preCompra para que realize la funcion
                         } else if (canti > disponible) {
                             JOptionPane.showMessageDialog(null, "Esa cantidad no se encuentra disponible"); //verifica que la cantidad que se digito no sea mayor a la que esta en el archivo
                             txtCantidad.setText("");
@@ -251,6 +252,28 @@ public class vistaUsuario extends javax.swing.JFrame {
         }
     }
 
+    public void preCompras() {
+        int row;
+        row = table.getSelectedRow();
+
+        if (row != -1) {
+            if (canti != 0) {
+                String User = (String) nombreUser.get(0);
+                String nombreDiscoPelicula = tablaModelo.getValueAt(row, 0).toString();
+                String Precio = tablaModelo.getValueAt(row, 3).toString();
+
+                vetanaPreCompra preorden = new vetanaPreCompra();
+                preorden.preCompra(nombreDiscoPelicula, Precio, canti, User);
+                preorden.setVisible(true);
+                dispose();
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe indicar la cantidad de Discos o de Peliculas para realizar la Pre Orden");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar en la tabla el nombre de la pelicula o el nombre del Disco de Musica para realizar la Pre Compra");
+        }
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -334,6 +357,11 @@ public class vistaUsuario extends javax.swing.JFrame {
         btnPrecompra.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnPrecompra.setForeground(new java.awt.Color(255, 255, 255));
         btnPrecompra.setText("PRE-ORDENAR");
+        btnPrecompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrecompraActionPerformed(evt);
+            }
+        });
 
         btnCerrarCesion.setBackground(new java.awt.Color(255, 0, 51));
         btnCerrarCesion.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -412,14 +440,14 @@ public class vistaUsuario extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(ComboxCateg, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCerrarCesion, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCerrarCesion, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(ComboxCateg, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -490,6 +518,7 @@ public class vistaUsuario extends javax.swing.JFrame {
 //        ComboxCateg.setEnabled(true);
         nombre.setLabel("Nombre de la Canción"); //Lo que hace es cambiar el nombre del label para colocar nombre Musica
         ComboxCateg.removeAllItems();
+        ComboxCateg.addItem("Seleccionar");
         ComboxCateg.addItem("Merengue");
         ComboxCateg.addItem("Clasica");
         ComboxCateg.addItem("Salsa");
@@ -509,6 +538,7 @@ public class vistaUsuario extends javax.swing.JFrame {
 //        ComboxCateg.setEnabled(true);
         nombre.setLabel("Nombre de la Pelicula");//Lo que hace es cambiar el nombre del label para colocar nombre Pelcula
         ComboxCateg.removeAllItems();
+        ComboxCateg.addItem("Seleccionar");
         ComboxCateg.addItem("Comedia");
         ComboxCateg.addItem("Terror");
         ComboxCateg.addItem("Romanticas");
@@ -528,6 +558,10 @@ public class vistaUsuario extends javax.swing.JFrame {
         boolean valor1 = true;
         compraDiscosMusicaPeliculas(nombre, valor1, verificar);
     }//GEN-LAST:event_btnCompraActionPerformed
+
+    private void btnPrecompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrecompraActionPerformed
+        preCompras();
+    }//GEN-LAST:event_btnPrecompraActionPerformed
 
     /**
      * @param args the command line arguments

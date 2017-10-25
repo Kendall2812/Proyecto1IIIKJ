@@ -5,8 +5,7 @@
  */
 package Archivos;
 
-import NegocioVeficarDatos.Controlador;
-import NegocioVeficarDatos.Correo;
+import NegocioVeficarDatos.verificarDatos;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -34,7 +33,6 @@ public class archivosProyecto {
     int cambioCantidad = 0;
     public static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     public static Date date = new Date();
-    Correo c = new Correo();
     String usuario, nombreDisco, mensaje, asunto,nombrePelicula;
 
     public String datosAdmin() { //Lee el archivo del administrador
@@ -73,8 +71,8 @@ public class archivosProyecto {
         return valores;
     }
 
-    public String[] datosUser() { //Lee el archivo de usuario
-
+    public ArrayList datosUser() { //Lee el archivo de usuario
+        ArrayList User = new ArrayList();
         File usuarios;
         try {
             usuarios = new File("archivoUser.txt");
@@ -94,11 +92,15 @@ public class archivosProyecto {
             String linea6;
             while ((linea6 = archivo2.readLine()) != null) {
                 datos1 = linea6.split(" ");
+                
+                for (int x = 0; x < datos1.length; x++) {
+                    User.add(datos1[x]);
+                }
             }
         } catch (IOException e) {
             System.out.println("Error al leer el archivo: " + e);
         }
-        return datos1;
+        return User;
     }
 
     public void registrarDiscoMusica(String nombreDisco, String autor, String genero, String precio, String cantidadDisponible, String cancion1, String cancion2) {
@@ -429,7 +431,8 @@ public class archivosProyecto {
                             nombreDisco = nombre;
                             mensaje = "La compra de su disco: " + nombre + " fue exitosa, gracias por preferirnos";
                             asunto = "Compra existosa";
-                            enviarCorreo(usuario, mensaje, asunto);
+                            verificarDatos correo1 = new verificarDatos();
+                            correo1.enviarCorreo2(usuario, mensaje, asunto);
 
                             //JOptionPane.showMessageDialog(null, "Se registro con exito");
                         }
@@ -505,7 +508,8 @@ public class archivosProyecto {
                         nombrePelicula = nombre;
                         mensaje = "La compra de su Pelicula: " + nombre + " fue exitosa, gracias por preferirnos";
                         asunto = "Compra existosa";
-                        enviarCorreo(usuario, mensaje, asunto);
+                        verificarDatos correo1 = new verificarDatos();
+                        correo1.enviarCorreo2(usuario, mensaje, asunto);
 
                         //JOptionPane.showMessageDialog(null, "Se registro con exito");
                     }
@@ -549,19 +553,46 @@ public class archivosProyecto {
         }
     }
 
-    public void enviarCorreo(String usuario, String mensaje, String asunt) {
-        c.setContraseña("ieyoydtabzekgfhl");
-        c.setUsuarioCorreo("jennim2430@gmail.com");
-        c.setAsunto(asunt);
-        c.setMensaje(mensaje);
-        c.setDestino(usuario);
+    public void registrarPreCompra2(String usuario,String nombreArticulo,String cantidad,String total){
+        ArrayList usuario5 = new ArrayList();
+        usuario5 = datosUser();
+        String correo4 = ""; //nombre1 
+        boolean valor = false;
+                
+        for(int x = 0; x < usuario5.size(); x = x+4){
+            if(usuario5.get(x).equals(usuario)){
+                correo4 = (String) usuario5.get(x + 3);
+                valor = true;
+                break;
+            }
+        }
+        if (valor == true) {
+            File preCompras;
+            try {
+                preCompras = new File("archivoPreCompras.txt");
+                if (preCompras.createNewFile()) {
 
-        Controlador co = new Controlador();
-        if (co.enviarCorreo(c)) {
-            JOptionPane.showMessageDialog(null, "El correo ha sido enviado correctamente");
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al enviar el correo");
+                }
+
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "No se creo el archio" + e);
+            }
+
+            File direccion2 = new File("archivoPreCompras.txt");
+
+            try {
+                try (FileWriter escribir = new FileWriter(direccion2, true)) {
+                    escribir.write(usuario + ",");
+                    escribir.write(correo4 + ",");
+                    escribir.write(nombreArticulo + ",");
+                    escribir.write(cantidad + ",");
+                    escribir.write("*" + "\n");
+                    escribir.close();
+
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error no se pudo registrar la informacion en el archivo" + e);
+            }
         }
     }
-
 }

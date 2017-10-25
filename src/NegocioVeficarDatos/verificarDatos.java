@@ -10,11 +10,14 @@ import java.io.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+//import NegocioVeficarDatos.Controlador;
+//import NegocioVeficarDatos.Correo;
 
 /**
  *
  * @author Kendall
  */
+
 public class verificarDatos {
 
     String[] valores, datosUsuario;
@@ -23,6 +26,7 @@ public class verificarDatos {
     ArrayList Usuario = new ArrayList();
     ArrayList datosDisco = new ArrayList();
     boolean valor;
+    Correo c = new Correo();
 
     public boolean datosAdministrador(String nombre, String Clave) {//verifica el usuario y clave del administrador
         archivosProyecto datos = new archivosProyecto();
@@ -43,21 +47,20 @@ public class verificarDatos {
     public boolean datosUsuarios(String nombre, String Clave) {//verifica el nombre y clave de los usuarios
         String temp = "";
         boolean valor1 = false;
-        try {
-            try (BufferedReader bf = new BufferedReader(new FileReader("archivoUser.txt"))) {
-                String bfRead;
-                while ((bfRead = bf.readLine()) != null) {
-                    temp = bfRead;
-                    String lista = temp;
-                    String[] lista1 = lista.split(" ");
-                    if (nombre.equals(lista1[0]) & Clave.equals(lista1[1])) {
-                        valor1 = true;
-                    }
+        archivosProyecto user = new archivosProyecto();
+        ArrayList Usuario = new ArrayList();
+        Usuario = user.datosUser();
+        
+        for(int x = 0; x < Usuario.size(); x = x+4){
+            if(Usuario.get(x).equals(nombre)){
+                x = x + 1;
+                if(Usuario.get(x).equals(Clave)){
+                    valor1 = true;
+                    break;
                 }
             }
-        } catch (IOException e) {
-            System.out.println("No se encontro el archivo" + e);
         }
+        
         return valor1;
     }
 
@@ -111,5 +114,24 @@ public class verificarDatos {
     public void controlCompras(String nombre, String precio, String cantidad,String nameUser,String verificar){
         archivosProyecto compras = new archivosProyecto();
         compras.guardarCompras(nombre, precio, cantidad, nameUser,verificar);
+    }
+    public void registrarPreCompra(String usuario,String nombreArticulo,String cantida,String total){
+        archivosProyecto precompra = new archivosProyecto();
+        precompra.registrarPreCompra2(usuario, nombreArticulo, cantida, total);
+    }
+    
+    public void enviarCorreo2(String usuario, String mensaje, String asunt) { // enviar Correo
+        c.setContraseña("ieyoydtabzekgfhl");
+        c.setUsuarioCorreo("jennim2430@gmail.com");
+        c.setAsunto(asunt);
+        c.setMensaje(mensaje);
+        c.setDestino(usuario);
+
+        Controlador co = new Controlador();
+        if (co.enviarCorreo(c)) {
+            JOptionPane.showMessageDialog(null, "El correo ha sido enviado correctamente");
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al enviar el correo");
+        }
     }
 }

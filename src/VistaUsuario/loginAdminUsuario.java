@@ -37,7 +37,6 @@ public class loginAdminUsuario extends javax.swing.JFrame {
             valores = datosAmin.datosAdministrador(nombre, Clave);
 
             if (valores == true) {
-                //System.out.println("Entro a el programa");
                 accesoAdminstrador acceso = new accesoAdminstrador();
                 acceso.setVisible(true);
                 dispose();
