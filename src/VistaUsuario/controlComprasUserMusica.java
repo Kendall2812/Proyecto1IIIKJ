@@ -90,8 +90,8 @@ public class controlComprasUserMusica extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        DefaultTableModel tabla= (DefaultTableModel) jTable1.getModel();
-        archivosProyecto mostrar= new archivosProyecto();
+        DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
+        archivosProyecto mostrar = new archivosProyecto();
         mostrar.mostrarCompDisc(tabla);
     }//GEN-LAST:event_formWindowOpened
 

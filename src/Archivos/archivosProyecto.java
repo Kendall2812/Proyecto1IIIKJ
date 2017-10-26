@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class archivosProyecto {
 
     String[] datos1;
-    String nombre2, clave2, valores;
+    String nombre2, clave2, valores, to;
     ArrayList datos2 = new ArrayList();
     ArrayList nombreUser = new ArrayList();
     ArrayList dateMusic = new ArrayList();
@@ -34,6 +34,7 @@ public class archivosProyecto {
     public static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     public static Date date = new Date();
     String usuario, nombreDisco, mensaje, asunto, nombrePelicula;
+    int precio, monto;
 
     public String datosAdmin() { //Lee el archivo del administrador
 
@@ -596,7 +597,7 @@ public class archivosProyecto {
         }
     }
 
-    public void mostrarPreOrden(DefaultTableModel tabla) {
+    public void mostrarPreOrden(DefaultTableModel tabla, String verificar, int cantidad, String articulo, String asunto, String tipo, String user) {
         DefaultTableModel tempo = (DefaultTableModel) tabla;
         try {
             String temp = "";
@@ -606,15 +607,82 @@ public class archivosProyecto {
                     temp = bfRead;
                     String lista = temp;
                     String[] lista1 = lista.split(",");
-                    Object nuevo[] = {lista1[0], lista1[2], lista1[4], lista1[3]};
-                    tempo.addRow(nuevo);
+                    if (verificar.equals("abrir")) {
+                        Object nuevo[] = {lista1[0], lista1[2], lista1[4], lista1[3]};
+                        tempo.addRow(nuevo);
+                    }
+                    if (verificar.equals("musica")) {
+                        if (user.equals(lista1[0])) {
+                            to = lista1[1];
+                            try {
+                                String temp1 = "";
+                                try (BufferedReader bf1 = new BufferedReader(new FileReader("archivoDiscosMusica.txt"))) {
+                                    String bfRead1;
+                                    while ((bfRead1 = bf1.readLine()) != null) {
+                                        temp1 = bfRead1;
+                                        String lista2 = temp1;
+                                        String[] lista12 = lista2.split(",");
+                                        if (lista12[0].equals(articulo)) {
+                                            precio = Integer.parseInt(lista12[3]);
+                                            if (Integer.parseInt(lista12[4]) > 0) {
+                                                monto = (precio * cantidad);
+                                                mensaje = "Hola, te informamos que el articulo de " + tipo + ":" + articulo
+                                                        + "que solicitaste ya se encuentra disponible para su compra\n" + "Cantidad= " + cantidad + "\nMonto total=" + monto;
+                                                verificarDatos corr = new verificarDatos();
+                                                corr.enviarCorreo2(to, mensaje, asunto);
+                                                eliminarPreOrden(tabla, user, to, articulo, tipo, String.valueOf(cantidad));
+                                                break;
+                                            } else {
+                                                JOptionPane.showMessageDialog(null, "Aun no hay cantidad disponible para ese articulo");
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch (IOException e) {
+                                JOptionPane.showMessageDialog(null, "No se encontro ningun disco con el genero que selecciono" + e);
+                            }
+                        }
+                    } else if (verificar.equals("pelicula")) {
+                        if (user.equals(lista1[0])) {
+                            to = lista1[1];
+                            try {
+                                String temp1 = "";
+                                try (BufferedReader bf1 = new BufferedReader(new FileReader("archivoPeliculas.txt"))) {
+                                    String bfRead1;
+                                    while ((bfRead1 = bf1.readLine()) != null) {
+                                        temp1 = bfRead1;
+                                        String lista2 = temp1;
+                                        String[] lista12 = lista2.split(",");
+                                        if (lista12[0].equals(articulo)) {
+                                            precio = Integer.parseInt(lista12[3]);
+                                            if (Integer.parseInt(lista12[4]) > 0) {
+                                                monto = (precio * cantidad);
+                                                mensaje = "Hola, te informamos que el articulo de " + tipo + ":" + articulo
+                                                        + "que solicitaste ya se encuentra disponible para su compra\n" + "Cantidad= " + cantidad + "\nMonto total=" + monto;
+                                                verificarDatos corr = new verificarDatos();
+                                                corr.enviarCorreo2(to, mensaje, asunto);
+                                                eliminarPreOrden(tabla, user, to, articulo, tipo, String.valueOf(cantidad));
+                                                break;
+                                            } else {
+                                                JOptionPane.showMessageDialog(null, "Aun no hay cantidad disponible para ese articulo");
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch (IOException e) {
+                                JOptionPane.showMessageDialog(null, "error al abrir" + e);
+                            }
+                        }
+                    }
                 }
+
             }
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "No se encontro ningun disco con el genero que selecciono" + e);
+            JOptionPane.showMessageDialog(null, "error" + e);
         }
     }
-    public void mostrarCompDisc(DefaultTableModel tabla){
+
+    public void mostrarCompDisc(DefaultTableModel tabla) {
         DefaultTableModel tempo = (DefaultTableModel) tabla;
         try {
             String temp = "";
@@ -624,16 +692,17 @@ public class archivosProyecto {
                     temp = bfRead;
                     String lista = temp;
                     String[] lista1 = lista.split(",");
-                    Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3],lista1[4]};
+                    Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3], lista1[4]};
                     tempo.addRow(nuevo);
                 }
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "No se encontro ningun disco con el genero que selecciono" + e);
         }
-        
+
     }
-    public void mostrarCompPeli(DefaultTableModel tabla){
+
+    public void mostrarCompPeli(DefaultTableModel tabla) {
         DefaultTableModel tempo = (DefaultTableModel) tabla;
         try {
             String temp = "";
@@ -643,16 +712,17 @@ public class archivosProyecto {
                     temp = bfRead;
                     String lista = temp;
                     String[] lista1 = lista.split(",");
-                    Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3],lista1[4]};
+                    Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3], lista1[4]};
                     tempo.addRow(nuevo);
                 }
             }
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "No se encontro ningun disco con el genero que selecciono" + e);
         }
-        
+
     }
-    public ArrayList leerArchivoCompraMusica1(){
+
+    public ArrayList leerArchivoCompraMusica1() {
         ArrayList comprasMusica = new ArrayList();
         File direccion = new File("archivoCompras.txt");
 
@@ -671,5 +741,47 @@ public class archivosProyecto {
             System.out.println("Error al leer el archivo: " + e);
         }
         return comprasMusica;
+    }
+
+    public void eliminarPreOrden(DefaultTableModel tabla, String nombre, String correo, String articulo, String tipo, String cantidad) {
+        DefaultTableModel tempo = (DefaultTableModel) tabla;
+        try {
+            String temp;
+            try (BufferedReader bf = new BufferedReader(new FileReader("archivoPreCompras.txt"))) {
+                String bfRead;
+                while ((bfRead = bf.readLine()) != null) {
+                    temp = bfRead;
+                    String lista = temp;
+                    String[] lista1 = lista.split(",");
+                    if (lista1[0].equals(nombre) & lista1[1].equals(correo) & lista1[2].equals(articulo) & lista1[3].equals(cantidad) & lista1[4].equals(tipo)) {
+                        try {
+                            File archivo = new File("archivoPreCompras.txt");
+                            FileWriter escribir = new FileWriter(archivo, true);
+                            String temp1;
+                            try (BufferedReader bf1 = new BufferedReader(new FileReader("archivoPreCompras.txt"))) {
+                                String bf1Read;
+                                while ((bf1Read = bf1.readLine()) != null) {
+                                    temp1 = bf1Read;
+                                    if (temp1.equals(lista)) {
+                                        BufferedWriter br = new BufferedWriter(new FileWriter("archivoPreCompras.txt"));
+                                        continue;
+                                    }
+                                    escribir.write(temp1 + "\r\n");
+                                    tempo.setRowCount(0);
+                                }
+                                escribir.close();
+                                JOptionPane.showMessageDialog(null, "eliminado correctamente");
+                                mostrarPreOrden(tabla, "abrir", 0, "", "", "", "");
+                            }
+                        } catch (IOException e) {
+                            System.out.println("No se encontro el archivo" + e);
+                        }
+                        break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("No se encontro el archivo" + e);
+        }
     }
 }

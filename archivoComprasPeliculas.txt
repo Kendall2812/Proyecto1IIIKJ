@@ -1,3 +1,5 @@
 kendall,207620167,kendallandreyr@gmail.com,Enrredados,2,18/10/2017,*
 kendall,207620167,kendallandreyr@gmail.com,MagoOz,1,18/10/2017,*
 kendall,207620167,kendallandreyr@gmail.com,Enrredados,1,18/10/2017,*
+jeniffer,207500700,jennim24@hotmail.com,ruta equivocada,6,25/10/2017,*
+jeniffer,207500700,jennim24@hotmail.com,todo todo,2,26/10/2017,*

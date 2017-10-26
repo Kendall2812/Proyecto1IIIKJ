@@ -116,6 +116,11 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
         btnRegresar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -207,6 +212,13 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una de las tres opciones");
         }
     }//GEN-LAST:event_btnGraficarActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+        accesoAdminstrador acc = new accesoAdminstrador();
+        acc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -7,6 +7,8 @@ package VistaUsuario;
 
 import Archivos.archivosProyecto;
 import java.awt.Color;
+
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,13 +21,42 @@ public class verPreOrdenes extends javax.swing.JFrame {
      * Creates new form verPreOrdenes
      */
     String correo;
-    
+    String mensaje, asunto, to, articulo, tipo, user, verificar;
+    int cantidad;
+    DefaultTableModel tabla;
+
     public verPreOrdenes() {
         initComponents();
         this.getContentPane().setBackground(Color.gray);
-        this.setTitle("Vista De Pre-Ordenes");       
+        this.setTitle("Vista De Pre-Ordenes");
         setLocationRelativeTo(null);
-        
+
+    }
+
+    public void enviarCorreoPreOr() {
+        tabla = (DefaultTableModel) jTable1.getModel();
+        int row;
+        row = jTable1.getSelectedRow();
+        if (row != -1) {
+            articulo = jTable1.getValueAt(row, 1).toString();
+            user = jTable1.getValueAt(row, 0).toString();
+            tipo = jTable1.getValueAt(row, 2).toString();
+            cantidad = Integer.valueOf(tabla.getValueAt(row, 3).toString());
+            if (tipo.equals("Musica")) {
+                verificar = "musica";
+                asunto = "Notificacion sobre pre-orden de disco de musica";
+                archivosProyecto arc = new archivosProyecto();
+                arc.mostrarPreOrden(tabla, verificar, cantidad, articulo, asunto, tipo, user);
+            } else if (tipo.equals("Pelicula")) {
+                verificar = "pelicula";
+                asunto = "Notificacion sobre pre-orden de pelicula";
+                archivosProyecto arc = new archivosProyecto();
+                arc.mostrarPreOrden(tabla, verificar, cantidad, articulo, asunto, tipo, user);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar a cual usuario desea enviar el correo");
+        }
+
     }
 
     /**
@@ -40,6 +71,7 @@ public class verPreOrdenes extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -59,6 +91,18 @@ public class verPreOrdenes extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Notificar a usuario");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Regresar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,13 +117,18 @@ public class verPreOrdenes extends javax.swing.JFrame {
                         .addGap(302, 302, 302)
                         .addComponent(jButton1)))
                 .addGap(42, 42, 42))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jButton2)
+                .addGap(95, 95, 95))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(84, 84, 84)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addContainerGap()
+                .addComponent(jButton2)
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -90,9 +139,22 @@ public class verPreOrdenes extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         DefaultTableModel tabla = (DefaultTableModel) jTable1.getModel();
-        archivosProyecto arc= new archivosProyecto();
-        arc.mostrarPreOrden((DefaultTableModel) tabla);
+        archivosProyecto arc = new archivosProyecto();
+        verificar = "abrir";
+        arc.mostrarPreOrden(tabla, verificar, cantidad, articulo, asunto, tipo, user);
     }//GEN-LAST:event_formWindowOpened
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        enviarCorreoPreOr();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        accesoAdminstrador acc = new accesoAdminstrador();
+        acc.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,6 +193,7 @@ public class verPreOrdenes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

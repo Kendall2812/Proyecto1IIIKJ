@@ -17,3 +17,7 @@ jeniffer,207500700,jennim24@hotmail.com,en vivo,1,25/10/2017,*
 jeniffer,207500700,jennim24@hotmail.com,saturday night Fever,1,25/10/2017,*
 kendall,207620167,kendallandreyr@gmail.com,perdido,2,25/10/2017,*
 kendall,207620167,kendallandreyr@gmail.com,Mejor Paso Doble,5,25/10/2017,*
+jeniffer,207500700,jennim24@hotmail.com,azul vivo,3,26/10/2017,*
+jeniffer,207500700,jennim24@hotmail.com,muevelo,1,26/10/2017,*
+jeniffer,207500700,jennim24@hotmail.com,noches de fantasia,1,26/10/2017,*
+jeniffer,207500700,jennim24@hotmail.com,perdido,3,26/10/2017,*

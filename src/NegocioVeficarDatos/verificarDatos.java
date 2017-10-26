@@ -138,8 +138,6 @@ public class verificarDatos {
         //Merengue,Clasica,Salsa,PasoDoble,Cumbia
         ArrayList masMenoVendido = new ArrayList();
         archivosProyecto comprasDiscoMusica = new archivosProyecto();
-        masMenoVendido = comprasDiscoMusica.leerArchivoCompraMusica1();
-        
-        
+        masMenoVendido = comprasDiscoMusica.leerArchivoCompraMusica1();  
     }
 }

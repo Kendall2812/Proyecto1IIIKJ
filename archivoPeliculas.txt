@@ -1,7 +1,7 @@
-saw 8,James Wan,Terror,1000,10,*
-guardianes de la galaxia,James Gunn,Accion,1000,20,*
-todo todo,nicola yoon,Romanticas,1500,20,*
-ruta equivocada,Alan,Suspenso,1000,6,*
-la mascara,mike werb,Comedia,1200,8,*
-MagoOz,jerry,Comedia,30000,6,*
-Enrredados,james,Comedia,15000,7,* 
+saw 8,James Wan,Terror,1000,10,*,
+guardianes de la galaxia,James Gunn,Accion,1000,20,*,
+la mascara,mike werb,Comedia,1200,8,*,
+MagoOz,jerry,Comedia,30000,6,*,
+Enrredados,james,Comedia,15000,7,*,
+ruta equivocada,Alan,Suspenso,1000,3,*,
+todo todo,nicola yoon,Romanticas,1500,18,*,
