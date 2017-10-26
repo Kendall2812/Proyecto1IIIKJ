@@ -197,46 +197,53 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Precio");
 
+        txtCancion2.setEditable(false);
+        txtCancion2.setBackground(new java.awt.Color(255, 255, 255));
         txtCancion2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtCancion2.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtCancion2.setEnabled(false);
 
+        txtNombre.setEditable(false);
+        txtNombre.setBackground(new java.awt.Color(255, 255, 255));
         txtNombre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtNombre.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtNombre.setEnabled(false);
 
+        txtCategoria.setEditable(false);
+        txtCategoria.setBackground(new java.awt.Color(255, 255, 255));
         txtCategoria.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtCategoria.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtCategoria.setEnabled(false);
         txtCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCategoriaActionPerformed(evt);
             }
         });
 
+        txtPrecio.setEditable(false);
+        txtPrecio.setBackground(new java.awt.Color(255, 255, 255));
         txtPrecio.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtPrecio.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtPrecio.setEnabled(false);
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Disponibles");
 
+        txtDisponibles.setEditable(false);
+        txtDisponibles.setBackground(new java.awt.Color(255, 255, 255));
         txtDisponibles.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtDisponibles.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtDisponibles.setEnabled(false);
 
         jLabel8.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Canción 1");
 
+        txtCancion1.setEditable(false);
+        txtCancion1.setBackground(new java.awt.Color(255, 255, 255));
         txtCancion1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtCancion1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtCancion1.setEnabled(false);
 
+        txtAutor.setEditable(false);
+        txtAutor.setBackground(new java.awt.Color(255, 255, 255));
         txtAutor.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtAutor.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtAutor.setEnabled(false);
 
         btnEditar.setBackground(new java.awt.Color(51, 204, 0));
         btnEditar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N

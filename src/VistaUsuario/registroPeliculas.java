@@ -7,6 +7,7 @@ package VistaUsuario;
 
 import NegocioVeficarDatos.verificarDatos;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,12 +31,20 @@ public class registroPeliculas extends javax.swing.JFrame {
         categoria = jCbCategoriaPelicula.getSelectedItem().toString();
         precio = txtPrecioPelicula.getText();
         cantidad = txtPeliculasDiponibles.getText();
-        verificarDatos peliculas = new verificarDatos();
-        peliculas.registrarPelicula(nombre,autor,categoria,precio,cantidad);
-        txtNombrePelicula.setText(" ");
-        txtAutorPelicula.setText(" ");
-        txtPrecioPelicula.setText(" ");
-        txtPeliculasDiponibles.setText(" ");
+        if(categoria.equals("Seleccionar")){
+            JOptionPane.showMessageDialog(null, "Error de Item");
+        } else {
+            if (nombre.equals("") || autor.equals("") || categoria.equals("") || precio.equals("") || cantidad.equals("")) {
+                JOptionPane.showMessageDialog(null, "Todos los campos deben de estar Completos");
+            } else {
+                verificarDatos peliculas = new verificarDatos();
+                peliculas.registrarPelicula(nombre, autor, categoria, precio, cantidad);
+                txtNombrePelicula.setText(" ");
+                txtAutorPelicula.setText(" ");
+                txtPrecioPelicula.setText(" ");
+                txtPeliculasDiponibles.setText(" ");
+            }
+        }
     }
 
     /**

@@ -36,14 +36,18 @@ public class registroDiscoMusica extends javax.swing.JFrame {
         if(genero.equals("Seleccionar")){
             JOptionPane.showMessageDialog(null, "Error de Item");
         }else{
-            verificarDatos registroMusica = new verificarDatos();
-            registroMusica.registrarDiscoMusica(nombreDisco,autor,genero,precio,cantidadDisponible,cancion1,cancion2);
-            txtNombreDisco.setText(" ");
-            txtNombreAutor.setText(" ");
-            txtPrecioDisco.setText(" ");
-            txtDisponibleCantidDisco.setText(" ");
-            txtCancion1.setText(" ");
-            txtCancion1.setText(" ");
+            if (nombreDisco.equals("") || autor.equals("") || genero.equals("") || precio.equals("") || cantidadDisponible.equals("") || cancion1.equals("") || cancion2.equals("")) {
+                JOptionPane.showMessageDialog(null, "Todos los campos deben de estar Completos");
+            }else{
+                verificarDatos registroMusica = new verificarDatos();
+                registroMusica.registrarDiscoMusica(nombreDisco, autor, genero, precio, cantidadDisponible, cancion1, cancion2);
+                txtNombreDisco.setText(" ");
+                txtNombreAutor.setText(" ");
+                txtPrecioDisco.setText(" ");
+                txtDisponibleCantidDisco.setText(" ");
+                txtCancion1.setText(" ");
+                txtCancion2.setText(" ");
+            }
         }
     }
 
