@@ -652,4 +652,24 @@ public class archivosProyecto {
         }
         
     }
+    public ArrayList leerArchivoCompraMusica1(){
+        ArrayList comprasMusica = new ArrayList();
+        File direccion = new File("archivoCompras.txt");
+
+        try {
+            FileReader leer = new FileReader(direccion);
+            BufferedReader archivo2 = new BufferedReader(leer);
+            String linea6;
+            while ((linea6 = archivo2.readLine()) != null) {
+                datos1 = linea6.split(" ");
+
+                for (int x = 0; x < datos1.length; x++) {
+                    comprasMusica.add(datos1[x]);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e);
+        }
+        return comprasMusica;
+    }
 }

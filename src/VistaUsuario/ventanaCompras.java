@@ -172,6 +172,7 @@ public class ventanaCompras extends javax.swing.JFrame {
     private void btnConfirmarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarCompraActionPerformed
         btnCancelarCompra.setEnabled(false);
         nombre = txtNombreDisco.getText();
+        nombreUser = txtnombreUsuario.getText();
         String nombreuser = txtnombreUsuario.getText();
         verificarDatos confirmaCompra = new verificarDatos();
         confirmaCompra.controlCompras(nombre,preciofacturado,cantidad,nombreuser,verificar);

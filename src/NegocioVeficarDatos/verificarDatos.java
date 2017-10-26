@@ -134,4 +134,12 @@ public class verificarDatos {
             JOptionPane.showMessageDialog(null, "Error al enviar el correo");
         }
     }
+    public void reporte1Musica(){
+        //Merengue,Clasica,Salsa,PasoDoble,Cumbia
+        ArrayList masMenoVendido = new ArrayList();
+        archivosProyecto comprasDiscoMusica = new archivosProyecto();
+        masMenoVendido = comprasDiscoMusica.leerArchivoCompraMusica1();
+        
+        
+    }
 }
