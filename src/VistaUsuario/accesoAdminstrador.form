@@ -13,15 +13,21 @@
             <Property name="text" type="java.lang.String" value="Reportes"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+            <MenuItem class="javax.swing.JMenuItem" name="reporteMusica">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reportes de Discos de Musica"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reporteMusicaActionPerformed"/>
+              </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
+            <MenuItem class="javax.swing.JMenuItem" name="reportePeliculas">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reportes de Discos de Pelicula"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reportePeliculasActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

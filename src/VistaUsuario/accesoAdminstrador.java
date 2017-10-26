@@ -116,8 +116,8 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         btnCerrarCesión = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        reporteMusica = new javax.swing.JMenuItem();
+        reportePeliculas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         menuDiscosMusica = new javax.swing.JMenuItem();
         menuPeliculas = new javax.swing.JMenuItem();
@@ -191,11 +191,21 @@ public class accesoAdminstrador extends javax.swing.JFrame {
 
         jMenu1.setText("Reportes");
 
-        jMenuItem3.setText("Reportes de Discos de Musica");
-        jMenu1.add(jMenuItem3);
+        reporteMusica.setText("Reportes de Discos de Musica");
+        reporteMusica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporteMusicaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(reporteMusica);
 
-        jMenuItem4.setText("Reportes de Discos de Pelicula");
-        jMenu1.add(jMenuItem4);
+        reportePeliculas.setText("Reportes de Discos de Pelicula");
+        reportePeliculas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportePeliculasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(reportePeliculas);
 
         jMenuBar1.add(jMenu1);
 
@@ -324,6 +334,15 @@ public class accesoAdminstrador extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_menuPeliculasActionPerformed
 
+    private void reporteMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteMusicaActionPerformed
+        reportesDiscosMusica reporte = new reportesDiscosMusica();
+        reporte.setVisible(true);
+    }//GEN-LAST:event_reporteMusicaActionPerformed
+
+    private void reportePeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportePeliculasActionPerformed
+        
+    }//GEN-LAST:event_reportePeliculasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -372,13 +391,13 @@ public class accesoAdminstrador extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JRadioButton jRbModificarDisco;
     private javax.swing.JRadioButton jRbModificarPelicula;
     private javax.swing.JRadioButton jrbRegistroDisco;
     private javax.swing.JRadioButton jrbRegistroPelicula;
     private javax.swing.JMenuItem menuDiscosMusica;
     private javax.swing.JMenuItem menuPeliculas;
+    private javax.swing.JMenuItem reporteMusica;
+    private javax.swing.JMenuItem reportePeliculas;
     // End of variables declaration//GEN-END:variables
 }

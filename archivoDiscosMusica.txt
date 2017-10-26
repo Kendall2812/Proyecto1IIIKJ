@@ -6,3 +6,6 @@ noches de fantasia,joseph,Merengue,20000,1,que levante la mano,noche de fantasia
 guayacan,carlos,PasoDoble,10000,7,pasodobles,cada dia que pasa,*,
 en vivo,oscar,Salsa,9000,4,lloraras,yo quisiera,*,
 saturday night Fever,Bee Gees,Clasica,40000,3,stayin alive,Night Fever,*,
+Mejor Salsa,Marc Anthony,Salsa,13000,15,Valio la Pena,Ahora Quien ,*
+Mejor Paso Doble,Ronald,PasoDoble,10000,12,Ole,Cariño Verdadero,*
+Bailador ,Celso Piña  ,Cumbia,16000 ,13,El Paso del Gigante,Conrol Machete,*
