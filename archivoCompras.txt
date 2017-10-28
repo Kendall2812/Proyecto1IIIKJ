@@ -1,23 +1,15 @@
-kendall,207620167,kendallandreyr@gmail.com,guayacan,5,18/10/2017,*
-daniel,20963145,danielor@gmail.com,noches de fantasia,2,18/10/2017,*
-jeniffer,207500700,jennim24@hotmail.com,saturday night Fever,1,18/10/2017,*
-kendall,207620167,kendallandreyr@gmail.com,muevelo,2,18/10/2017,*
-kendall,207620167,kendallandreyr@gmail.com,perdido,2,18/10/2017,*
-kendall,207620167,kendallandreyr@gmail.com,noches de fantasia,1,18/10/2017,*
-kendall,207620167,kendallandreyr@gmail.com,music1990,1,18/10/2017,*
-kendall,207620167,kendallandreyr@gmail.com,guayacan,1,18/10/2017,*
-kendall,207620167,kendallandreyr@gmail.com,noches de fantasia,2,18/10/2017,*
-kendall,207620167,kendallandreyr@gmail.com,guayacan,2,18/10/2017,*
-kendall,207620167,kendallandreyr@gmail.com,guayacan,5,20/10/2017,*
-kendall,207620167,kendallandreyr@gmail.com,en vivo,2,24/10/2017,*
-kendall,207620167,kendallandreyr@gmail.com,en vivo,2,24/10/2017,*
-kendall,207620167,kendallandreyr@gmail.com,guayacan,2,24/10/2017,*
-kendall,207620167,kendallandreyr@gmail.com,guayacan,2,24/10/2017,*
-jeniffer,207500700,jennim24@hotmail.com,en vivo,1,25/10/2017,*
-jeniffer,207500700,jennim24@hotmail.com,saturday night Fever,1,25/10/2017,*
-kendall,207620167,kendallandreyr@gmail.com,perdido,2,25/10/2017,*
-kendall,207620167,kendallandreyr@gmail.com,Mejor Paso Doble,5,25/10/2017,*
-jeniffer,207500700,jennim24@hotmail.com,azul vivo,3,26/10/2017,*
-jeniffer,207500700,jennim24@hotmail.com,muevelo,1,26/10/2017,*
-jeniffer,207500700,jennim24@hotmail.com,noches de fantasia,1,26/10/2017,*
-jeniffer,207500700,jennim24@hotmail.com,perdido,3,26/10/2017,*
+daniel,20963145,danielor@gmail.com,music1990,1,27/10/2017,Clasica,*
+laura,203850147,laurar@gmail.com,music1990,2,27/10/2017,Clasica,*
+laura,203850147,laurar@gmail.com,en vivo,2,27/10/2017,Salsa,*
+andrea,203450146,andretaU@gmail.com,guayacan,3,27/10/2017,PasoDoble,*
+andrea,203450146,andretaU@gmail.com,Mejor Salsa,3,27/10/2017,Salsa,*
+yamileyh,70890905,yamary@gmail.com,music1990,5,27/10/2017,Clasica,*
+yamileyh,70890905,yamary@gmail.com,Mejor Salsa,2,27/10/2017,Salsa,*
+kendall,207620167,kendallandreyr@gmail.com,saturday night Fever,5,27/10/2017,Clasica,*
+kendall,207620167,kendallandreyr@gmail.com,Mejor Paso Doble,2,27/10/2017,PasoDoble,*
+kendall,207620167,kendallandreyr@gmail.com,guayacan,2,27/10/2017,PasoDoble,*
+kendall,207620167,kendallandreyr@gmail.com,noches de fantasia,5,27/10/2017,Merengue,*
+kendall,207620167,kendallandreyr@gmail.com,muevelo,2,27/10/2017,Merengue,*
+kendall,207620167,kendallandreyr@gmail.com,noches de fantasia,2,27/10/2017,Merengue,*
+kendall,207620167,kendallandreyr@gmail.com,Bailador,2,27/10/2017,Cumbia,*
+kendall,207620167,kendallandreyr@gmail.com,Bailador,2,27/10/2017,Cumbia,*

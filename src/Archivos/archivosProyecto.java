@@ -374,7 +374,7 @@ public class archivosProyecto {
         }
     }
 
-    public void guardarCompras(String nombre, String precio, String cantidad, String nameUser, String verificar) {
+    public void guardarCompras(String nombre, String precio, String cantidad, String nameUser, String verificar,String genero) {
 
         boolean valor1 = false;
         File direccion = new File("archivoUser.txt");
@@ -425,6 +425,7 @@ public class archivosProyecto {
                         escribir.write(correo3 + ",");
                         escribir.write(nombre + ",");
                         escribir.write(cantidad + "," + dateFormat.format(date) + ",");
+                        escribir.write(genero + ",");
                         escribir.write("*" + "\n");
                         escribir.close();
                         usuario = correo3;

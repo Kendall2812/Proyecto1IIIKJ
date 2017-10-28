@@ -234,9 +234,10 @@ public class vistaUsuario extends javax.swing.JFrame {
                             String User = (String) nombreUser.get(0);
                             String strResultado = tablaModelo.getValueAt(row, 0).toString();
                             String Precio = tablaModelo.getValueAt(row, 3).toString();
+                            String genero = tablaModelo.getValueAt(row, 2).toString();
 
                             ventanaCompras compra = new ventanaCompras(); //llama ventana compra
-                            compra.registrarCompra(strResultado, Precio, canti, User, verificar);
+                            compra.registrarCompra(strResultado, Precio, canti, User, verificar,genero);
                             compra.setVisible(true);
                             dispose();
                         }

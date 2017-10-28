@@ -19,7 +19,7 @@ public class ventanaCompras extends javax.swing.JFrame {
      */
     int costoTotal = 0;
     String nombreUser;
-    String preciofacturado,nombre,cantidad, verificar;
+    String preciofacturado,nombre,cantidad, verificar,Genero;
     public ventanaCompras() {
         initComponents();
         this.getContentPane().setBackground(Color.gray);
@@ -27,7 +27,7 @@ public class ventanaCompras extends javax.swing.JFrame {
         this.setTitle("Ventana Compra");
     }
     
-    public void registrarCompra(String nombre,String precio, int cantidadCompra, String nombreUsuario, String verifica){//String catalogo
+    public void registrarCompra(String nombre,String precio, int cantidadCompra, String nombreUsuario, String verifica, String genero){//String catalogo
        cantidad = String.valueOf(cantidadCompra);
        int costo = Integer.parseInt(precio);
        costoTotal = cantidadCompra* costo;
@@ -36,7 +36,8 @@ public class ventanaCompras extends javax.swing.JFrame {
        txtPrecio.setText(preciofacturado);
        txtCantidadCompra.setText(cantidad);
        txtnombreUsuario.setText(nombreUsuario);
-       verificar= verifica;
+       verificar = verifica;
+       Genero = genero;
     }
     
 
@@ -175,7 +176,7 @@ public class ventanaCompras extends javax.swing.JFrame {
         nombreUser = txtnombreUsuario.getText();
         String nombreuser = txtnombreUsuario.getText();
         verificarDatos confirmaCompra = new verificarDatos();
-        confirmaCompra.controlCompras(nombre,preciofacturado,cantidad,nombreuser,verificar);
+        confirmaCompra.controlCompras(nombre,preciofacturado,cantidad,nombreuser,verificar,Genero);
 
         btnCancelarCompra.setEnabled(true);
         txtNombreDisco.setText("");

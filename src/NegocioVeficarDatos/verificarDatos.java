@@ -111,9 +111,9 @@ public class verificarDatos {
         archivosProyecto eliminarMovie = new archivosProyecto();
         eliminarMovie.eliminarPelicula(elimarDateMovie);
     }
-    public void controlCompras(String nombre, String precio, String cantidad,String nameUser,String verificar){
+    public void controlCompras(String nombre, String precio, String cantidad,String nameUser,String verificar,String genero){
         archivosProyecto compras = new archivosProyecto();
-        compras.guardarCompras(nombre, precio, cantidad, nameUser,verificar);
+        compras.guardarCompras(nombre, precio, cantidad, nameUser,verificar,genero);
     }
     public void registrarPreCompra(String usuario,String nombreArticulo,String cantida,String total,String genero){
         archivosProyecto precompra = new archivosProyecto();
@@ -135,24 +135,66 @@ public class verificarDatos {
         }
     }
      public void reporte1Musica(){
-        //Merengue,Clasica,Salsa,PasoDoble,Cumbia   leerDatosMusica()
+        //Merengue,Clasica,Salsa,PasoDoble,Cumbia  
         ArrayList masMenoVendido = new ArrayList();
         ArrayList datosMusica = new ArrayList();
         ArrayList generos = new ArrayList();
-        int numero;
+        ArrayList geneDisco = new ArrayList();
+        ArrayList clasica = new ArrayList();
+        String cancion = "";
         
         archivosProyecto comprasDiscoMusica = new archivosProyecto();
         
         datosMusica = comprasDiscoMusica.leerDatosMusica();
         masMenoVendido = comprasDiscoMusica.leerArchivoCompraMusica1();
-        for (int y = 0; y < masMenoVendido.size(); y = y+7) {
-               y = y + 3;
-               generos.add(masMenoVendido.get(y));
- 
+        for (int y = 0; y < masMenoVendido.size(); y++) {
+            if(y == 3){
+                generos.add(masMenoVendido.get(y));
+                y = y + 3;
+                generos.add(masMenoVendido.get(y));
+                y = y + 4;
+            }else if(y > 3){
+                generos.add(masMenoVendido.get(y));
+                y = y + 3;
+                generos.add(masMenoVendido.get(y));
+                y = y + 4;
+            }
         }
-        for(int x = 0; x < datosMusica.size(); x++){
-           
+        for(int x = 1; x < generos.size(); x++){
+            if(generos.get(x).equals("Clasica")){
+                cancion = (String) generos.get(x - 1);
+                clasica.add(cancion);
+                for(int r = 0; r < clasica.size();r++){
+                    if(clasica.get(x).equals(cancion)){
+                        
+                    }
+                }
+                x= x+1;
+                
+            }
+            else if(generos.get(x).equals("Merengue")){
+                x= x+1;
+            }
+            else if(generos.get(x).equals("Salsa")){
+                x= x+1;
+            }
+            else if(generos.get(x).equals("PasoDoble")){
+                x= x+1;
+            }
+            else if(generos.get(x).equals("Cumbia")){
+                x= x+1;
+            }
         }
-        
+//        for(int x = 0; x < datosMusica.size(); x++){
+//            geneDisco.add(datosMusica.get(x));
+//            x = x +2;
+//            geneDisco.add(datosMusica.get(x));
+//            x = x +5;
+//        }
+//        for(int s = 0; s < generos.size() && s < geneDisco.size(); s++){
+//            if(generos.get(s).equals(geneDisco.get(s))){
+//                System.out.println();
+//            } 
+//        }
     }
 }
