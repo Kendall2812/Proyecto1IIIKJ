@@ -731,7 +731,7 @@ public class archivosProyecto {
             BufferedReader archivo2 = new BufferedReader(leer);
             String linea6;
             while ((linea6 = archivo2.readLine()) != null) {
-                datos1 = linea6.split(" ");
+                datos1 = linea6.split(",");
 
                 for (int x = 0; x < datos1.length; x++) {
                     comprasMusica.add(datos1[x]);
@@ -784,4 +784,5 @@ public class archivosProyecto {
             System.out.println("No se encontro el archivo" + e);
         }
     }
+    
 }

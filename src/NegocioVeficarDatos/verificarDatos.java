@@ -134,10 +134,25 @@ public class verificarDatos {
             JOptionPane.showMessageDialog(null, "Error al enviar el correo");
         }
     }
-    public void reporte1Musica(){
-        //Merengue,Clasica,Salsa,PasoDoble,Cumbia
+     public void reporte1Musica(){
+        //Merengue,Clasica,Salsa,PasoDoble,Cumbia   leerDatosMusica()
         ArrayList masMenoVendido = new ArrayList();
+        ArrayList datosMusica = new ArrayList();
+        ArrayList generos = new ArrayList();
+        int numero;
+        
         archivosProyecto comprasDiscoMusica = new archivosProyecto();
-        masMenoVendido = comprasDiscoMusica.leerArchivoCompraMusica1();  
+        
+        datosMusica = comprasDiscoMusica.leerDatosMusica();
+        masMenoVendido = comprasDiscoMusica.leerArchivoCompraMusica1();
+        for (int y = 0; y < masMenoVendido.size(); y = y+7) {
+               y = y + 3;
+               generos.add(masMenoVendido.get(y));
+ 
+        }
+        for(int x = 0; x < datosMusica.size(); x++){
+           
+        }
+        
     }
 }
