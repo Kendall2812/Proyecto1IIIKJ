@@ -337,6 +337,7 @@ public class accesoAdminstrador extends javax.swing.JFrame {
     private void reporteMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteMusicaActionPerformed
         reportesDiscosMusica reporte = new reportesDiscosMusica();
         reporte.setVisible(true);
+        dispose();
     }//GEN-LAST:event_reporteMusicaActionPerformed
 
     private void reportePeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportePeliculasActionPerformed

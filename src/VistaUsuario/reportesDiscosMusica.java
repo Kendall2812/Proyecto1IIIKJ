@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package VistaUsuario;
+import NegocioVeficarDatos.verificarDatos;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import org.jfree.chart.*;
 import org.jfree.chart.plot.PlotOrientation;
@@ -21,23 +23,79 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
     JFreeChart grafica1;
     ChartPanel Panel;
     int valor1,valor2,valor3;
+    ArrayList datosReporte1 = new ArrayList();
     DefaultCategoryDataset Datos = new DefaultCategoryDataset();
+    DefaultCategoryDataset Datos2 = new DefaultCategoryDataset();
+    String genero1, genero2, genero3, genero4, genero5;
+    String cancion1, cancion2, cancion3;
+    String cancion4, cancion5, cancion6; 
+    String cancion7, cancion8, cancion9, cancion10;
+    int maximo = 0;
+    int menor = 0;
+    int maximo2, menor2;
+    int maximo3, menor3;
+    int maximo4, menor4;
+    int maximo5, menor5;
+    
     public reportesDiscosMusica() {
         initComponents();
         this.getContentPane().setBackground(Color.gray);
         this.setLocationRelativeTo(null);
         this.setTitle("Reportes Musica");
         this.pack();
-        
-        
+
     }
     public void grafica(){
-        Datos.addValue(valor1, "Más Vendido", "Disco más vendido");
-        Datos.addValue(valor2, "Menos Vendido", "Disco menos vendido");
-        Datos.addValue(valor3, "Iguales", "Iguales");
+        verificarDatos reporte1 = new verificarDatos();
+        datosReporte1 = reporte1.reporte1Musica();
         
-        grafica1 = ChartFactory.createBarChart("Visitas diarias",
-        "Días", "Visitas", Datos,
+        genero1 = (String) datosReporte1.get(0);
+        cancion1 = (String) datosReporte1.get(1);
+        maximo = (int) datosReporte1.get(2);
+        cancion2 = (String) datosReporte1.get(3);
+        menor = (int) datosReporte1.get(4);
+        
+        genero2 = (String) datosReporte1.get(5);
+        cancion3 = (String) datosReporte1.get(6);
+        maximo2 = (int) datosReporte1.get(7);
+        cancion4 = (String) datosReporte1.get(8);
+        menor2 = (int) datosReporte1.get(9);        
+        
+        genero3 = (String) datosReporte1.get(10);
+        cancion5 = (String) datosReporte1.get(11);
+        maximo3 = (int) datosReporte1.get(12);
+        cancion6 = (String) datosReporte1.get(13);
+        menor3 = (int) datosReporte1.get(14);
+                
+        genero4 = (String) datosReporte1.get(15);
+        cancion7 = (String) datosReporte1.get(16);
+        maximo4 = (int) datosReporte1.get(17);        
+        cancion8 = (String) datosReporte1.get(18);
+        menor4 = (int) datosReporte1.get(19);
+                
+        genero5 = (String) datosReporte1.get(20);
+        cancion9 = (String) datosReporte1.get(21);
+        maximo5 = (int) datosReporte1.get(22);
+        cancion10 = (String) datosReporte1.get(23);
+        menor5 = (int) datosReporte1.get(24);
+                
+        Datos.addValue(maximo, cancion1, genero1+" "+"+");
+        Datos.addValue(menor, cancion2, genero1+ " "+"-");
+        
+        Datos.addValue(maximo2, cancion3, genero2+" "+"+");
+        Datos.addValue(menor2, cancion4, genero2+ " "+"-");
+        
+        Datos.addValue(maximo3, cancion5, genero3+" "+"+");
+        Datos.addValue(menor3, cancion6, genero3+ " "+"-");
+        
+        Datos.addValue(maximo4, cancion7, genero4+" "+"+");
+        Datos.addValue(menor4, cancion8, genero4+ " "+"-");
+        
+        Datos.addValue(maximo5, cancion9, genero5+" "+"+");
+        Datos.addValue(menor5, cancion10, genero5+ " "+"-");
+        
+        grafica1 = ChartFactory.createBarChart3D("Discos Más y Menos Comprados",
+        "Generos", "Compras", Datos,
         PlotOrientation.VERTICAL, true, true, false);
     }
     public void mostrarEnPanel(){
@@ -63,6 +121,8 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnGraficar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,11 +151,11 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1363, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 414, Short.MAX_VALUE)
+            .addGap(0, 642, Short.MAX_VALUE)
         );
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -122,6 +182,14 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("El Simbolo + significa más Vendido");
+
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("El Simbolo - significa menos Vendido");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,86 +197,89 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jrbComprasPorUser)
+                            .addComponent(jrbMasMenosVendidos)
                             .addComponent(jrbPorRango)
-                            .addComponent(jLabel1))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jrbMasMenosVendidos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
-                        .addComponent(btnGraficar)
-                        .addGap(120, 120, 120)
-                        .addComponent(btnRegresar)))
-                .addContainerGap())
+                            .addComponent(jrbComprasPorUser))
+                        .addGap(239, 239, 239)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnGraficar)
+                                .addGap(91, 91, 91)
+                                .addComponent(btnRegresar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(33, 33, 33)
+                                .addComponent(jLabel3))))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnGraficar)
-                            .addComponent(btnRegresar))
-                        .addGap(9, 9, 9))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jrbMasMenosVendidos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(jrbComprasPorUser)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jrbPorRango)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jrbMasMenosVendidos)
+                    .addComponent(btnRegresar)
+                    .addComponent(btnGraficar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jrbComprasPorUser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jrbPorRango))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(23, 23, 23)))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarActionPerformed
-        if(jrbMasMenosVendidos.isSelected()){///Se estan hacinedo Prubas con las graficas
-            
-            if(jPanel1 == null){
+        if (jrbMasMenosVendidos.isSelected()) {///Se estan hacinedo Prubas con las graficas
+
+            if (jPanel1 == null) {
                 jPanel1.remove(Panel);
                 jPanel1.repaint();
-            }else{
-                valor1 = 15;
-                valor2 = 20;
-                valor3 = 30;
+            } else {
                 grafica();
-                 mostrarEnPanel();
+                mostrarEnPanel();
             }
-        }else if(jrbComprasPorUser.isSelected()){
-            
-            if(jPanel1 == null){
+        } else if (jrbComprasPorUser.isSelected()) {
+
+            if (jPanel1 == null) {
                 jPanel1.remove(Panel);
                 jPanel1.repaint();
-            }else{
+            } else {
                 valor1 = 5;
                 valor2 = 10;
                 valor3 = 25;
                 grafica();
-                 mostrarEnPanel();
+                mostrarEnPanel();
             }
-        }else if(jrbPorRango.isSelected()){
-            
-            if(jPanel1 == null){
+        } else if (jrbPorRango.isSelected()) {
+
+            if (jPanel1 == null) {
                 jPanel1.remove(Panel);
                 jPanel1.repaint();
-            }else{
+            } else {
                 valor1 = 20;
                 valor2 = 39;
                 valor3 = 35;
                 grafica();
-                 mostrarEnPanel();
+                mostrarEnPanel();
             }
-            
-        }else{
+
+        } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una de las tres opciones");
         }
     }//GEN-LAST:event_btnGraficarActionPerformed
@@ -260,6 +331,8 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jrbComprasPorUser;
     private javax.swing.JRadioButton jrbMasMenosVendidos;
