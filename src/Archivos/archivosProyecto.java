@@ -627,8 +627,8 @@ public class archivosProyecto {
                                             precio = Integer.parseInt(lista12[3]);
                                             if (Integer.parseInt(lista12[4]) > 0) {
                                                 monto = (precio * cantidad);
-                                                mensaje = "Hola, te informamos que el articulo de " + tipo + ":" + articulo
-                                                        + "que solicitaste ya se encuentra disponible para su compra\n" + "Cantidad= " + cantidad + "\nMonto total=" + monto;
+                                                mensaje = "Hola, te informamos que el articulo de " + tipo + ": " + articulo
+                                                        + " que solicitaste ya se encuentra disponible para su compra:\n" + "Cantidad= " + cantidad + "\nMonto total=" + monto;
                                                 verificarDatos corr = new verificarDatos();
                                                 corr.enviarCorreo2(to, mensaje, asunto);
                                                 eliminarPreOrden(tabla, user, to, articulo, tipo, String.valueOf(cantidad));
