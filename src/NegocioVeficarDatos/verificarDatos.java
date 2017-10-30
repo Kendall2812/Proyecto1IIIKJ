@@ -491,5 +491,16 @@ public class verificarDatos {
         
         return reporteMusica1;
     }
+    public ArrayList reporte1Pelicualas(){
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        return null;
+    }
 }
-//Tengo que corregir cuando maximo y menor tienen el mismo valor porque se esta cayendo por que el no sabe cual es el nombre de una de las canciones 
