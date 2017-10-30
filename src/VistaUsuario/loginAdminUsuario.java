@@ -51,6 +51,8 @@ public class loginAdminUsuario extends javax.swing.JFrame {
                 boolean valor1 = false;
                 vistaUsuario vista= new vistaUsuario();
                 vista.setVisible(true);
+//                verificarDatos ver = new verificarDatos();
+//                ver.reporte1Musica();
                 vista.compraDiscosMusicaPeliculas(nombre,valor1,verificar);
                 dispose();
             } else {

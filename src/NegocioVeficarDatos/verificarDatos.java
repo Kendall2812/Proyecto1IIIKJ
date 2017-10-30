@@ -234,16 +234,20 @@ public class verificarDatos {
         menor = (mayorMenorClasico.stream().mapToInt(z -> z).min().getAsInt());
 
         System.out.print("Genero Clasico " + "Mas vendido: " + maximo + " y " + " menos vendido: " + menor + "\n");
+        boolean valor1 = true;
+        boolean valor2 = true;
 
         for (int u = 0; u < clasica.size(); u++) {
-            if (clasica.get(u).equals(maximo)) {
+            if (clasica.get(u).equals(maximo) && valor1 == true) {
                 u = u + 1;
                 cancion1 = (String) clasica.get(u);
                 System.out.println(cancion1);
-            } else if (clasica.get(u).equals(menor)) {
+                valor1 = false;
+            } else if (clasica.get(u).equals(menor) && valor2 == true) {
                 u = u + 1;
                 cancion2 = (String) clasica.get(u);
                 System.out.println(cancion2);
+                valor2 = false;
             }
         }
         reporteMusica1.add(genero1);
@@ -288,16 +292,20 @@ public class verificarDatos {
         menor2 = (mayorMenorMerengue.stream().mapToInt(a -> a).min().getAsInt());
 
         System.out.print("Genero Merengue " + "Mas vendido: " + maximo2 + " y " + " menos vendido: " + menor2 + "\n");
+        boolean valor3 = true;
+        boolean valor4 = true;
 
         for (int u = 0; u < Merengue.size(); u++) { // este for es para verificar aquien le pertene el numero para asi poder obtener el nombre del disco
-            if (Merengue.get(u).equals(maximo2)) {
+            if (Merengue.get(u).equals(maximo2) && valor3 == true) {
                 u = u + 1;
                 cancion3 = (String) Merengue.get(u);
                 System.out.println(cancion3);
-            } else if (Merengue.get(u).equals(menor2)) {
+                valor3 = false;
+            } else if (Merengue.get(u).equals(menor2) && valor4 == true) {
                 u = u + 1;
                 cancion4 = (String) Merengue.get(u);
                 System.out.println(cancion4);
+                valor4 = false;
             }
         }
         reporteMusica1.add(genero2);
@@ -342,16 +350,20 @@ public class verificarDatos {
         menor3 = (mayorMenorSalsa.stream().mapToInt(a -> a).min().getAsInt());
 
         System.out.print("Genero Salsa " + "Mas vendido: " + maximo3 + " y " + " menos vendido: " + menor3 + "\n");
+        boolean valor5 = true;
+        boolean valor6 = true;
 
         for (int u = 0; u < Salsa.size(); u++) { // este for es para verificar aquien le pertene el numero para asi poder obtener el nombre del disco
-            if (Salsa.get(u).equals(maximo3)) {
+            if (Salsa.get(u).equals(maximo3) && valor5 == true) {
                 u = u + 1;
                 cancion5 = (String) Salsa.get(u);
                 System.out.println(cancion5);
-            } else if (Salsa.get(u).equals(menor3)) {
+                valor5 = false;
+            } else if (Salsa.get(u).equals(menor3) && valor6 == true) {
                 u = u + 1;
                 cancion6 = (String) Salsa.get(u);
                 System.out.println(cancion6);
+                valor6 = false;
             }
         }
         reporteMusica1.add(genero3);
@@ -397,16 +409,20 @@ public class verificarDatos {
         menor4 = (mayorMenorPasoDoble.stream().mapToInt(a -> a).min().getAsInt());
 
         System.out.print("Genero PasoDoble " + "Mas vendido: " + maximo4 + " y " + " menos vendido: " + menor4 + "\n");
+        boolean valor7 = true;
+        boolean valor8 = true;
 
         for (int u = 0; u < PasoDoble.size(); u++) { // este for es para verificar aquien le pertene el numero para asi poder obtener el nombre del disco
-            if (PasoDoble.get(u).equals(maximo4)) {
+            if (PasoDoble.get(u).equals(maximo4) && valor7 == true) {
                 u = u + 1;
                 cancion7 = (String) PasoDoble.get(u);
                 System.out.println(cancion7);
-            } else if (PasoDoble.get(u).equals(menor4)) {
+                valor7 = false;
+            } else if (PasoDoble.get(u).equals(menor4) && valor8 == true) {
                 u = u + 1;
                 cancion8 = (String) PasoDoble.get(u);
                 System.out.println(cancion8);
+                valor8 = false;
             }
         }
         reporteMusica1.add(genero4);
@@ -451,16 +467,20 @@ public class verificarDatos {
         menor5 = (mayorMenorCumbia.stream().mapToInt(a -> a).min().getAsInt());
 
         System.out.print("Genero Cumbia " + "Mas vendido: " + maximo5 + " y " + " menos vendido: " + menor5 + "\n");
+        boolean valor9 = true;
+        boolean valor10 = true;
 
         for (int u = 0; u < Cumbia.size(); u++) { // este for es para verificar aquien le pertene el numero para asi poder obtener el nombre del disco
-            if (Cumbia.get(u).equals(maximo5)) {
+            if (Cumbia.get(u).equals(maximo5) && valor9 == true) {
                 u = u + 1;
                 cancion9 = (String) Cumbia.get(u);
                 System.out.println(cancion9);
-            } else if (Cumbia.get(u).equals(menor5)) {
+                valor9 = false;
+            } else if (Cumbia.get(u).equals(menor5) && valor10 == true) {
                 u = u + 1;
                 cancion10 = (String) Cumbia.get(u);
                 System.out.println(cancion10);
+                valor10 = false;
             }
         }
         reporteMusica1.add(genero5);
@@ -472,3 +492,4 @@ public class verificarDatos {
         return reporteMusica1;
     }
 }
+//Tengo que corregir cuando maximo y menor tienen el mismo valor porque se esta cayendo por que el no sabe cual es el nombre de una de las canciones 
