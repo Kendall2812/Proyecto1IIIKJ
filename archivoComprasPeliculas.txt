@@ -3,3 +3,10 @@ kendall,207620167,kendallandreyr@gmail.com,MagoOz,1,18/10/2017,*
 kendall,207620167,kendallandreyr@gmail.com,Enrredados,1,18/10/2017,*
 jeniffer,207500700,jennim24@hotmail.com,ruta equivocada,6,25/10/2017,*
 jeniffer,207500700,jennim24@hotmail.com,todo todo,2,26/10/2017,*
+kendall,207620167,kendallandreyr@gmail.com,la mascara,2,31/10/2017,*
+kendall,207620167,kendallandreyr@gmail.com,guardianes de la galaxia,2,31/10/2017,*
+kendall,207620167,kendallandreyr@gmail.com,guardianes de la galaxia,3,31/10/2017,*
+kendall,207620167,kendallandreyr@gmail.com,Titanic,2,31/10/2017,*
+kendall,207620167,kendallandreyr@gmail.com,Titanic,2,31/10/2017,*
+kendall,207620167,kendallandreyr@gmail.com,guardianes de la galaxia,1,31/10/2017,*
+kendall,207620167,kendallandreyr@gmail.com,saw 8,2,31/10/2017,*

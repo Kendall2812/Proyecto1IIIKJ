@@ -28,21 +28,15 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
      */
     JFreeChart grafica1, grafica2;
     ChartPanel Panel;
-    int valor1, valor2, valor3;
     ArrayList datosReporte1 = new ArrayList();
     DefaultCategoryDataset Datos = new DefaultCategoryDataset();
     DefaultCategoryDataset Datos2 = new DefaultCategoryDataset();
-    String genero1, genero2, genero3, genero4, genero5;
-    String cancion1, cancion2, cancion3;
-    String cancion4, cancion5, cancion6;
-    String cancion7, cancion8, cancion9, cancion10, usuario;
-    int maximo = 0;
-    int menor = 0;
+    String genero1;
+    String cancion1, cancion2;
+    String usuario;
     int maximo2, menor2;
-    int maximo3, menor3;
-    int maximo4, menor4;
-    int maximo5, menor5;
-    int max, min;
+    int indice;
+    int indice2;
 
     ArrayList datosPersonaArc = new ArrayList();
     ArrayList datosDiscoArc = new ArrayList();
@@ -68,54 +62,34 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
         verificarDatos reporte1 = new verificarDatos();
         datosReporte1 = reporte1.reporte1Musica();
 
-        genero1 = (String) datosReporte1.get(0);
-        cancion1 = (String) datosReporte1.get(1);
-        maximo = (int) datosReporte1.get(2);
-        cancion2 = (String) datosReporte1.get(3);
-        menor = (int) datosReporte1.get(4);
+        if (datosReporte1.isEmpty() == false) {
+            for (int x = 0; x < datosReporte1.size(); x++) {
+                x = 0;
+                indice = x;
 
-        genero2 = (String) datosReporte1.get(5);
-        cancion3 = (String) datosReporte1.get(6);
-        maximo2 = (int) datosReporte1.get(7);
-        cancion4 = (String) datosReporte1.get(8);
-        menor2 = (int) datosReporte1.get(9);
+                genero1 = (String) datosReporte1.get(indice);
+                cancion1 = (String) datosReporte1.get(indice + 1);
+                maximo2 = (int) datosReporte1.get(indice + 2);
+                cancion2 = (String) datosReporte1.get(indice + 3);
+                menor2 = (int) datosReporte1.get(indice + 4);
 
-        genero3 = (String) datosReporte1.get(10);
-        cancion5 = (String) datosReporte1.get(11);
-        maximo3 = (int) datosReporte1.get(12);
-        cancion6 = (String) datosReporte1.get(13);
-        menor3 = (int) datosReporte1.get(14);
+                Datos.addValue(maximo2, cancion1, genero1 + " " + "+");
+                Datos.addValue(menor2, cancion2, genero1 + " " + "-");
 
-        genero4 = (String) datosReporte1.get(15);
-        cancion7 = (String) datosReporte1.get(16);
-        maximo4 = (int) datosReporte1.get(17);
-        cancion8 = (String) datosReporte1.get(18);
-        menor4 = (int) datosReporte1.get(19);
+                indice2 = datosReporte1.indexOf(genero1);
+                int cont = 0;
+                while (cont != 5) {
+                    datosReporte1.remove(indice2);
+                    cont++;
+                }
+            }
 
-        genero5 = (String) datosReporte1.get(20);
-        cancion9 = (String) datosReporte1.get(21);
-        maximo5 = (int) datosReporte1.get(22);
-        cancion10 = (String) datosReporte1.get(23);
-        menor5 = (int) datosReporte1.get(24);
-
-        Datos.addValue(maximo, cancion1, genero1 + " " + "+");
-        Datos.addValue(menor, cancion2, genero1 + " " + "-");
-
-        Datos.addValue(maximo2, cancion3, genero2 + " " + "+");
-        Datos.addValue(menor2, cancion4, genero2 + " " + "-");
-
-        Datos.addValue(maximo3, cancion5, genero3 + " " + "+");
-        Datos.addValue(menor3, cancion6, genero3 + " " + "-");
-
-        Datos.addValue(maximo4, cancion7, genero4 + " " + "+");
-        Datos.addValue(menor4, cancion8, genero4 + " " + "-");
-
-        Datos.addValue(maximo5, cancion9, genero5 + " " + "+");
-        Datos.addValue(menor5, cancion10, genero5 + " " + "-");
-
-        grafica1 = ChartFactory.createBarChart3D("Discos Más y Menos Comprados",
-                "Generos", "Compras", Datos,
-                PlotOrientation.VERTICAL, true, true, false);
+            grafica1 = ChartFactory.createBarChart3D("Discos Más y Menos Comprados",
+                    "Generos", "Compras", Datos,
+                    PlotOrientation.VERTICAL, true, true, false);
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay datos para graficar");
+        }
     }
 
     public void grafica2() {
@@ -451,9 +425,6 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
                 jPanel1.remove(Panel);
                 jPanel1.repaint();
             } else {
-                valor1 = 20;
-                valor2 = 39;
-                valor3 = 35;
                 grafica();
                 mostrarEnPanel();
             }

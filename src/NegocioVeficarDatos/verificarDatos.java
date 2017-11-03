@@ -26,17 +26,21 @@ public class verificarDatos {
     ArrayList Usuario = new ArrayList();
     ArrayList datosDisco = new ArrayList();
     ArrayList reporteMusica1 = new ArrayList();
+    ArrayList reportePelicula1 = new ArrayList();
     boolean valor;
     String genero1, genero2, genero3, genero4, genero5;
     String cancion1, cancion2, cancion3;
     String cancion4, cancion5, cancion6; 
     String cancion7, cancion8, cancion9, cancion10;
+    String pelicula1, pelicula2;
+    String cancion11, cancion12;
     int maximo = 0;
     int menor = 0;
     int maximo2, menor2;
     int maximo3, menor3;
     int maximo4, menor4;
     int maximo5, menor5;
+    int maximo6 = 0, menor6 = 0;
     Correo c = new Correo();
 
     public boolean datosAdministrador(String nombre, String Clave) {//verifica el usuario y clave del administrador
@@ -149,358 +153,352 @@ public class verificarDatos {
         //Merengue,Clasica,Salsa,PasoDoble,Cumbia  
         ArrayList masMenoVendido = new ArrayList();
         ArrayList datosMusica = new ArrayList();
-        ArrayList generos = new ArrayList();
-        ArrayList geneDisco = new ArrayList();
-
-        ArrayList clasica = new ArrayList();
-        ArrayList musicClasic = new ArrayList();
-        ArrayList<Integer> mayorMenorClasico = new ArrayList<Integer>();
-
-        ArrayList musicMerengue = new ArrayList();
-        ArrayList Merengue = new ArrayList();
-        ArrayList<Integer> mayorMenorMerengue = new ArrayList<Integer>();
-
-        ArrayList musicSalsa = new ArrayList();
-        ArrayList Salsa = new ArrayList();
-        ArrayList<Integer> mayorMenorSalsa = new ArrayList<Integer>();
-
-        ArrayList musicPasoDoble = new ArrayList();
-        ArrayList PasoDoble = new ArrayList();
-        ArrayList<Integer> mayorMenorPasoDoble = new ArrayList<Integer>();
-
-        ArrayList musicCumbia = new ArrayList();
-        ArrayList Cumbia = new ArrayList();
-        ArrayList<Integer> mayorMenorCumbia = new ArrayList<Integer>();
-
-        String cancion = "";
-        int cont = 0;
-
-        archivosProyecto comprasDiscoMusica = new archivosProyecto();
-
-        datosMusica = comprasDiscoMusica.leerDatosMusica();
-        masMenoVendido = comprasDiscoMusica.leerArchivoCompraMusica1();
-
-        for (int y = 0; y < masMenoVendido.size(); y++) {//son los nombres de los discos que estan registrados en el archivo de compras
-            if (y == 3) {
-                generos.add(masMenoVendido.get(y));
-                y = y + 3;
-                generos.add(masMenoVendido.get(y));
-                y = y + 4;
-            } else if (y > 3) {
-                generos.add(masMenoVendido.get(y));
-                y = y + 3;
-                generos.add(masMenoVendido.get(y));
-                y = y + 4;
-            }
-        }
-        for (int x = 0; x < datosMusica.size(); x++) {//Son discos que estan registradas en el archivo
-            geneDisco.add(datosMusica.get(x));
-            x = x + 7;
-        }
-        //Todo esta parte es para determinar solo el genero Clasico
-        for (int x = 1; x < generos.size(); x++) {
-            if (generos.get(x).equals("Clasica")) {
-                genero1 = "Clasica";
-                for (int f = 1; f < generos.size(); f++) {
-                    if (generos.get(f).equals("Clasica")) {
-                        cancion = (String) generos.get(f - 1);
-                        musicClasic.add(cancion);
-                        f = f + 1;
-                    }
-                }
-                for (int t = 0; t < geneDisco.size(); t++) {
-                    cont = 0;
-                    for (int h = 0; h < musicClasic.size(); h++) {
-                        if (geneDisco.get(t).equals(musicClasic.get(h))) {
-                            cont++;
-                        }
-                    }
-                    if (cont != 0) {
-                        clasica.add(cont);
-                        clasica.add(geneDisco.get(t));
-                    }
-                }
-                break;
-            }
-            x = x + 1;
-        }
-        for (int p = 0; p < clasica.size(); p++) { // este for es para sacar de la lista clasica los numeros de las veces que se repite un disco
-            mayorMenorClasico.add((Integer) clasica.get(p));
-            p = p + 1;
-        }
+        ArrayList nombreDisco = new ArrayList();
+        ArrayList DatosMusica = new ArrayList();
+        ArrayList Musica = new ArrayList();
+        ArrayList Generos = new ArrayList();
+        ArrayList<Integer> maximoMinimo = new ArrayList<Integer>();
         
-        //esto es para determinar cual disco es el que mas se compro y cual menos se compro
-        maximo = (mayorMenorClasico.stream().mapToInt(l -> l).max().getAsInt()); // se esta aplicando las expreciones Lambda
-        menor = (mayorMenorClasico.stream().mapToInt(z -> z).min().getAsInt());
+        String nameMovie = "";
+        String genero = "";
 
-        System.out.print("Genero Clasico " + "Mas vendido: " + maximo + " y " + " menos vendido: " + menor + "\n");
-        boolean valor1 = true;
-        boolean valor2 = true;
+        String nombreMovie = "";
+        int cantidadComprada = 0;
+        boolean entro1 = false;
+        String generoMusic = "";
+        int borrarGenero = 0;
 
-        for (int u = 0; u < clasica.size(); u++) {
-            if (clasica.get(u).equals(maximo) && valor1 == true) {
-                u = u + 1;
-                cancion1 = (String) clasica.get(u);
-                System.out.println(cancion1);
-                valor1 = false;
-            } else if (clasica.get(u).equals(menor) && valor2 == true) {
-                u = u + 1;
-                cancion2 = (String) clasica.get(u);
-                System.out.println(cancion2);
-                valor2 = false;
-            }
-        }
-        reporteMusica1.add(genero1);
-        reporteMusica1.add(cancion1);
-        reporteMusica1.add(maximo);
-        reporteMusica1.add(cancion2);
-        reporteMusica1.add(menor);
-
-        // Esta parte es para determinar solo el generos Merengue
-        for (int x = 1; x < generos.size(); x++) { // este for es para determinar el genero
-            if (generos.get(x).equals("Merengue")) { // verifica el genero merengue
-                for (int f = 1; f < generos.size(); f++) { // este for es para obtener solamente las canciones de este genero
-                    genero2 = "Merengue";
-                    if (generos.get(f).equals("Merengue")) {
-                        cancion = (String) generos.get(f - 1);
-                        musicMerengue.add(cancion);
-                        f = f + 1;
-                    }
-                }
-                for (int t = 0; t < geneDisco.size(); t++) { // este for es para determinar cuantas veces se repite una cancion 
-                    cont = 0;
-                    for (int h = 0; h < musicMerengue.size(); h++) { //este for recorrer esta lista para obtener los nombres de los disco que se compraron
-                        if (geneDisco.get(t).equals(musicMerengue.get(h))) { // y aqui se obtiene el nombre del disco que esta en geneDisco y se revisa cuantas veces se compro este disco
-                            cont++; // aumenta el contadaor cada vez que una cancion se repita
-                        }
-                    }
-                    if (cont != 0) { // aqui se valida que el contador sea diferente de 0 para que se pueda escribir en la lista Clasica
-                        Merengue.add(cont);
-                        Merengue.add(geneDisco.get(t)); // y aqui se le agrega las veces que se repite el disco y el nombre del disco
-                    }
-                }
-                break;
-            }
-            x = x + 1;
-        }
-        for (int p = 0; p < Merengue.size(); p++) { // este for es para sacar de la lista Merengue los numeros de las veces que se repite un disco
-            mayorMenorMerengue.add((Integer) Merengue.get(p)); // y se agrega a mayorMenorMerengue
-            p = p + 1;
-        }
-        //esto es para determinar cual disco es el que mas se compro y cual menos se compro
-        maximo2 = (mayorMenorMerengue.stream().mapToInt(q -> q).max().getAsInt()); // se esta aplicando las expreciones Lambda
-        menor2 = (mayorMenorMerengue.stream().mapToInt(a -> a).min().getAsInt());
-
-        System.out.print("Genero Merengue " + "Mas vendido: " + maximo2 + " y " + " menos vendido: " + menor2 + "\n");
-        boolean valor3 = true;
-        boolean valor4 = true;
-
-        for (int u = 0; u < Merengue.size(); u++) { // este for es para verificar aquien le pertene el numero para asi poder obtener el nombre del disco
-            if (Merengue.get(u).equals(maximo2) && valor3 == true) {
-                u = u + 1;
-                cancion3 = (String) Merengue.get(u);
-                System.out.println(cancion3);
-                valor3 = false;
-            } else if (Merengue.get(u).equals(menor2) && valor4 == true) {
-                u = u + 1;
-                cancion4 = (String) Merengue.get(u);
-                System.out.println(cancion4);
-                valor4 = false;
-            }
-        }
-        reporteMusica1.add(genero2);
-        reporteMusica1.add(cancion3);
-        reporteMusica1.add(maximo2);
-        reporteMusica1.add(cancion4);
-        reporteMusica1.add(menor2);
-        
-        // Esta parte es para determinar solo el generos Salsa
-        for (int x = 1; x < generos.size(); x++) { // este for es para determinar el genero
-            if (generos.get(x).equals("Salsa")) { // verifica el genero merengue
-                for (int f = 1; f < generos.size(); f++) { // este for es para obtener solamente las canciones de este genero
-                    genero3 = "Salsa";
-                    if (generos.get(f).equals("Salsa")) {
-                        cancion = (String) generos.get(f - 1);
-                        musicSalsa.add(cancion);
-                        f = f + 1;
-                    }
-                }
-                for (int t = 0; t < geneDisco.size(); t++) { // este for es para determinar cuantas veces se repite una cancion 
-                    cont = 0;
-                    for (int h = 0; h < musicSalsa.size(); h++) { //este for recorrer esta lista para obtener los nombres de los disco que se compraron
-                        if (geneDisco.get(t).equals(musicSalsa.get(h))) { // y aqui se obtiene el nombre del disco que esta en geneDisco y se revisa cuantas veces se compro este disco
-                            cont++; // aumenta el contadaor cada vez que una cancion se repita
-                        }
-                    }
-                    if (cont != 0) { // aqui se valida que el contador sea diferente de 0 para que se pueda escribir en la lista Clasica
-                        Salsa.add(cont);
-                        Salsa.add(geneDisco.get(t)); // y aqui se le agrega las veces que se repite el disco y el nombre del disco
-                    }
-                }
-                break;
-            }
-            x = x + 1;
-        }
-        for (int p = 0; p < Salsa.size(); p++) { // este for es para sacar de la lista Salsa los numeros de las veces que se repite un disco
-            mayorMenorSalsa.add((Integer) Salsa.get(p)); // y se agrega a mayorMenorSalsa
-            p = p + 1;
-        }
-        //esto es para determinar cual disco es el que mas se compro y cual menos se compro
-        maximo3 = (mayorMenorSalsa.stream().mapToInt(q -> q).max().getAsInt()); // se esta aplicando las expreciones Lambda
-        menor3 = (mayorMenorSalsa.stream().mapToInt(a -> a).min().getAsInt());
-
-        System.out.print("Genero Salsa " + "Mas vendido: " + maximo3 + " y " + " menos vendido: " + menor3 + "\n");
-        boolean valor5 = true;
-        boolean valor6 = true;
-
-        for (int u = 0; u < Salsa.size(); u++) { // este for es para verificar aquien le pertene el numero para asi poder obtener el nombre del disco
-            if (Salsa.get(u).equals(maximo3) && valor5 == true) {
-                u = u + 1;
-                cancion5 = (String) Salsa.get(u);
-                System.out.println(cancion5);
-                valor5 = false;
-            } else if (Salsa.get(u).equals(menor3) && valor6 == true) {
-                u = u + 1;
-                cancion6 = (String) Salsa.get(u);
-                System.out.println(cancion6);
-                valor6 = false;
-            }
-        }
-        reporteMusica1.add(genero3);
-        reporteMusica1.add(cancion5);
-        reporteMusica1.add(maximo3);
-        reporteMusica1.add(cancion6);
-        reporteMusica1.add(menor3);
-        
-
-        // Esta parte es para determinar solo el genero PasoDoble
-        for (int x = 1; x < generos.size(); x++) { // este for es para determinar el genero
-            if (generos.get(x).equals("PasoDoble")) { // verifica el genero merengue
-                for (int f = 1; f < generos.size(); f++) { // este for es para obtener solamente las canciones de este genero
-                    genero4 = "PasoDoble";
-                    if (generos.get(f).equals("PasoDoble")) {
-                        cancion = (String) generos.get(f - 1);
-                        musicPasoDoble.add(cancion);
-                        f = f + 1;
-                    }
-                }
-                for (int t = 0; t < geneDisco.size(); t++) { // este for es para determinar cuantas veces se repite una cancion 
-                    cont = 0;
-                    for (int h = 0; h < musicPasoDoble.size(); h++) { //este for recorrer esta lista para obtener los nombres de los disco que se compraron
-                        if (geneDisco.get(t).equals(musicPasoDoble.get(h))) { // y aqui se obtiene el nombre del disco que esta en geneDisco y se revisa cuantas veces se compro este disco
-                            cont++; // aumenta el contadaor cada vez que una cancion se repita
-                        }
-                    }
-                    if (cont != 0) { // aqui se valida que el contador sea diferente de 0 para que se pueda escribir en la lista Clasica
-                        PasoDoble.add(cont);
-                        PasoDoble.add(geneDisco.get(t)); // y aqui se le agrega las veces que se repite el disco y el nombre del disco
-                    }
-                }
-                break;
-            }
-            x = x + 1;
-        }
-        for (int p = 0; p < PasoDoble.size(); p++) { // este for es para sacar de la lista PasoDoble los numeros de las veces que se repite un disco
-            mayorMenorPasoDoble.add((Integer) PasoDoble.get(p)); // y se agrega a mayorMenorPasoDoble
-            p = p + 1;
-        }
-        //esto es para determinar cual disco es el que mas se compro y cual menos se compro
-        maximo4 = (mayorMenorPasoDoble.stream().mapToInt(q -> q).max().getAsInt()); // se esta aplicando las expreciones Lambda
-        menor4 = (mayorMenorPasoDoble.stream().mapToInt(a -> a).min().getAsInt());
-
-        System.out.print("Genero PasoDoble " + "Mas vendido: " + maximo4 + " y " + " menos vendido: " + menor4 + "\n");
-        boolean valor7 = true;
-        boolean valor8 = true;
-
-        for (int u = 0; u < PasoDoble.size(); u++) { // este for es para verificar aquien le pertene el numero para asi poder obtener el nombre del disco
-            if (PasoDoble.get(u).equals(maximo4) && valor7 == true) {
-                u = u + 1;
-                cancion7 = (String) PasoDoble.get(u);
-                System.out.println(cancion7);
-                valor7 = false;
-            } else if (PasoDoble.get(u).equals(menor4) && valor8 == true) {
-                u = u + 1;
-                cancion8 = (String) PasoDoble.get(u);
-                System.out.println(cancion8);
-                valor8 = false;
-            }
-        }
-        reporteMusica1.add(genero4);
-        reporteMusica1.add(cancion7);
-        reporteMusica1.add(maximo4);
-        reporteMusica1.add(cancion8);
-        reporteMusica1.add(menor4);
-        
-        // Esta parte es para determinar solo el genero Cumbia
-        for (int x = 1; x < generos.size(); x++) { // este for es para determinar el genero
-            if (generos.get(x).equals("Cumbia")) { // verifica el genero merengue
-                genero5 = "Cumbia";
-                for (int f = 1; f < generos.size(); f++) { // este for es para obtener solamente las canciones de este genero
-                    if (generos.get(f).equals("Cumbia")) {
-                        cancion = (String) generos.get(f - 1);
-                        musicCumbia.add(cancion);
-                        f = f + 1;
-                    }
-                }
-                for (int t = 0; t < geneDisco.size(); t++) { // este for es para determinar cuantas veces se repite una cancion 
-                    cont = 0;
-                    for (int h = 0; h < musicCumbia.size(); h++) { //este for recorrer esta lista para obtener los nombres de los disco que se compraron
-                        if (geneDisco.get(t).equals(musicCumbia.get(h))) { // y aqui se obtiene el nombre del disco que esta en geneDisco y se revisa cuantas veces se compro este disco
-                            cont++; // aumenta el contadaor cada vez que una cancion se repita
-                        }
-                    }
-                    if (cont != 0) { // aqui se valida que el contador sea diferente de 0 para que se pueda escribir en la lista Clasica
-                        Cumbia.add(cont);
-                        Cumbia.add(geneDisco.get(t)); // y aqui se le agrega las veces que se repite el disco y el nombre del disco
-                    }
-                }
-                break;
-            }
-            x = x + 1;
-        }
-        for (int p = 0; p < Cumbia.size(); p++) { // este for es para sacar de la lista PasoDoble los numeros de las veces que se repite un disco
-            mayorMenorCumbia.add((Integer) Cumbia.get(p)); // y se agrega a mayorMenorPasoDoble
-            p = p + 1;
-        }
-        //esto es para determinar cual disco es el que mas se compro y cual menos se compro
-        maximo5 = (mayorMenorCumbia.stream().mapToInt(q -> q).max().getAsInt()); // se esta aplicando las expreciones Lambda
-        menor5 = (mayorMenorCumbia.stream().mapToInt(a -> a).min().getAsInt());
-
-        System.out.print("Genero Cumbia " + "Mas vendido: " + maximo5 + " y " + " menos vendido: " + menor5 + "\n");
-        boolean valor9 = true;
         boolean valor10 = true;
+        boolean valor11 = true;
+        boolean valor12 = false;
 
-        for (int u = 0; u < Cumbia.size(); u++) { // este for es para verificar aquien le pertene el numero para asi poder obtener el nombre del disco
-            if (Cumbia.get(u).equals(maximo5) && valor9 == true) {
-                u = u + 1;
-                cancion9 = (String) Cumbia.get(u);
-                System.out.println(cancion9);
-                valor9 = false;
-            } else if (Cumbia.get(u).equals(menor5) && valor10 == true) {
-                u = u + 1;
-                cancion10 = (String) Cumbia.get(u);
-                System.out.println(cancion10);
-                valor10 = false;
+        archivosProyecto comprasMusica = new archivosProyecto();
+
+        masMenoVendido = comprasMusica.leerArchivoCompraMusica1();
+        datosMusica = comprasMusica.leerDatosMusica();
+
+        for (int x = 0; x < masMenoVendido.size(); x++) {
+            if (x == 3) {
+                nombreDisco.add(masMenoVendido.get(x));
+                x = x + 1;
+                nombreDisco.add(masMenoVendido.get(x));
+                x = x + 6;
+            } else if (x > 3) {
+                nombreDisco.add(masMenoVendido.get(x));
+                x = x + 1;
+                nombreDisco.add(masMenoVendido.get(x));
+                x = x + 6;
             }
         }
-        reporteMusica1.add(genero5);
-        reporteMusica1.add(cancion9);
-        reporteMusica1.add(maximo5);
-        reporteMusica1.add(cancion10);
-        reporteMusica1.add(menor5);
+
+        for (int x = 0; x < datosMusica.size(); x++) {//Son discos que el administrador registra
+            DatosMusica.add(datosMusica.get(x));
+            x = x + 2;
+            DatosMusica.add(datosMusica.get(x));
+            x = x + 5;
+        }
+        int contador = 0;
+        String numero = "";
+        int sumador = 0;
+        for (int v = 0; v < DatosMusica.size(); v++) {
+            contador = 0;
+            for (int h = 0; h < nombreDisco.size(); h++) {
+                if (DatosMusica.get(v).equals(nombreDisco.get(h))) { // esta comparando los nombres  de los discos
+                    nameMovie = (String) DatosMusica.get(v); /// nombre pelicula
+                    v = v + 1;
+                    genero = (String) DatosMusica.get(v); // genero pelicula
+                    v = v - 1;
+
+                    h = h + 1;
+                    numero = (String) nombreDisco.get(h); // cantidad que fue comprada esta pelicula
+                    sumador = Integer.parseInt(numero);
+
+                    contador = contador + sumador;
+                    h = h - 1;
+                }
+            }
+            if (contador != 0) {
+                Musica.add(genero);
+                Musica.add(contador);
+                Musica.add(nameMovie);
+                valor12 = true;
+            }
+            contador = 0;
+            v = v + 1;
+        }
         
+        if (valor12 == true) {
+            for (int r = 0; r < Musica.size(); r++) {
+                for (int w = 0; w < Musica.size(); w++) {
+                    if (Musica.get(r).equals(Musica.get(w))) {
+
+                        for (int t = 0; t < Musica.size(); t++) {
+                            if (Musica.get(t).equals(Musica.get(r))) {
+                                generoMusic = (String) Musica.get(t); // captura el genero del pelicula
+                                t = t + 1;
+                                cantidadComprada = (int) Musica.get(t);// captura la cantidad que fue comprada de la pelicula
+                                t = t + 1;
+                                nombreMovie = (String) Musica.get(t); // captura el nombre de la pelicula
+
+                                Generos.add(cantidadComprada);
+                                Generos.add(nombreMovie);
+                            }
+                        }
+                        for (int f = 0; f < Musica.size(); f++) { // este for es para eliminar las peliculas que ya estan agregadas a la lista Generos para que no genere errores
+
+                            if (entro1 == true) {
+                                f = 0;
+                                entro1 = false;
+                            }
+                            if (Musica.get(f).equals(generoMusic)) {
+                                borrarGenero = Musica.indexOf(generoMusic);
+                                Musica.remove(borrarGenero);
+                                Musica.remove(borrarGenero);
+                                Musica.remove(borrarGenero);
+                                entro1 = true;
+                            }
+                        }
+                        if (Generos.isEmpty() == false) {
+
+                            for (int c = 0; c < Generos.size(); c++) { //aparta los numero de los nombre de los discos para agregarlos a otra lista
+                                maximoMinimo.add((Integer) Generos.get(c));
+                                c = c + 1;
+                            }
+                            int cantidad = maximoMinimo.size();
+
+                            if (cantidad == 1) {
+
+                                maximo6 = (maximoMinimo.stream().mapToInt(p -> p).max().getAsInt()); // se esta aplicando las expreciones Lambda
+                                menor6 = 0;
+
+                                for (int u = 0; u < Generos.size(); u++) { // este for es para verificar aquien le pertene el numero para asi poder obtener el nombre del disco
+                                    if (Generos.get(u).equals(maximo6) && valor11 == true) {
+                                        u = u + 1;
+                                        cancion11 = (String) Generos.get(u);
+                                        System.out.println(cancion11);
+                                        valor11 = false;
+                                    }
+                                }
+                                cancion12 = "null";
+
+                                reporteMusica1.add(generoMusic);
+                                reporteMusica1.add(cancion11);
+                                reporteMusica1.add(maximo6);
+                                reporteMusica1.add(cancion12);
+                                reporteMusica1.add(menor6);
+                            } else {
+                                maximo6 = (maximoMinimo.stream().mapToInt(p -> p).max().getAsInt()); // se esta aplicando las expreciones Lambda
+                                menor6 = (maximoMinimo.stream().mapToInt(a -> a).min().getAsInt());
+
+                                for (int u = 0; u < Generos.size(); u++) {
+                                    if (Generos.get(u).equals(maximo6) && valor10 == true) {
+                                        u = u + 1;
+                                        cancion11 = (String) Generos.get(u);
+                                        System.out.println(cancion11);
+                                        valor10 = false;
+                                    } else if (Generos.get(u).equals(menor6) && valor11 == true) {
+                                        u = u + 1;
+                                        cancion12 = (String) Generos.get(u);
+                                        System.out.println(cancion12);
+                                        valor11 = false;
+                                    }
+                                }
+                                reporteMusica1.add(generoMusic);
+                                reporteMusica1.add(cancion11);
+                                reporteMusica1.add(maximo6);
+                                reporteMusica1.add(cancion12);
+                                reporteMusica1.add(menor6);
+                            }
+
+                            cancion11 = "";
+                            cancion12 = "";
+                            Generos.clear();
+                            maximoMinimo.clear();
+                            valor11 = true;
+                            valor10 = true;
+                        }
+                    }
+                    w = 0 - 1; // se le resta a 0 para que la lista arranque desde 0 y pueda verificar ese campo de la lista
+                }
+                r = r + 2;
+            }
+        }
         return reporteMusica1;
     }
-    public ArrayList reporte1Pelicualas(){
+
+    public ArrayList reporte1Peliculas(){
+        ArrayList masMenoVendido = new ArrayList();
+        ArrayList datosPelicula = new ArrayList();
+        ArrayList nombrePelicula = new ArrayList();
+        ArrayList DatosPelicula = new ArrayList();
+        ArrayList Peliculas = new ArrayList();
+        ArrayList Generos = new ArrayList();
+        ArrayList<Integer> maximoMinimo = new ArrayList<Integer>();
+
+        String nameMovie = "";
+        String genero = "";
+
+        String nombreMovie = "";
+        int cantidadComprada = 0;
+        boolean entro1 = false;
+        String generoPeli = "";
+        int borrarGenero = 0;
+
+        boolean valor10 = true;
+        boolean valor11 = true;
+        boolean valor12 = false;
+
+        archivosProyecto comprasPelicula = new archivosProyecto();
+
+        masMenoVendido = comprasPelicula.leerArchivoCompraPelicula1();
+        datosPelicula = comprasPelicula.leerDatosPeliculas();
+
+        for (int x = 0; x < masMenoVendido.size(); x++) {
+            if (x == 3) {
+                nombrePelicula.add(masMenoVendido.get(x));
+                x = x + 1;
+                nombrePelicula.add(masMenoVendido.get(x));
+                x = x + 5;
+            } else if (x > 3) {
+                nombrePelicula.add(masMenoVendido.get(x));
+                x = x + 1;
+                nombrePelicula.add(masMenoVendido.get(x));
+                x = x + 5;
+            }
+        }
+
+        for (int x = 0; x < datosPelicula.size(); x++) {//Son discos que estan registradas en el archivo
+            DatosPelicula.add(datosPelicula.get(x));
+            x = x + 2;
+            DatosPelicula.add(datosPelicula.get(x));
+            x = x + 3;
+        }
+        int contador = 0;
+        String numero = "";
+        int sumador = 0;
+        for (int v = 0; v < DatosPelicula.size(); v++) {
+            contador = 0;
+            for (int h = 0; h < nombrePelicula.size(); h++) {
+                if (DatosPelicula.get(v).equals(nombrePelicula.get(h))) {
+                    nameMovie = (String) DatosPelicula.get(v); /// nombre pelicula
+                    v = v + 1;
+                    genero = (String) DatosPelicula.get(v); // genero pelicula
+                    v = v - 1;
+
+                    h = h + 1;
+                    numero = (String) nombrePelicula.get(h); // cantidad que fue comprada esta pelicula
+                    sumador = Integer.parseInt(numero);
+
+                    contador = contador + sumador;
+                    h = h - 1;
+                }
+            }
+            if (contador != 0) {
+                Peliculas.add(genero);
+                Peliculas.add(contador);
+                Peliculas.add(nameMovie);
+                valor12 = true;
+            }
+            contador = 0;
+            v = v + 1;
+        }
         
-        
-        
-        
-        
-        
-        
-        
-        
-        return null;
+        if (valor12 == true) {
+            for (int r = 0; r < Peliculas.size(); r++) {
+                for (int w = 0; w < Peliculas.size(); w++) {
+                    if (Peliculas.get(r).equals(Peliculas.get(w))) {
+
+                        for (int t = 0; t < Peliculas.size(); t++) {
+                            if (Peliculas.get(t).equals(Peliculas.get(r))) {
+                                generoPeli = (String) Peliculas.get(t); // captura el genero del pelicula
+                                t = t + 1;
+                                cantidadComprada = (int) Peliculas.get(t);// captura la cantidad que fue comprada de la pelicula
+                                t = t + 1;
+                                nombreMovie = (String) Peliculas.get(t); // captura el nombre de la pelicula
+
+                                Generos.add(cantidadComprada);
+                                Generos.add(nombreMovie);
+                            }
+                        }
+                        for (int f = 0; f < Peliculas.size(); f++) { // este for es para eliminar las peliculas que ya estan agregadas a la lista Generos para que no genere errores
+
+                            if (entro1 == true) {
+                                f = 0;
+                                entro1 = false;
+                            }
+                            if (Peliculas.get(f).equals(generoPeli)) {
+                                borrarGenero = Peliculas.indexOf(generoPeli);
+                                Peliculas.remove(borrarGenero);
+                                Peliculas.remove(borrarGenero);
+                                Peliculas.remove(borrarGenero);
+                                entro1 = true;
+                            }
+                        }
+                        if (Generos.isEmpty() == false) {
+
+                            for (int c = 0; c < Generos.size(); c++) { //aparta los numero de los nombre de los discos para agregarlos a otra lista
+                                maximoMinimo.add((Integer) Generos.get(c));
+                                c = c + 1;
+                            }
+                            int cantidad = maximoMinimo.size();
+
+                            if (cantidad == 1) {
+
+                                maximo6 = (maximoMinimo.stream().mapToInt(p -> p).max().getAsInt()); // se esta aplicando las expreciones Lambda
+                                menor6 = 0;
+
+                                for (int u = 0; u < Generos.size(); u++) { // este for es para verificar aquien le pertene el numero para asi poder obtener el nombre del disco
+                                    if (Generos.get(u).equals(maximo6) && valor11 == true) {
+                                        u = u + 1;
+                                        pelicula1 = (String) Generos.get(u);
+                                        System.out.println(pelicula1);
+                                        valor11 = false;
+                                    }
+                                }
+                                pelicula2 = "null";
+
+                                reportePelicula1.add(generoPeli);
+                                reportePelicula1.add(pelicula1);
+                                reportePelicula1.add(maximo6);
+                                reportePelicula1.add(pelicula2);
+                                reportePelicula1.add(menor6);
+                            } else {
+                                maximo6 = (maximoMinimo.stream().mapToInt(p -> p).max().getAsInt()); // se esta aplicando las expreciones Lambda
+                                menor6 = (maximoMinimo.stream().mapToInt(a -> a).min().getAsInt());
+
+                                for (int u = 0; u < Generos.size(); u++) {
+                                    if (Generos.get(u).equals(maximo6) && valor10 == true) {
+                                        u = u + 1;
+                                        pelicula1 = (String) Generos.get(u);
+                                        System.out.println(pelicula1);
+                                        valor10 = false;
+                                    } else if (Generos.get(u).equals(menor6) && valor11 == true) {
+                                        u = u + 1;
+                                        pelicula2 = (String) Generos.get(u);
+                                        System.out.println(pelicula2);
+                                        valor11 = false;
+                                    }
+                                }
+                                reportePelicula1.add(generoPeli);
+                                reportePelicula1.add(pelicula1);
+                                reportePelicula1.add(maximo6);
+                                reportePelicula1.add(pelicula2);
+                                reportePelicula1.add(menor6);
+                            }
+
+                            pelicula1 = "";
+                            pelicula2 = "";
+                            Generos.clear();
+                            maximoMinimo.clear();
+                            valor11 = true;
+                            valor10 = true;
+                        }
+                    }
+                    w = 0 - 1; // se le resta a 0 para que la lista arranque desde 0 y pueda verificar ese campo de la lista
+                }
+                r = r + 2;
+            }
+        }
+        return reportePelicula1;
     }
 }
