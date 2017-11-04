@@ -19,3 +19,6 @@ kendall,207620167,kendallandreyr@gmail.com,Bailador,5,28/10/2017,Cumbia,*
 kendall,207620167,kendallandreyr@gmail.com,Bailador,5,29/10/2017,Cumbia,*
 kendall,207620167,kendallandreyr@gmail.com,saturday night Fever,2,29/10/2017,Clasica,*
 kendall,207620167,kendallandreyr@gmail.com,Mejor Paso Doble,3,29/10/2017,PasoDoble,*
+jeniffer,207500700,jennim24@hotmail.com,noches de fantasia,3,29/10/2017,Merengue,*
+jeniffer,207500700,jennim24@hotmail.com,noches de fantasia,5,29/10/2017,Merengue,*
+jeniffer,207500700,jennim24@hotmail.com,Bailador,1,30/10/2017,Cumbia,*

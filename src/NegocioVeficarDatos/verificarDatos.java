@@ -6,7 +6,6 @@
 package NegocioVeficarDatos;
 
 import Archivos.archivosProyecto;
-import java.io.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
