@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.jfree.chart.*;
 import org.jfree.chart.plot.PlotOrientation;
@@ -53,9 +54,7 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Reportes Musica");
         this.pack();
-        leerDatosMusica(usuario);
         agregaCombo();
-
     }
 
     public void grafica() {
@@ -106,6 +105,7 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.BorderLayout());
         jPanel1.add(Panel);
         jPanel1.validate();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     public void mostrarEnPanel2() {
@@ -113,9 +113,10 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.BorderLayout());
         jPanel1.add(Panel);
         jPanel1.validate();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
-    public void leerDatosMusica(String persona) {
+    public void leerDatosMusica() {
         String linea70;
         String[] nombreDisco;
         File direccion0 = new File("archivoDiscosMusica.txt");
@@ -131,36 +132,6 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
         }
-        String linea7;
-        String[] nombrePersona;
-        File direccion = new File("archivoUser.txt");
-        try {
-            FileReader leer = new FileReader(direccion);
-            BufferedReader archivo = new BufferedReader(leer);
-            while ((linea7 = archivo.readLine()) != null) {
-                nombrePersona = linea7.split(" ");
-                datosPersonaArc.add(nombrePersona[0]);
-                totalUsers.add(0);
-            }
-            System.out.println("2" + datosPersonaArc);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
-        }
-        String linea71;
-        String[] nombrePersona1;
-        File direccion1 = new File("archivoCompras.txt");
-        try {
-            FileReader leer = new FileReader(direccion1);
-            BufferedReader archivo = new BufferedReader(leer);
-            while ((linea71 = archivo.readLine()) != null) {
-                nombrePersona1 = linea71.split(",");
-                usersCompr.add(nombrePersona1[0]);
-            }
-            System.out.println("3" + usersCompr);
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
-        }
-
         String linea72;
         String[] nombrePersona2;
         File direccion2 = new File("archivoCompras.txt");
@@ -177,7 +148,6 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
         }
-
         int i = 0;
         int p = 0;
         while (p < datosDiscoArc.size()) {
@@ -211,6 +181,33 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
     }
 
     public void agregaCombo() {
+        String linea7;
+        String[] nombrePersona;
+        File direccion = new File("archivoUser.txt");
+        try {
+            FileReader leer = new FileReader(direccion);
+            BufferedReader archivo = new BufferedReader(leer);
+            while ((linea7 = archivo.readLine()) != null) {
+                nombrePersona = linea7.split(" ");
+                datosPersonaArc.add(nombrePersona[0]);
+                totalUsers.add(0);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
+        }
+        String linea71;
+        String[] nombrePersona1;
+        File direccion1 = new File("archivoCompras.txt");
+        try {
+            FileReader leer = new FileReader(direccion1);
+            BufferedReader archivo = new BufferedReader(leer);
+            while ((linea71 = archivo.readLine()) != null) {
+                nombrePersona1 = linea71.split(",");
+                usersCompr.add(nombrePersona1[0]);
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
+        }
         int i = 0;
         int p = 0;
         while (p < datosPersonaArc.size()) {
@@ -227,9 +224,6 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
             i = 0;
         }
         int j;
-        System.out.println("Datos per" + datosPersonaArc);
-        System.out.println("Total user" + totalUsers);
-
         for (j = 0; j < totalUsers.size();) {
             if (totalUsers.get(j).equals(0)) {
                 totalUsers.remove(j);
@@ -242,8 +236,6 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
         for (int k = 0; k < datosPersonaArc.size(); k++) {
             combo.addItem((String) datosPersonaArc.get(k));
         }
-        System.out.println("Datos per" + datosPersonaArc);
-        System.out.println("Total user" + totalUsers);
     }
 
     /**
@@ -298,7 +290,7 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 642, Short.MAX_VALUE)
+            .addGap(0, 545, Short.MAX_VALUE)
         );
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -354,8 +346,8 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jrbMasMenosVendidos)
                                 .addGap(77, 77, 77)
-                                .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(150, 150, 150)
+                                .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(96, 96, 96)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnGraficar)
@@ -389,7 +381,7 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jrbPorRango))
-                .addGap(18, 18, 18)
+                .addGap(115, 115, 115)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -399,7 +391,6 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
 
     private void btnGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarActionPerformed
         if (jrbMasMenosVendidos.isSelected()) {///Se estan hacinedo Prubas con las graficas
-
             if (jPanel1 == null) {
                 jPanel1.remove(Panel);
                 jPanel1.repaint();
@@ -408,19 +399,17 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
                 mostrarEnPanel();
             }
         } else if (jrbComprasPorUser.isSelected()) {
-
             if (jPanel1 == null) {
                 jPanel1.remove(Panel);
                 jPanel1.repaint();
             } else {
                 if (combo.getSelectedIndex() != -1) {
-                    leerDatosMusica(usuario);
+                    leerDatosMusica();
                     grafica2();
                     mostrarEnPanel2();
                 }
             }
         } else if (jrbPorRango.isSelected()) {
-
             if (jPanel1 == null) {
                 jPanel1.remove(Panel);
                 jPanel1.repaint();
@@ -428,7 +417,6 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
                 grafica();
                 mostrarEnPanel();
             }
-
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una de las tres opciones");
         }
@@ -452,6 +440,11 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
         totalUsers = new ArrayList<>();
         Datos2.clear();
         usuario = combo.getSelectedItem().toString();
+        jPanel1.removeAll();
+        if (Panel != null) {
+            jPanel1.remove(Panel);
+            jPanel1.repaint();
+        }
     }//GEN-LAST:event_comboActionPerformed
 
     /**

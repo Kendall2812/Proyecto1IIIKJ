@@ -7,7 +7,12 @@ package VistaUsuario;
 
 import NegocioVeficarDatos.verificarDatos;
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -24,25 +29,37 @@ public class reportesPeliculas extends javax.swing.JFrame {
     /**
      * Creates new form reportesPeliculas
      */
-    JFreeChart grafica1;
+    JFreeChart grafica1, grafica2;
     ChartPanel Panel;
     DefaultCategoryDataset Datos = new DefaultCategoryDataset();
+    DefaultCategoryDataset Datos2 = new DefaultCategoryDataset();
     ArrayList datosReporte1Peliculas = new ArrayList();
-    int numero =0;
-    String genero1;
+    int numero = 0;
+    String genero1, usuario;
     String cancion1, cancion2;
     int maximo2, menor2;
     int indice;
     int indice2;
-    
+
+    ArrayList datosPersonaArc = new ArrayList();
+    ArrayList datosDiscoArc = new ArrayList();
+    ArrayList usersCompr = new ArrayList();
+    ArrayList<Integer> cantiDis = new ArrayList<>();
+    ArrayList DiscosComp = new ArrayList();
+    ArrayList<Integer> cantidadTotal = new ArrayList<>();
+    ArrayList<Integer> userscanpo = new ArrayList<>();
+    ArrayList totalUsers = new ArrayList<>();
+
     public reportesPeliculas() {
         initComponents();
         this.getContentPane().setBackground(Color.gray);
         this.setLocationRelativeTo(null);
         this.setTitle("Reportes Peliculas");
         this.pack();
+        agregaCombo();
     }
-    public void greficarMovie(){
+
+    public void greficarMovie() {
         verificarDatos reporte1 = new verificarDatos();
         datosReporte1Peliculas = reporte1.reporte1Peliculas();
         if (datosReporte1Peliculas.isEmpty() == false) {
@@ -66,19 +83,167 @@ public class reportesPeliculas extends javax.swing.JFrame {
                     cont++;
                 }
             }
-
             grafica1 = ChartFactory.createBarChart3D("Peliculas Más y Menos Comprados",
                     "Generos", "Compras", Datos,
                     PlotOrientation.VERTICAL, true, true, false);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "No hay datos para graficar");
         }
     }
-    public void mostrarEnPanel(){
+
+    public void mostrarEnPanel() {
         Panel = new ChartPanel(grafica1);
         PanelPeliculas.setLayout(new java.awt.BorderLayout());
         PanelPeliculas.add(Panel);
         PanelPeliculas.validate();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+    }
+
+    public void grafica2() {
+        for (int j = 0; j < datosDiscoArc.size(); j++) {
+            Datos2.addValue(cantidadTotal.get(j), (Comparable) datosDiscoArc.get(j), (Comparable) datosDiscoArc.get(j));
+        }
+        grafica2 = ChartFactory.createBarChart3D("Discos Más y Menos Comprados",
+                usuario, "Compras", Datos2,
+                PlotOrientation.VERTICAL, true, true, false);
+    }
+
+    public void mostrarEnPanel2() {
+        Panel = new ChartPanel(grafica2);
+        PanelPeliculas.setLayout(new java.awt.BorderLayout());
+        PanelPeliculas.add(Panel);
+        PanelPeliculas.validate();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+    }
+
+    public void leerDatosMusica() {
+        String linea70;
+        String[] nombreDisco;
+        File direccion0 = new File("archivoPeliculas.txt");
+        try {
+            FileReader leer = new FileReader(direccion0);
+            BufferedReader archivo = new BufferedReader(leer);
+            while ((linea70 = archivo.readLine()) != null) {
+                nombreDisco = linea70.split(",");
+                datosDiscoArc.add(nombreDisco[0]);
+                cantidadTotal.add(0);
+            }
+            System.out.println("1" + datosDiscoArc);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
+        }
+        String linea72;
+        String[] nombrePersona2;
+        File direccion2 = new File("archivoComprasPeliculas.txt");
+        try {
+            FileReader leer = new FileReader(direccion2);
+            BufferedReader archivo = new BufferedReader(leer);
+            while ((linea72 = archivo.readLine()) != null) {
+                nombrePersona2 = linea72.split(",");
+                if (nombrePersona2[0].equals(usuario)) {
+                    DiscosComp.add(nombrePersona2[3]);
+                    cantiDis.add(Integer.parseInt(nombrePersona2[4]));
+                }
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
+        }
+        int i = 0;
+        int p = 0;
+        while (p < datosDiscoArc.size()) {
+            for (; i < DiscosComp.size();) {
+                if (DiscosComp.get(i).equals(datosDiscoArc.get(p))) {
+                    int cantidad1 = (int) cantidadTotal.get(p);
+                    int cantidad2 = (int) cantiDis.get(i);
+                    int cantiTo = cantidad1 + cantidad2;
+                    cantidadTotal.set(p, cantiTo);
+                }
+                i++;
+            }
+            p++;
+            i = 0;
+        }
+        int j;
+        System.out.println("CantidadTotal" + cantidadTotal);
+        System.out.println("discosComprados" + DiscosComp);
+        System.out.println("ArcDis" + datosDiscoArc);
+        for (j = 0; j < cantidadTotal.size();) {
+            if (cantidadTotal.get(j).equals(0)) {
+                cantidadTotal.remove(j);
+                datosDiscoArc.remove(j);
+                j = 0;
+            } else {
+                j++;
+            }
+        }
+        System.out.println("CantidadTotal" + cantidadTotal);
+        System.out.println("ArcDis" + datosDiscoArc);
+    }
+
+    public void agregaCombo() {
+        String linea7;
+        String[] nombrePersona;
+        File direccion = new File("archivoUser.txt");
+        try {
+            FileReader leer = new FileReader(direccion);
+            BufferedReader archivo = new BufferedReader(leer);
+            while ((linea7 = archivo.readLine()) != null) {
+                nombrePersona = linea7.split(" ");
+                datosPersonaArc.add(nombrePersona[0]);
+                totalUsers.add(0);
+            }
+            System.out.println("2" + datosPersonaArc);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
+        }
+        String linea71;
+        String[] nombrePersona1;
+        File direccion1 = new File("archivoComprasPeliculas.txt");
+        try {
+            FileReader leer = new FileReader(direccion1);
+            BufferedReader archivo = new BufferedReader(leer);
+            while ((linea71 = archivo.readLine()) != null) {
+                nombrePersona1 = linea71.split(",");
+                usersCompr.add(nombrePersona1[0]);
+            }
+            System.out.println("3" + usersCompr);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
+        }
+
+        int i = 0;
+        int p = 0;
+        while (p < datosPersonaArc.size()) {
+            for (; i < usersCompr.size();) {
+                if (usersCompr.get(i).equals(datosPersonaArc.get(p))) {
+                    int cantidad1 = (int) totalUsers.get(p);
+                    int cantidad2 = 1;
+                    int cantiTo = cantidad1 + cantidad2;
+                    totalUsers.set(p, cantiTo);
+                }
+                i++;
+            }
+            p++;
+            i = 0;
+        }
+        int j;
+        System.out.println("Datos per" + datosPersonaArc);
+        System.out.println("Total user" + totalUsers);
+
+        for (j = 0; j < totalUsers.size();) {
+            if (totalUsers.get(j).equals(0)) {
+                totalUsers.remove(j);
+                datosPersonaArc.remove(j);
+                j = 0;
+            } else {
+                j++;
+            }
+        }
+        for (int k = 0; k < datosPersonaArc.size(); k++) {
+            combo.addItem((String) datosPersonaArc.get(k));
+        }
+        System.out.println("Datos per" + datosPersonaArc);
+        System.out.println("Total user" + totalUsers);
     }
 
     /**
@@ -98,6 +263,7 @@ public class reportesPeliculas extends javax.swing.JFrame {
         btnGraficar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         PanelPeliculas = new javax.swing.JPanel();
+        combo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -154,8 +320,14 @@ public class reportesPeliculas extends javax.swing.JFrame {
         );
         PanelPeliculasLayout.setVerticalGroup(
             PanelPeliculasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 653, Short.MAX_VALUE)
+            .addGap(0, 651, Short.MAX_VALUE)
         );
+
+        combo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -171,13 +343,18 @@ public class reportesPeliculas extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Reporte2)
-                                    .addComponent(Reporte1))
-                                .addGap(208, 208, 208)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Reporte2)
+                                        .addGap(208, 208, 208))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Reporte1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                                        .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(72, 72, 72)))
                                 .addComponent(btnGraficar)
                                 .addGap(106, 106, 106)
                                 .addComponent(btnRegresar)))
-                        .addGap(0, 563, Short.MAX_VALUE)))
+                        .addGap(0, 577, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -188,7 +365,9 @@ public class reportesPeliculas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(Reporte1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Reporte1)
+                            .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Reporte2))
                     .addGroup(layout.createSequentialGroup()
@@ -221,16 +400,19 @@ public class reportesPeliculas extends javax.swing.JFrame {
             if (PanelPeliculas == null) {
                 PanelPeliculas.remove(Panel);
                 PanelPeliculas.repaint();
-            } else {              
-//                grafica();
-//                mostrarEnPanel();
+            } else {
+                if (combo.getSelectedIndex() != -1) {
+                    leerDatosMusica();
+                    grafica2();
+                    mostrarEnPanel2();
+                }
             }
         } else if (Reporte3.isSelected()) {
 
             if (PanelPeliculas == null) {
                 PanelPeliculas.remove(Panel);
                 PanelPeliculas.repaint();
-            } else {               
+            } else {
 //                grafica();
 //                mostrarEnPanel();
             }
@@ -245,6 +427,25 @@ public class reportesPeliculas extends javax.swing.JFrame {
         acc.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboActionPerformed
+        // TODO add your handling code here:
+        datosDiscoArc = new ArrayList();
+        usersCompr = new ArrayList();
+        cantiDis = new ArrayList<>();
+        DiscosComp = new ArrayList();
+        cantidadTotal = new ArrayList<>();
+        userscanpo = new ArrayList<>();
+        totalUsers = new ArrayList<>();
+        usuario = "";
+        Datos2.clear();
+        usuario = combo.getSelectedItem().toString();
+        PanelPeliculas.removeAll();
+        if (Panel != null) {
+            PanelPeliculas.remove(Panel);
+            PanelPeliculas.repaint();
+        }
+    }//GEN-LAST:event_comboActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,6 +490,7 @@ public class reportesPeliculas extends javax.swing.JFrame {
     private javax.swing.JButton btnGraficar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> combo;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
