@@ -6,7 +6,18 @@
 package NegocioVeficarDatos;
 
 import Archivos.archivosProyecto;
+import VistaUsuario.reportesDiscosMusica;
+import VistaUsuario.reportesPeliculas;
+import static VistaUsuario.reportesPeliculas.date;
+import static VistaUsuario.reportesPeliculas.dateFormat;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 //import NegocioVeficarDatos.Controlador;
@@ -16,7 +27,6 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Kendall
  */
-
 public class verificarDatos {
 
     String[] valores, datosUsuario;
@@ -29,7 +39,7 @@ public class verificarDatos {
     boolean valor;
     String genero1, genero2, genero3, genero4, genero5;
     String cancion1, cancion2, cancion3;
-    String cancion4, cancion5, cancion6; 
+    String cancion4, cancion5, cancion6;
     String cancion7, cancion8, cancion9, cancion10;
     String pelicula1, pelicula2;
     String cancion11, cancion12;
@@ -64,17 +74,17 @@ public class verificarDatos {
         archivosProyecto user = new archivosProyecto();
         ArrayList Usuario = new ArrayList();
         Usuario = user.datosUser();
-        
-        for(int x = 0; x < Usuario.size(); x = x+4){
-            if(Usuario.get(x).equals(nombre)){
+
+        for (int x = 0; x < Usuario.size(); x = x + 4) {
+            if (Usuario.get(x).equals(nombre)) {
                 x = x + 1;
-                if(Usuario.get(x).equals(Clave)){
+                if (Usuario.get(x).equals(Clave)) {
                     valor1 = true;
                     break;
                 }
             }
         }
-        
+
         return valor1;
     }
 
@@ -95,45 +105,53 @@ public class verificarDatos {
 
     public void buscarArchivo(String genero, DefaultTableModel tabla, boolean bus) {//busca los generos en el archivo
         archivosProyecto buscarInfo = new archivosProyecto();
-        buscarInfo.buscarGeneroMusicaPelicual(genero, (DefaultTableModel) tabla, bus);   
+        buscarInfo.buscarGeneroMusicaPelicual(genero, (DefaultTableModel) tabla, bus);
     }
-    public ArrayList editarMusica(){
+
+    public ArrayList editarMusica() {
         ArrayList nombre = new ArrayList();
         archivosProyecto buscarNombreDisco = new archivosProyecto();
         datosDisco = buscarNombreDisco.leerDatosMusica();
         return datosDisco;
     }
-    public void guardarMusicaEdidata(ArrayList datosNuevos){
+
+    public void guardarMusicaEdidata(ArrayList datosNuevos) {
         archivosProyecto guardar = new archivosProyecto();
-        guardar.editarInfoMusica(datosNuevos,true);
+        guardar.editarInfoMusica(datosNuevos, true);
     }
-    public void eliminarDisco(ArrayList datosEliminar){
+
+    public void eliminarDisco(ArrayList datosEliminar) {
         archivosProyecto eliminar = new archivosProyecto();
         eliminar.eliminarInfoMusica(datosEliminar);
     }
-    public ArrayList eidtarPeliculas(){
+
+    public ArrayList eidtarPeliculas() {
         ArrayList datosPelicula = new ArrayList();
         archivosProyecto buscarNombrePelicula = new archivosProyecto();
         datosPelicula = buscarNombrePelicula.leerDatosPeliculas();
         return datosPelicula;
     }
-    public void guardarPeliculaEditada(ArrayList datosMovieNuevos){
+
+    public void guardarPeliculaEditada(ArrayList datosMovieNuevos) {
         archivosProyecto guardar = new archivosProyecto();
-        guardar.guardarInfoPelicEditada(datosMovieNuevos,true);
+        guardar.guardarInfoPelicEditada(datosMovieNuevos, true);
     }
-    public void eliminarPelicula(ArrayList elimarDateMovie){
+
+    public void eliminarPelicula(ArrayList elimarDateMovie) {
         archivosProyecto eliminarMovie = new archivosProyecto();
         eliminarMovie.eliminarPelicula(elimarDateMovie);
     }
-    public void controlCompras(String nombre, String precio, String cantidad,String nameUser,String verificar,String genero){
+
+    public void controlCompras(String nombre, String precio, String cantidad, String nameUser, String verificar, String genero) {
         archivosProyecto compras = new archivosProyecto();
-        compras.guardarCompras(nombre, precio, cantidad, nameUser,verificar,genero);
+        compras.guardarCompras(nombre, precio, cantidad, nameUser, verificar, genero);
     }
-    public void registrarPreCompra(String usuario,String nombreArticulo,String cantida,String total,String genero){
+
+    public void registrarPreCompra(String usuario, String nombreArticulo, String cantida, String total, String genero) {
         archivosProyecto precompra = new archivosProyecto();
         precompra.registrarPreCompra2(usuario, nombreArticulo, cantida, total, genero);
     }
-    
+
     public void enviarCorreo2(String usuario, String mensaje, String asunt) { // enviar Correo
         c.setContraseña("ieyoydtabzekgfhl");
         c.setUsuarioCorreo("jennim2430@gmail.com");
@@ -148,6 +166,7 @@ public class verificarDatos {
             JOptionPane.showMessageDialog(null, "Error al enviar el correo");
         }
     }
+
     public ArrayList reporte1Musica() {
         //Merengue,Clasica,Salsa,PasoDoble,Cumbia  
         ArrayList masMenoVendido = new ArrayList();
@@ -157,7 +176,7 @@ public class verificarDatos {
         ArrayList Musica = new ArrayList();
         ArrayList Generos = new ArrayList();
         ArrayList<Integer> maximoMinimo = new ArrayList<Integer>();
-        
+
         String nameMovie = "";
         String genero = "";
 
@@ -225,7 +244,7 @@ public class verificarDatos {
             contador = 0;
             v = v + 1;
         }
-        
+
         if (valor12 == true) {
             for (int r = 0; r < Musica.size(); r++) {
                 for (int w = 0; w < Musica.size(); w++) {
@@ -325,7 +344,7 @@ public class verificarDatos {
         return reporteMusica1;
     }
 
-    public ArrayList reporte1Peliculas(){
+    public ArrayList reporte1Peliculas() {
         ArrayList masMenoVendido = new ArrayList();
         ArrayList datosPelicula = new ArrayList();
         ArrayList nombrePelicula = new ArrayList();
@@ -401,7 +420,7 @@ public class verificarDatos {
             contador = 0;
             v = v + 1;
         }
-        
+
         if (valor12 == true) {
             for (int r = 0; r < Peliculas.size(); r++) {
                 for (int w = 0; w < Peliculas.size(); w++) {
@@ -499,5 +518,196 @@ public class verificarDatos {
             }
         }
         return reportePelicula1;
+    }
+
+    public void validaFechaRep3(String fechaActual, String fechaDig) throws ParseException {
+        SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaACT = formateador.parse(fechaActual);
+        Date fechaDi = formateador.parse(fechaDig);
+        if ((fechaDi.before(fechaACT) || fechaDi.equals(fechaACT))) {
+            System.out.println("la fecha si es anterior");
+            leerDatosPeli(fechaDig);
+        } else {
+            JOptionPane.showMessageDialog(null,"La fecha debe ser anterior a la actual");
+        }
+    }
+
+    public void leerDatosPeli(String fechaDig) throws ParseException {
+        ArrayList datosDiscoArc = new ArrayList();
+        ArrayList<Integer> cantiDis = new ArrayList<>();
+        ArrayList DiscosComp = new ArrayList();
+        ArrayList<Integer> cantidadTotal = new ArrayList<>();
+        SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaDi = formateador.parse(fechaDig);
+        boolean bus = false;
+        String linea70;
+        String[] nombreDisco;
+        File direccion0 = new File("archivoPeliculas.txt");
+        try {
+            FileReader leer = new FileReader(direccion0);
+            BufferedReader archivo = new BufferedReader(leer);
+            while ((linea70 = archivo.readLine()) != null) {
+                nombreDisco = linea70.split(",");
+                datosDiscoArc.add(nombreDisco[0]);
+                cantidadTotal.add(0);
+            }
+            System.out.println("datosDisc " + datosDiscoArc);
+            System.out.println("cantidadvacia " + cantidadTotal);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
+        }
+        String linea72, prueba;
+        String[] nombrePersona2;
+        File direccion2 = new File("archivoComprasPeliculas.txt");
+        try {
+            FileReader leer = new FileReader(direccion2);
+            BufferedReader archivo = new BufferedReader(leer);
+            while ((linea72 = archivo.readLine()) != null) {
+                nombrePersona2 = linea72.split(",");
+                if (nombrePersona2[5] != null) {
+                    prueba = nombrePersona2[5];
+                    Date fechaDate1 = formateador.parse(prueba);
+                    if ((fechaDate1.before(fechaDi) || fechaDate1.equals(fechaDi))) {
+                        DiscosComp.add(nombrePersona2[3]);
+                        cantiDis.add(Integer.parseInt(nombrePersona2[4]));
+                        bus = true;
+                    }
+                }
+            }
+            if (!bus) {
+                JOptionPane.showMessageDialog(null, "No hay datos menores a esa fecha");
+            }
+            System.out.println("discosCompradosmenoresAlafecha " + DiscosComp);
+            System.out.println("Cantidadessegunfechas " + cantiDis);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
+        }
+        if (bus) {
+            int i = 0;
+            int p = 0;
+            while (p < datosDiscoArc.size()) {
+                for (; i < DiscosComp.size();) {
+                    if (DiscosComp.get(i).equals(datosDiscoArc.get(p))) {
+                        int cantidad1 = (int) cantidadTotal.get(p);
+                        int cantidad2 = (int) cantiDis.get(i);
+                        int cantiTo = cantidad1 + cantidad2;
+                        cantidadTotal.set(p, cantiTo);
+                    }
+                    i++;
+                }
+                p++;
+                i = 0;
+            }
+            System.out.println("sumatotal " + cantidadTotal);
+            int j;
+            for (j = 0; j < cantidadTotal.size();) {
+                if (cantidadTotal.get(j).equals(0)) {
+                    cantidadTotal.remove(j);
+                    datosDiscoArc.remove(j);
+                    j = 0;
+                } else {
+                    j++;
+                }
+            }
+            System.out.println("los que quedaron fijos " + cantidadTotal);
+            System.out.println("los quedaron segun cantidad " + datosDiscoArc);
+            reportesPeliculas ver = new reportesPeliculas();
+            ver.grafica3(datosDiscoArc, cantidadTotal, fechaDig);
+        }
+    }
+    public void validaFechaRep3Mu(String fechaActual, String fechaDig) throws ParseException {
+        SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaACT = formateador.parse(fechaActual);
+        Date fechaDi = formateador.parse(fechaDig);
+        if ((fechaDi.before(fechaACT) || fechaDi.equals(fechaACT))) {
+//            System.out.println("la fecha si es anterior");
+            leerDatosMusica(fechaDig);
+        } else {
+            JOptionPane.showMessageDialog(null,"La fecha debe ser anterior a la actual");
+        }
+    }
+    
+    public void leerDatosMusica(String fechaDig) throws ParseException {
+        ArrayList datosDiscoArc = new ArrayList();
+        ArrayList<Integer> cantiDis = new ArrayList<>();
+        ArrayList DiscosComp = new ArrayList();
+        ArrayList<Integer> cantidadTotal = new ArrayList<>();
+        SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaDi = formateador.parse(fechaDig);
+        boolean bus = false;
+        String linea70;
+        String[] nombreDisco;
+        File direccion0 = new File("archivoDiscosMusica.txt");
+        try {
+            FileReader leer = new FileReader(direccion0);
+            BufferedReader archivo = new BufferedReader(leer);
+            while ((linea70 = archivo.readLine()) != null) {
+                nombreDisco = linea70.split(",");
+                datosDiscoArc.add(nombreDisco[0]);
+                cantidadTotal.add(0);
+            }
+            System.out.println("datosDisc " + datosDiscoArc);
+            System.out.println("cantidadvacia " + cantidadTotal);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
+        }
+        String linea72, prueba;
+        String[] nombrePersona2;
+        File direccion2 = new File("archivoCompras.txt");
+        try {
+            FileReader leer = new FileReader(direccion2);
+            BufferedReader archivo = new BufferedReader(leer);
+            while ((linea72 = archivo.readLine()) != null) {
+                nombrePersona2 = linea72.split(",");
+                if (nombrePersona2[5] != null) {
+                    prueba = nombrePersona2[5];
+                    Date fechaDate1 = formateador.parse(prueba);
+                    if ((fechaDate1.before(fechaDi) || fechaDate1.equals(fechaDi))) {
+                        DiscosComp.add(nombrePersona2[3]);
+                        cantiDis.add(Integer.parseInt(nombrePersona2[4]));
+                        bus = true;
+                    }
+                }
+            }
+            if (!bus) {
+                JOptionPane.showMessageDialog(null, "No hay datos menores a esa fecha");
+            }
+            System.out.println("discosCompradosmenoresAlafecha " + DiscosComp);
+            System.out.println("Cantidadessegunfechas " + cantiDis);
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
+        }
+        if (bus) {
+            int i = 0;
+            int p = 0;
+            while (p < datosDiscoArc.size()) {
+                for (; i < DiscosComp.size();) {
+                    if (DiscosComp.get(i).equals(datosDiscoArc.get(p))) {
+                        int cantidad1 = (int) cantidadTotal.get(p);
+                        int cantidad2 = (int) cantiDis.get(i);
+                        int cantiTo = cantidad1 + cantidad2;
+                        cantidadTotal.set(p, cantiTo);
+                    }
+                    i++;
+                }
+                p++;
+                i = 0;
+            }
+            System.out.println("sumatotal " + cantidadTotal);
+            int j;
+            for (j = 0; j < cantidadTotal.size();) {
+                if (cantidadTotal.get(j).equals(0)) {
+                    cantidadTotal.remove(j);
+                    datosDiscoArc.remove(j);
+                    j = 0;
+                } else {
+                    j++;
+                }
+            }
+            System.out.println("los que quedaron fijos " + cantidadTotal);
+            System.out.println("los quedaron segun cantidad " + datosDiscoArc);
+            reportesDiscosMusica ver = new reportesDiscosMusica();
+            ver.grafica4(datosDiscoArc, cantidadTotal, fechaDig);
+        }
     }
 }

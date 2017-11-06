@@ -6,12 +6,20 @@
 package VistaUsuario;
 
 import NegocioVeficarDatos.verificarDatos;
+import static VistaUsuario.reportesPeliculas.date;
+import static VistaUsuario.reportesPeliculas.dateFormat;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.jfree.chart.*;
@@ -27,18 +35,18 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
     /**
      * Creates new form reportesDiscosMusica
      */
-    JFreeChart grafica1, grafica2;
+    public static JFreeChart grafica1;
     ChartPanel Panel;
     ArrayList datosReporte1 = new ArrayList();
     DefaultCategoryDataset Datos = new DefaultCategoryDataset();
-    DefaultCategoryDataset Datos2 = new DefaultCategoryDataset();
     String genero1;
     String cancion1, cancion2;
     String usuario;
     int maximo2, menor2;
     int indice;
     int indice2;
-
+    public static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    public static Date date = new Date();
     ArrayList datosPersonaArc = new ArrayList();
     ArrayList datosDiscoArc = new ArrayList();
     ArrayList usersCompr = new ArrayList();
@@ -54,7 +62,10 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setTitle("Reportes Musica");
         this.pack();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         agregaCombo();
+        combo.setVisible(false);
+        dtFecha.setVisible(false);
     }
 
     public void grafica() {
@@ -93,10 +104,10 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
 
     public void grafica2() {
         for (int j = 0; j < datosDiscoArc.size(); j++) {
-            Datos2.addValue(cantidadTotal.get(j), (Comparable) datosDiscoArc.get(j), (Comparable) datosDiscoArc.get(j));
+            Datos.addValue(cantidadTotal.get(j), (Comparable) datosDiscoArc.get(j), (Comparable) datosDiscoArc.get(j));
         }
-        grafica2 = ChartFactory.createBarChart3D("Discos Más y Menos Comprados",
-                usuario, "Compras", Datos2,
+        grafica1 = ChartFactory.createBarChart3D("Discos Más y Menos Comprados",
+                usuario, "Compras", Datos,
                 PlotOrientation.VERTICAL, true, true, false);
     }
 
@@ -109,7 +120,7 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
     }
 
     public void mostrarEnPanel2() {
-        Panel = new ChartPanel(grafica2);
+        Panel = new ChartPanel(grafica1);
         jPanel1.setLayout(new java.awt.BorderLayout());
         jPanel1.add(Panel);
         jPanel1.validate();
@@ -238,6 +249,35 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
         }
     }
 
+    public void validaFecha() throws ParseException {
+        if (this.dtFecha.getCalendar() != null) {
+            String fechaActual = dateFormat.format(date);
+            Date time = this.dtFecha.getDate();
+            String fechaDig = dateFormat.format(time);
+            verificarDatos ver = new verificarDatos();
+            ver.validaFechaRep3Mu(fechaActual, fechaDig);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar la fecha deseada");
+        }
+    }
+
+    public void grafica4(ArrayList datosDicos, ArrayList<Integer> CantidadTotal, String fechaDi) {
+        for (int k = 0; k < datosDicos.size(); k++) {
+            Datos.addValue((Number) CantidadTotal.get(k), (Comparable) datosDicos.get(k), (Comparable) datosDicos.get(k));
+        }
+        grafica1 = ChartFactory.createBarChart3D("Discos Más y Menos Comprados",
+                fechaDi, "Compras", Datos,
+                PlotOrientation.VERTICAL, true, true, false);
+    }
+
+    public void mostrarEnPanel3() {
+        Panel = new ChartPanel(grafica1);
+        jPanel1.setLayout(new java.awt.BorderLayout());
+        jPanel1.add(Panel);
+        jPanel1.validate();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -255,9 +295,8 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnGraficar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         combo = new javax.swing.JComboBox<>();
+        dtFecha = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -266,31 +305,47 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
         jrbMasMenosVendidos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jrbMasMenosVendidos.setForeground(new java.awt.Color(255, 255, 255));
         jrbMasMenosVendidos.setText("Más vendidos y menos vendido por categoria");
+        jrbMasMenosVendidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbMasMenosVendidosActionPerformed(evt);
+            }
+        });
 
         jrbComprasPorUser.setBackground(java.awt.Color.gray);
         buttonGroup1.add(jrbComprasPorUser);
         jrbComprasPorUser.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jrbComprasPorUser.setForeground(new java.awt.Color(255, 255, 255));
         jrbComprasPorUser.setText("Más comprados por Usuario");
+        jrbComprasPorUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbComprasPorUserActionPerformed(evt);
+            }
+        });
 
         jrbPorRango.setBackground(java.awt.Color.gray);
         buttonGroup1.add(jrbPorRango);
         jrbPorRango.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jrbPorRango.setForeground(new java.awt.Color(255, 255, 255));
         jrbPorRango.setText("Cantidad de disco mas vendidos por rango de fecha");
+        jrbPorRango.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbPorRangoActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(java.awt.Color.gray);
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 153, 153), null));
+        jPanel1.setPreferredSize(new java.awt.Dimension(4, 651));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1363, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 545, Short.MAX_VALUE)
+            .addGap(0, 647, Short.MAX_VALUE)
         );
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -317,14 +372,6 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("El Simbolo + significa más Vendido");
-
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("El Simbolo - significa menos Vendido");
-
         combo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboActionPerformed(evt);
@@ -336,54 +383,46 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jrbPorRango)
-                            .addComponent(jrbComprasPorUser)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jrbMasMenosVendidos)
-                                .addGap(77, 77, 77)
-                                .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(96, 96, 96)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnGraficar)
-                                .addGap(91, 91, 91)
-                                .addComponent(btnRegresar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(33, 33, 33)
-                                .addComponent(jLabel3)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addComponent(jrbMasMenosVendidos)
+                        .addGap(18, 18, 18)
+                        .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(209, 209, 209)
+                        .addComponent(btnGraficar)
+                        .addGap(580, 580, 580)
+                        .addComponent(btnRegresar))
+                    .addComponent(jrbComprasPorUser)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jrbPorRango)
+                        .addGap(173, 173, 173)
+                        .addComponent(dtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1387, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(11, 11, 11)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jrbMasMenosVendidos)
-                    .addComponent(btnRegresar)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnGraficar)
-                    .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(btnRegresar))
+                .addGap(7, 7, 7)
                 .addComponent(jrbComprasPorUser)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jrbPorRango))
-                .addGap(115, 115, 115)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addGap(2, 2, 2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jrbPorRango)
+                    .addComponent(dtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -414,8 +453,13 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
                 jPanel1.remove(Panel);
                 jPanel1.repaint();
             } else {
-                grafica();
-                mostrarEnPanel();
+                try {
+                    jPanel1.removeAll();
+                    validaFecha();
+                    mostrarEnPanel3();
+                } catch (ParseException ex) {
+                    Logger.getLogger(reportesPeliculas.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una de las tres opciones");
@@ -438,7 +482,8 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
         cantidadTotal = new ArrayList<>();
         userscanpo = new ArrayList<>();
         totalUsers = new ArrayList<>();
-        Datos2.clear();
+        usuario = "";
+        Datos.clear();
         usuario = combo.getSelectedItem().toString();
         jPanel1.removeAll();
         if (Panel != null) {
@@ -446,6 +491,30 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
             jPanel1.repaint();
         }
     }//GEN-LAST:event_comboActionPerformed
+
+    private void jrbMasMenosVendidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbMasMenosVendidosActionPerformed
+        // TODO add your handling code here:
+        Datos.clear();
+        jPanel1.removeAll();
+        combo.setVisible(false);
+        dtFecha.setVisible(false);
+    }//GEN-LAST:event_jrbMasMenosVendidosActionPerformed
+
+    private void jrbComprasPorUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbComprasPorUserActionPerformed
+        // TODO add your handling code here:
+        Datos.clear();
+        jPanel1.removeAll();
+        combo.setVisible(true);
+        dtFecha.setVisible(false);
+    }//GEN-LAST:event_jrbComprasPorUserActionPerformed
+
+    private void jrbPorRangoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbPorRangoActionPerformed
+        // TODO add your handling code here:
+        Datos.clear();
+        jPanel1.removeAll();
+        combo.setVisible(false);
+        dtFecha.setVisible(true);
+    }//GEN-LAST:event_jrbPorRangoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -487,9 +556,8 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> combo;
+    private com.toedter.calendar.JDateChooser dtFecha;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jrbComprasPorUser;
     private javax.swing.JRadioButton jrbMasMenosVendidos;

@@ -11,7 +11,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
@@ -29,12 +35,17 @@ public class reportesPeliculas extends javax.swing.JFrame {
     /**
      * Creates new form reportesPeliculas
      */
-    JFreeChart grafica1, grafica2;
+    public static JFreeChart grafica1;
     ChartPanel Panel1;
     ChartPanel Panel;
+    ChartPanel Panel3;
     DefaultCategoryDataset Datos = new DefaultCategoryDataset();
-    DefaultCategoryDataset Datos2 = new DefaultCategoryDataset();
+//    DefaultCategoryDataset Datos2 = new DefaultCategoryDataset();
+//    DefaultCategoryDataset Datos3 = new DefaultCategoryDataset();
     ArrayList datosReporte1Peliculas = new ArrayList();
+    public static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    public static Date date = new Date();
+
     int numero = 0;
     String genero1, usuario;
     String cancion1, cancion2;
@@ -53,11 +64,14 @@ public class reportesPeliculas extends javax.swing.JFrame {
 
     public reportesPeliculas() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.getContentPane().setBackground(Color.gray);
         this.setLocationRelativeTo(null);
         this.setTitle("Reportes Peliculas");
         this.pack();
         agregaCombo();
+        combo.setVisible(false);
+        dtFecha.setVisible(false);
     }
 
     public void greficarMovie() {
@@ -93,24 +107,24 @@ public class reportesPeliculas extends javax.swing.JFrame {
     }
 
     public void mostrarEnPanel() {
-        Panel1 = new ChartPanel(grafica1);
+        Panel = new ChartPanel(grafica1);
         PanelPeliculas.setLayout(new java.awt.BorderLayout());
-        PanelPeliculas.add(Panel1);
+        PanelPeliculas.add(Panel);
         PanelPeliculas.validate();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     public void grafica2() {
         for (int j = 0; j < datosDiscoArc.size(); j++) {
-            Datos2.addValue(cantidadTotal.get(j), (Comparable) datosDiscoArc.get(j), (Comparable) datosDiscoArc.get(j));
+            Datos.addValue(cantidadTotal.get(j), (Comparable) datosDiscoArc.get(j), (Comparable) datosDiscoArc.get(j));
         }
-        grafica2 = ChartFactory.createBarChart3D("Discos Más y Menos Comprados",
-                usuario, "Compras", Datos2,
+        grafica1 = ChartFactory.createBarChart3D("Discos Más y Menos Comprados",
+                usuario, "Compras", Datos,
                 PlotOrientation.VERTICAL, true, true, false);
     }
 
     public void mostrarEnPanel2() {
-        Panel = new ChartPanel(grafica2);
+        Panel = new ChartPanel(grafica1);
         PanelPeliculas.setLayout(new java.awt.BorderLayout());
         PanelPeliculas.add(Panel);
         PanelPeliculas.validate();
@@ -174,6 +188,7 @@ public class reportesPeliculas extends javax.swing.JFrame {
             }
         }
     }
+
     public void agregaCombo() {
         String linea7;
         String[] nombrePersona;
@@ -233,6 +248,35 @@ public class reportesPeliculas extends javax.swing.JFrame {
         }
     }
 
+    public void validaFecha() throws ParseException {
+        if (this.dtFecha.getCalendar() != null) {
+            String fechaActual = dateFormat.format(date);
+            Date time = this.dtFecha.getDate();
+            String fechaDig = dateFormat.format(time);
+            verificarDatos ver = new verificarDatos();
+            ver.validaFechaRep3(fechaActual, fechaDig);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar la fecha deseada");
+        }
+    }
+
+    public void grafica3(ArrayList datosDicos, ArrayList<Integer> CantidadTotal, String fechaDi) {
+        for (int k = 0; k < datosDicos.size(); k++) {
+            Datos.addValue((Number) CantidadTotal.get(k), (Comparable) datosDicos.get(k), (Comparable) datosDicos.get(k));
+        }
+        grafica1 = ChartFactory.createBarChart3D("Discos Más y Menos Comprados",
+                fechaDi, "Compras", Datos,
+                PlotOrientation.VERTICAL, true, true, false);
+    }
+
+    public void mostrarEnPanel3() {
+        Panel = new ChartPanel(grafica1);
+        PanelPeliculas.setLayout(new java.awt.BorderLayout());
+        PanelPeliculas.add(Panel);
+        PanelPeliculas.validate();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -251,7 +295,7 @@ public class reportesPeliculas extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
         PanelPeliculas = new javax.swing.JPanel();
         combo = new javax.swing.JComboBox<>();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        dtFecha = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -264,18 +308,33 @@ public class reportesPeliculas extends javax.swing.JFrame {
         Reporte1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         Reporte1.setForeground(new java.awt.Color(255, 255, 255));
         Reporte1.setText("Más vendidos y menos vendido por categoria");
+        Reporte1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Reporte1ActionPerformed(evt);
+            }
+        });
 
         Reporte2.setBackground(java.awt.Color.gray);
         buttonGroup1.add(Reporte2);
         Reporte2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         Reporte2.setForeground(new java.awt.Color(255, 255, 255));
         Reporte2.setText("Más comprados por Usuario");
+        Reporte2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Reporte2ActionPerformed(evt);
+            }
+        });
 
         Reporte3.setBackground(java.awt.Color.gray);
         buttonGroup1.add(Reporte3);
         Reporte3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         Reporte3.setForeground(new java.awt.Color(255, 255, 255));
         Reporte3.setText("Cantidad de disco mas vendidos por rango de fecha");
+        Reporte3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Reporte3ActionPerformed(evt);
+            }
+        });
 
         btnGraficar.setBackground(new java.awt.Color(51, 204, 0));
         btnGraficar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -327,12 +386,8 @@ public class reportesPeliculas extends javax.swing.JFrame {
                     .addComponent(PanelPeliculas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Reporte2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Reporte1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(Reporte2)
+                            .addComponent(Reporte1))
                         .addGap(14, 14, 14)
                         .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(173, 173, 173)
@@ -346,7 +401,7 @@ public class reportesPeliculas extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(Reporte3)
                                 .addGap(147, 147, 147)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(dtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -370,13 +425,10 @@ public class reportesPeliculas extends javax.swing.JFrame {
                             .addComponent(btnRegresar))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Reporte3)
-                        .addGap(18, 18, 18)
-                        .addComponent(PanelPeliculas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(Reporte3)
+                    .addComponent(dtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(PanelPeliculas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -385,16 +437,14 @@ public class reportesPeliculas extends javax.swing.JFrame {
 
     private void btnGraficarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarActionPerformed
         if (Reporte1.isSelected()) {///Se estan hacinedo Prubas con las graficas
-
             if (PanelPeliculas == null) {
-                PanelPeliculas.remove(Panel1);
+                PanelPeliculas.remove(Panel);
                 PanelPeliculas.repaint();
             } else {
                 greficarMovie();
                 mostrarEnPanel();
             }
         } else if (Reporte2.isSelected()) {
-
             if (PanelPeliculas == null) {
                 PanelPeliculas.remove(Panel);
                 PanelPeliculas.repaint();
@@ -406,13 +456,16 @@ public class reportesPeliculas extends javax.swing.JFrame {
                 }
             }
         } else if (Reporte3.isSelected()) {
-
             if (PanelPeliculas == null) {
                 PanelPeliculas.remove(Panel);
                 PanelPeliculas.repaint();
             } else {
-//                grafica();
-//                mostrarEnPanel();
+                try {
+                    validaFecha();
+                    mostrarEnPanel3();
+                } catch (ParseException ex) {
+                    Logger.getLogger(reportesPeliculas.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         } else {
@@ -436,7 +489,7 @@ public class reportesPeliculas extends javax.swing.JFrame {
         userscanpo = new ArrayList<>();
         totalUsers = new ArrayList<>();
         usuario = "";
-        Datos2.clear();
+        Datos.clear();
         usuario = combo.getSelectedItem().toString();
         PanelPeliculas.removeAll();
         if (Panel != null) {
@@ -444,6 +497,30 @@ public class reportesPeliculas extends javax.swing.JFrame {
             PanelPeliculas.repaint();
         }
     }//GEN-LAST:event_comboActionPerformed
+
+    private void Reporte1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Reporte1ActionPerformed
+        // TODO add your handling code here:
+        Datos.clear();
+        PanelPeliculas.removeAll();
+        combo.setVisible(false);
+        dtFecha.setVisible(false);
+    }//GEN-LAST:event_Reporte1ActionPerformed
+
+    private void Reporte2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Reporte2ActionPerformed
+        // TODO add your handling code here:
+        Datos.clear();
+        PanelPeliculas.removeAll();
+        combo.setVisible(true);
+        dtFecha.setVisible(false);
+    }//GEN-LAST:event_Reporte2ActionPerformed
+
+    private void Reporte3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Reporte3ActionPerformed
+        // TODO add your handling code here:
+        Datos.clear();
+        PanelPeliculas.removeAll();
+        combo.setVisible(false);
+        dtFecha.setVisible(true);
+    }//GEN-LAST:event_Reporte3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -489,7 +566,7 @@ public class reportesPeliculas extends javax.swing.JFrame {
     private javax.swing.JButton btnRegresar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> combo;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser dtFecha;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
