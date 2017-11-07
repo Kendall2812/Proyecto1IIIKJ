@@ -520,6 +520,162 @@ public class verificarDatos {
         return reportePelicula1;
     }
 
+        public ArrayList datosMusicaPeliculasPrecio(String verificar, String genero, int precio1, int precio2){
+        ArrayList musicaPelicula = new ArrayList();
+        ArrayList datosMusicaPelicula = new ArrayList();
+        ArrayList validarPrecios = new ArrayList();
+        ArrayList discosMostrar = new ArrayList();
+        int indice = 0;
+        String nombreDisco = "";
+        boolean valor1 = false;
+        
+        if (verificar.equals("Musica")) {
+            archivosProyecto infoMusica = new archivosProyecto();
+            musicaPelicula = infoMusica.leerDatosMusica();
+
+            for (int x = 0; x < musicaPelicula.size(); x++) {
+                if (valor1 == true) {
+                    x = 0;
+                }
+                x = x + 2;
+                if (musicaPelicula.get(x).equals(genero)) {
+                    indice = musicaPelicula.indexOf(musicaPelicula.get(x));
+                    nombreDisco = (String) musicaPelicula.get(indice - 2);
+
+                    datosMusicaPelicula.add(musicaPelicula.get(indice - 2));
+                    datosMusicaPelicula.add(musicaPelicula.get(indice - 1));
+                    datosMusicaPelicula.add(musicaPelicula.get(indice));
+                    datosMusicaPelicula.add(musicaPelicula.get(indice + 1));//precio disco
+                    datosMusicaPelicula.add(musicaPelicula.get(indice + 2));
+                    datosMusicaPelicula.add(musicaPelicula.get(indice + 3));
+                    datosMusicaPelicula.add(musicaPelicula.get(indice + 4));
+
+                    int p = musicaPelicula.indexOf(nombreDisco);
+                    int cont = 0;
+                    while (cont != 8) {
+                        musicaPelicula.remove(p);
+                        cont++;
+                    }
+                    valor1 = true;
+
+                } else {
+                    x = x + 5;
+                    valor1 = false;
+                }
+            }
+            if (datosMusicaPelicula.isEmpty() == false) {
+                int precio = 0;
+                String precio3 = "";
+                String nombreDisc = "";
+
+                for (int r = 0; r < datosMusicaPelicula.size(); r++) {
+                    nombreDisc = (String) datosMusicaPelicula.get(r);
+                    r = r + 3;
+                    precio3 = (String) datosMusicaPelicula.get(r);
+                    precio = Integer.parseInt(precio3);
+                    //System.out.println("jola");
+                    if (precio >= precio1 && precio <= precio2) {
+                        validarPrecios.add(nombreDisc);
+                        r = r + 3;
+                    } else {
+                        r = r + 3;
+                    }
+                }
+
+                if (validarPrecios.isEmpty() == false) {
+
+                    for (int u = 0; u < validarPrecios.size(); u++) {
+                        for (int v = 0; v < datosMusicaPelicula.size(); v++) {
+                            if (validarPrecios.get(u).equals(datosMusicaPelicula.get(v))) {
+                                discosMostrar.add(datosMusicaPelicula.get(v));
+                                discosMostrar.add(datosMusicaPelicula.get(v + 1));
+                                discosMostrar.add(datosMusicaPelicula.get(v + 2));
+                                discosMostrar.add(datosMusicaPelicula.get(v + 3));
+                                discosMostrar.add(datosMusicaPelicula.get(v + 4));
+                                discosMostrar.add(datosMusicaPelicula.get(v + 5));
+                                discosMostrar.add(datosMusicaPelicula.get(v + 6));
+                                v = v + 6;
+                            } else {
+                                v = v + 6;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else if (verificar.equals("Pelicula")) {
+            archivosProyecto infoPelicula = new archivosProyecto();
+            musicaPelicula = infoPelicula.leerDatosPeliculas();
+
+            for (int x = 0; x < musicaPelicula.size(); x++) {
+                if (valor1 == true) {
+                    x = 0;
+                }
+                x = x + 2;
+                if (musicaPelicula.get(x).equals(genero)) {
+                    indice = musicaPelicula.indexOf(musicaPelicula.get(x));
+                    nombreDisco = (String) musicaPelicula.get(indice - 2);
+
+                    datosMusicaPelicula.add(musicaPelicula.get(indice - 2));
+                    datosMusicaPelicula.add(musicaPelicula.get(indice - 1));
+                    datosMusicaPelicula.add(musicaPelicula.get(indice));
+                    datosMusicaPelicula.add(musicaPelicula.get(indice + 1));//precio disco
+                    datosMusicaPelicula.add(musicaPelicula.get(indice + 2));
+
+                    int p = musicaPelicula.indexOf(nombreDisco);
+                    int cont = 0;
+                    while (cont != 6) {
+                        musicaPelicula.remove(p);
+                        cont++;
+                    }
+                    valor1 = true;
+
+                } else {
+                    x = x + 3;
+                    valor1 = false;
+                }
+            }
+            if (datosMusicaPelicula.isEmpty() == false) {
+                int precio = 0;
+                String precio3 = "";
+                String nombrePeli = "";
+
+                for (int r = 0; r < datosMusicaPelicula.size(); r++) {
+                    nombrePeli = (String) datosMusicaPelicula.get(r);
+                    r = r + 3;
+                    precio3 = (String) datosMusicaPelicula.get(r);
+                    precio = Integer.parseInt(precio3);
+                    //System.out.println("jola");
+                    if (precio >= precio1 && precio <= precio2) {
+                        validarPrecios.add(nombrePeli);
+                        r = r + 1;
+                    } else {
+                        r = r + 1;
+                    }
+                }
+
+                if (validarPrecios.isEmpty() == false) {
+
+                    for (int u = 0; u < validarPrecios.size(); u++) {
+                        for (int v = 0; v < datosMusicaPelicula.size(); v++) {
+                            if (validarPrecios.get(u).equals(datosMusicaPelicula.get(v))) {
+                                discosMostrar.add(datosMusicaPelicula.get(v));
+                                discosMostrar.add(datosMusicaPelicula.get(v + 1));
+                                discosMostrar.add(datosMusicaPelicula.get(v + 2));
+                                discosMostrar.add(datosMusicaPelicula.get(v + 3));
+                                discosMostrar.add(datosMusicaPelicula.get(v + 4));
+                                v = v + 4;
+                            } else {
+                                v = v + 4;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return discosMostrar;
+    }
+    
     public void validaFechaRep3(String fechaActual, String fechaDig) throws ParseException {
         SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
         Date fechaACT = formateador.parse(fechaActual);

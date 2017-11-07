@@ -52,7 +52,7 @@ public class loginAdminUsuario extends javax.swing.JFrame {
                 vistaUsuario vista= new vistaUsuario();
                 vista.setVisible(true);
 //                verificarDatos ver = new verificarDatos();
-//                ver.reporte1Musica();
+//                ver.datosMusicaPrecio("Pelicula","Comedia", 14000, 31000);
 //                ver.reporte1Peliculas();
                 vista.compraDiscosMusicaPeliculas(nombre,valor1,verificar);
                 dispose();

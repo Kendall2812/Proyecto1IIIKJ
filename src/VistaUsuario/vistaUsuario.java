@@ -36,10 +36,20 @@ public class vistaUsuario extends javax.swing.JFrame {
     String nombreUsuario, verificar;
     boolean bus;
     TableModel tablaModelo;
+    ArrayList discoPrecio = new ArrayList();
     
 
     public vistaUsuario() {
         initComponents();
+        jLabel3pre.setVisible(false);
+        jLabel4pre.setVisible(false);
+        jLabelpre.setVisible(false);
+        txtRangoPrecio.setBackground(Color.GRAY);
+        txtPrecio2.setBackground(Color.GRAY);
+        
+        txtRangoPrecio.setEnabled(false);
+        txtPrecio2.setEnabled(false);
+        
         this.getContentPane().setBackground(Color.gray);
         this.setLocationRelativeTo(null);
         this.setTitle("Vista Usuario");
@@ -62,12 +72,72 @@ public class vistaUsuario extends javax.swing.JFrame {
     public void filtroBusqueda() {
         String selec = txtSeleccion.getText();
         String genero = ComboxCateg.getSelectedItem().toString();
+        ArrayList discosMostrar = new ArrayList();
+        //String genero1 = menuItemMusica.getSelectedObjects().toString();
+        
         if (nombre.isSelected()) {
             String bus1 = "nom";
             valida(genero, selec, bus1);
         } else if (autor.isSelected()) {
             String bus1 = "aut";
             valida(genero, selec, bus1);
+        } else if (precio.isSelected()) {
+            String numero = txtRangoPrecio.getText();
+            String numero2 = txtPrecio2.getText();
+            if (numero.equals("") || numero2.equals("")) {
+                JOptionPane.showMessageDialog(null, "Ambas casillas deben estar llenas. No se puede buscar con un solo precio");
+            } else {
+                int precio = Integer.parseInt(numero);
+                int precio2 = Integer.parseInt(numero2);
+                
+                if (precio < 0 || precio2 < 0) {
+                    JOptionPane.showMessageDialog(null, "Los valores no deben ser negativos");
+                }else{
+                    
+                    if (precio == 0 || precio2 == 0) {
+                        JOptionPane.showMessageDialog(null, "Ambas casillas deben estar llenas. No se puede buscar con un solo precio");
+                    } else {
+                        if (precio != precio2 && precio2 != precio) {
+                            if (precio < precio2) {
+                                verificarDatos datosPrecio = new verificarDatos();
+                                discosMostrar = datosPrecio.datosMusicaPeliculasPrecio(verificar, genero, precio, precio2);
+
+                                if (verificar.equals("Musica")) {
+
+                                    if (discosMostrar.isEmpty() == false) {
+                                        DefaultTableModel tempo = (DefaultTableModel) table.getModel();
+                                        tempo.setRowCount(0);
+                                        for (int x = 0; x < discosMostrar.size(); x++) {
+                                            Object nuevo[] = {discosMostrar.get(x), discosMostrar.get(x + 1), discosMostrar.get(x + 2), discosMostrar.get(x + 3), discosMostrar.get(x + 4), discosMostrar.get(x + 5), discosMostrar.get(x + 6)};
+                                            x = x + 6;
+                                            tempo.addRow(nuevo);
+                                        }
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "No se a encontrado discos que esten dentro de este rango");
+                                    }
+                                } else if (verificar.equals("Pelicula")) {
+
+                                    if (discosMostrar.isEmpty() == false) {
+                                        DefaultTableModel tempo = (DefaultTableModel) table.getModel();
+                                        tempo.setRowCount(0);
+                                        for (int x = 0; x < discosMostrar.size(); x++) {
+                                            Object nuevo[] = {discosMostrar.get(x), discosMostrar.get(x + 1), discosMostrar.get(x + 2), discosMostrar.get(x + 3), discosMostrar.get(x + 4)};
+                                            x = x + 4;
+                                            tempo.addRow(nuevo);
+                                        }
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "No se a encontrado discos que esten dentro de este rango");
+                                    }
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "El primer precio debe ser menor a el segundo precio para poder realizar la consulta");
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Los precios no pueden ser los mismos");
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -210,7 +280,7 @@ public class vistaUsuario extends javax.swing.JFrame {
         try {
             try {
                 if (valor == false) {
-                    //System.out.println("hola");
+                    
                 } else {
 
                     if (numero.equals("-1")) {//validad que se aya seleccionado una cancion en el Jtable
@@ -297,6 +367,11 @@ public class vistaUsuario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
+        txtRangoPrecio = new javax.swing.JTextField();
+        txtPrecio2 = new javax.swing.JTextField();
+        jLabel3pre = new javax.swing.JLabel();
+        jLabel4pre = new javax.swing.JLabel();
+        jLabelpre = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         menuOpciones = new javax.swing.JMenu();
         menuItemMusica = new javax.swing.JMenuItem();
@@ -329,18 +404,33 @@ public class vistaUsuario extends javax.swing.JFrame {
         nombre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         nombre.setForeground(new java.awt.Color(255, 255, 255));
         nombre.setText("Nombre de la cancion");
+        nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreActionPerformed(evt);
+            }
+        });
 
         autor.setBackground(java.awt.Color.gray);
         buttonGroup1.add(autor);
         autor.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         autor.setForeground(new java.awt.Color(255, 255, 255));
         autor.setText("Autor");
+        autor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                autorActionPerformed(evt);
+            }
+        });
 
         precio.setBackground(java.awt.Color.gray);
         buttonGroup1.add(precio);
         precio.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         precio.setForeground(new java.awt.Color(255, 255, 255));
         precio.setText("Precio");
+        precio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                precioActionPerformed(evt);
+            }
+        });
 
         btnCompra.setBackground(new java.awt.Color(51, 204, 0));
         btnCompra.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -383,6 +473,26 @@ public class vistaUsuario extends javax.swing.JFrame {
             }
         });
 
+        txtRangoPrecio.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtRangoPrecio.setBorder(null);
+        txtRangoPrecio.setEnabled(false);
+
+        txtPrecio2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtPrecio2.setBorder(null);
+        txtPrecio2.setEnabled(false);
+
+        jLabel3pre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel3pre.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3pre.setText("Precio 1");
+
+        jLabel4pre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabel4pre.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4pre.setText("Precio 2");
+
+        jLabelpre.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jLabelpre.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelpre.setText("Indique Rango Precios");
+
         menuOpciones.setText("Opciones");
 
         menuItemMusica.setText("MUSICA");
@@ -410,30 +520,6 @@ public class vistaUsuario extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(autor)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(precio)
-                                .addGap(104, 104, 104)
-                                .addComponent(btnCompra)))
-                        .addGap(30, 30, 30)
-                        .addComponent(btnPrecompra)
-                        .addContainerGap(290, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(nombre)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69))))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -448,6 +534,41 @@ public class vistaUsuario extends javax.swing.JFrame {
                         .addComponent(ComboxCateg, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(precio)
+                            .addComponent(autor)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(nombre)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(btnBuscar)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4pre)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtPrecio2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelpre)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3pre)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtRangoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCompra)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPrecompra)))
+                .addGap(69, 69, 69))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -459,7 +580,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                     .addComponent(btnCerrarCesion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ComboxCateg, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -473,13 +594,27 @@ public class vistaUsuario extends javax.swing.JFrame {
                         .addComponent(jLabel2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(autor)
-                .addGap(7, 7, 7)
+                .addGap(6, 6, 6)
                 .addComponent(precio)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCompra)
-                    .addComponent(btnPrecompra))
-                .addGap(72, 72, 72))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCompra)
+                            .addComponent(btnPrecompra))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addComponent(jLabelpre)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtRangoPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3pre))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4pre)
+                            .addComponent(txtPrecio2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30))))
         );
 
         pack();
@@ -562,6 +697,56 @@ public class vistaUsuario extends javax.swing.JFrame {
         preCompras();
     }//GEN-LAST:event_btnPrecompraActionPerformed
 
+    private void precioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioActionPerformed
+        //consulta por precio del disco o pelicula
+        
+        txtSeleccion.setEditable(false);
+        jLabel3pre.setVisible(true);
+        jLabel4pre.setVisible(true);
+        jLabelpre.setVisible(true);
+        txtRangoPrecio.setBackground(Color.WHITE);
+        txtPrecio2.setBackground(Color.WHITE);
+        
+        txtRangoPrecio.setEnabled(true);
+        txtPrecio2.setEnabled(true);
+        
+        txtSeleccion.setText("");
+    }//GEN-LAST:event_precioActionPerformed
+
+    private void autorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autorActionPerformed
+        //consulta por nombre de autor del disco o pelicula
+        
+        txtSeleccion.setEditable(true);
+        jLabel3pre.setVisible(false);
+        jLabel4pre.setVisible(false);
+        jLabelpre.setVisible(false);
+        txtRangoPrecio.setBackground(Color.GRAY);
+        txtPrecio2.setBackground(Color.GRAY);
+        
+        txtRangoPrecio.setEnabled(false);
+        txtPrecio2.setEnabled(false);
+        
+        txtRangoPrecio.setText("");
+        txtPrecio2.setText("");
+    }//GEN-LAST:event_autorActionPerformed
+
+    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
+        //consulta por nombre del disco o pelicula
+        
+        txtSeleccion.setEditable(true);
+        jLabel3pre.setVisible(false);
+        jLabel4pre.setVisible(false);
+        jLabelpre.setVisible(false);
+        txtRangoPrecio.setBackground(Color.GRAY);
+        txtPrecio2.setBackground(Color.GRAY);
+        
+        txtRangoPrecio.setEnabled(false);
+        txtPrecio2.setEnabled(false);
+        
+        txtRangoPrecio.setText("");
+        txtPrecio2.setText("");
+    }//GEN-LAST:event_nombreActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -607,6 +792,9 @@ public class vistaUsuario extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3pre;
+    private javax.swing.JLabel jLabel4pre;
+    private javax.swing.JLabel jLabelpre;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem menuItemMusica;
@@ -616,6 +804,8 @@ public class vistaUsuario extends javax.swing.JFrame {
     private javax.swing.JRadioButton precio;
     private javax.swing.JTable table;
     private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtPrecio2;
+    private javax.swing.JTextField txtRangoPrecio;
     private javax.swing.JTextField txtSeleccion;
     // End of variables declaration//GEN-END:variables
 }
