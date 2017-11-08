@@ -19,10 +19,11 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
     /**
      * Creates new form verEditarInfoMusica
      */
-    String nombre,nombreDisco;
-    String nombred,autor,categoria,precio,disponibles,cancion1,cancion2;
+    String nombre, nombreDisco;
+    String nombred, autor, categoria, precio, disponibles, cancion1, cancion2;
     ArrayList datosDisco = new ArrayList();
     boolean valor = false;
+
     public verEditarInfoMusica() {
         initComponents();
         this.getContentPane().setBackground(Color.gray);
@@ -31,24 +32,27 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         editarMusica();
     }
-    public void editarMusica(){
-        
+
+    public void editarMusica() {
+
         verificarDatos datosMusica = new verificarDatos();
         datosDisco = datosMusica.editarMusica();
         datos();
     }
-    public void datos(){
+
+    public void datos() {
         jCb1NombreDiscos.addItem("Seleccionar");
-        for(int x =0; x < datosDisco.size(); x = x + 8){
+        for (int x = 0; x < datosDisco.size(); x = x + 8) {
             nombre = (String) datosDisco.get(x);
             jCb1NombreDiscos.addItem(nombre);
-        }   
+        }
     }
-    public void VerInformacion(){
+
+    public void VerInformacion() {
         nombreDisco = jCb1NombreDiscos.getSelectedItem().toString();
-        
-        for(int y = 0; y < datosDisco.size(); y = y + 8){
-            if(datosDisco.get(y).equals(nombreDisco)){
+
+        for (int y = 0; y < datosDisco.size(); y = y + 8) {
+            if (datosDisco.get(y).equals(nombreDisco)) {
                 txtNombre.setText(datosDisco.get(y).toString());
                 txtAutor.setText(datosDisco.get(y + 1).toString());
                 txtCategoria.setText(datosDisco.get(y + 2).toString());
@@ -57,7 +61,7 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
                 txtCancion1.setText(datosDisco.get(y + 5).toString());
                 txtCancion2.setText(datosDisco.get(y + 6).toString());
                 break;
-            }else if(nombreDisco.equals("Seleccionar")){
+            } else if (nombreDisco.equals("Seleccionar")) {
                 txtNombre.setText("");
                 txtAutor.setText("");
                 txtCategoria.setText("");
@@ -68,7 +72,8 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
             }
         }
     }
-    public void editarInformacion(){
+
+    public void editarInformacion() {
         nombred = txtNombre.getText();
         autor = txtAutor.getText();
         categoria = txtCategoria.getText();
@@ -76,31 +81,36 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
         disponibles = txtDisponibles.getText();
         cancion1 = txtCancion1.getText();
         cancion2 = txtCancion2.getText();
-        if (nombred.equals("") || autor.equals("") || categoria.equals("") || precio.equals("") || disponibles.equals("") ||cancion1.equals("") || cancion2.equals("")) {
+        if (nombred.equals("") || autor.equals("") || categoria.equals("") || precio.equals("") || disponibles.equals("") || cancion1.equals("") || cancion2.equals("")) {
             JOptionPane.showMessageDialog(null, "No puede dejar ningun espacio en blanco");
         } else {
             if (categoria.equals("Merengue") || categoria.equals("Clasica") || categoria.equals("Salsa") || categoria.equals("PasoDoble") || categoria.equals("Cumbia")) {
                 for (int x = 0; x < datosDisco.size(); x = x + 8) {
                     if (datosDisco.get(x).equals(nombreDisco)) {
+                        if (nombreDisco.equals("en vivo") || nombreDisco.equals("guayacan")
+                                || nombreDisco.equals("azul vivo") || nombreDisco.equals("saturday night Fever")
+                                || nombreDisco.equals("noches de fantasia")) {
+                            JOptionPane.showMessageDialog(null, "Este disco no se puede eliminar");
+                        } else {
+                            int y = datosDisco.indexOf(nombreDisco);
+                            int cont = 0;
+                            while (cont != 8) {
+                                datosDisco.remove(y);
+                                cont++;
+                            }
 
-                        int y = datosDisco.indexOf(nombreDisco);
-                        int cont = 0;
-                        while (cont != 8) {
-                            datosDisco.remove(y);
-                            cont++;
+                            datosDisco.add(nombred);
+                            datosDisco.add(autor);
+                            datosDisco.add(categoria);
+                            datosDisco.add(precio);
+                            datosDisco.add(disponibles);
+                            datosDisco.add(cancion1);
+                            datosDisco.add(cancion2);
+                            datosDisco.add("*");
+                            verificarDatos editar = new verificarDatos();
+                            editar.guardarMusicaEdidata(datosDisco);
+                            break;
                         }
-
-                        datosDisco.add(nombred);
-                        datosDisco.add(autor);
-                        datosDisco.add(categoria);
-                        datosDisco.add(precio);
-                        datosDisco.add(disponibles);
-                        datosDisco.add(cancion1);
-                        datosDisco.add(cancion2);
-                        datosDisco.add("*");
-                        verificarDatos editar = new verificarDatos();
-                        editar.guardarMusicaEdidata(datosDisco);
-                        break;
                     }
                 }
             } else {
@@ -116,21 +126,27 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
         txtCancion2.setEditable(false);
         btnGuardar.setEnabled(false);
     }
-    public void eliminarDiscoMusica(){
+
+    public void eliminarDiscoMusica() {
         nombreDisco = jCb1NombreDiscos.getSelectedItem().toString();
         for (int x = 0; x < datosDisco.size(); x = x + 8) {
             if (datosDisco.get(x).equals(nombreDisco)) {
-
-                int y = datosDisco.indexOf(nombreDisco);
-                int cont = 0;
-                while (cont != 8) {
-                    datosDisco.remove(y);
-                    cont++;
+                if (nombreDisco.equals("en vivo") || nombreDisco.equals("guayacan")
+                        || nombreDisco.equals("azul vivo") || nombreDisco.equals("saturday night Fever")
+                        || nombreDisco.equals("noches de fantasia")) {
+                    JOptionPane.showMessageDialog(null, "Este disco no se puede eliminar");
+                } else {
+                    int y = datosDisco.indexOf(nombreDisco);
+                    int cont = 0;
+                    while (cont != 8) {
+                        datosDisco.remove(y);
+                        cont++;
+                    }
+                    verificarDatos editar = new verificarDatos();
+                    editar.eliminarDisco(datosDisco);
+                    jCb1NombreDiscos.removeItem(nombreDisco);
+                    break;
                 }
-                verificarDatos editar = new verificarDatos();
-                editar.eliminarDisco(datosDisco);
-                jCb1NombreDiscos.removeItem(nombreDisco);
-                break;
             }
         }
     }
