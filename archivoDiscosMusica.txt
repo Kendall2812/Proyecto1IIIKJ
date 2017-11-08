@@ -9,3 +9,4 @@ saturday night Fever,Bee Gees,Clasica,40000,18,stayin alive,Night Fever,*,
 Mejor Paso Doble,Ronald,PasoDoble,10000,6,Ole,Cariño Verdadero,*,
 noches de fantasia,joseph,Merengue,20000,15,que levante la mano,noche de fantasia,*,
 Bailador,Celso Piña,Cumbia,13000,9,El Gigante,Sobre el Rio,*,
+Salsa Viejitas,Mario Alberto,Salsa,14000,23,Sobredosis De Amor,El papa de la Salsa,*

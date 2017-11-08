@@ -52,7 +52,7 @@ public class verificarDatos {
     int maximo6 = 0, menor6 = 0;
     Correo c = new Correo();
 
-    public boolean datosAdministrador(String nombre, String Clave) {//verifica el usuario y clave del administrador
+    public boolean datosAdministrador(String nombre, String Clave) {//the method the what does is verify administrator account
         archivosProyecto datos = new archivosProyecto();
         String datos2 = datos.datosAdmin();
         valores = datos2.split(" ");
@@ -68,7 +68,7 @@ public class verificarDatos {
         return valor;
     }
 
-    public boolean datosUsuarios(String nombre, String Clave) {//verifica el nombre y clave de los usuarios
+    public boolean datosUsuarios(String nombre, String Clave) {//the method the what does is verify users accounts
         String temp = "";
         boolean valor1 = false;
         archivosProyecto user = new archivosProyecto();
@@ -88,27 +88,31 @@ public class verificarDatos {
         return valor1;
     }
 
-    public void guardarInfoRegistro(String nombre, String Clave, String Cedula, String correo) { // guarda los datos de los usuarios
+    public void guardarInfoRegistro(String nombre, String Clave, String Cedula, String correo) { // the method what it does is save the information of the new user
         archivosProyecto informacionUsuario = new archivosProyecto();
         informacionUsuario.registrosUsuarios(nombre, Clave, Cedula, correo);
     }
 
     public void registrarDiscoMusica(String nombreDisco, String autor, String genero, String precio, String cantidadDisponible, String cancion1, String cancion2) {
+        //the method the what does is send a list of music disc information to the project files to register it.
         archivosProyecto datosMusica = new archivosProyecto();
         datosMusica.registrarDiscoMusica(nombreDisco, autor, genero, precio, cantidadDisponible, cancion1, cancion2);
     }
 
     public void registrarPelicula(String nombre, String autor, String categoria, String precio, String cantidad) {
+        //the method the what does is send a list with the movie information to the project files to register it.
         archivosProyecto registroPelicula = new archivosProyecto();
         registroPelicula.registrarPeliculas(nombre, autor, categoria, precio, cantidad);
     }
 
-    public void buscarArchivo(String genero, DefaultTableModel tabla, boolean bus) {//busca los generos en el archivo
+    public void buscarArchivo(String genero, DefaultTableModel tabla, boolean bus) {
+        //the method of what it does is send information from a music or movie disc so it can search for the gender
         archivosProyecto buscarInfo = new archivosProyecto();
         buscarInfo.buscarGeneroMusicaPelicual(genero, (DefaultTableModel) tabla, bus);
     }
 
     public ArrayList editarMusica() {
+        //the method of what it does is send information of a music disc so it can editd the information of the music disc
         ArrayList nombre = new ArrayList();
         archivosProyecto buscarNombreDisco = new archivosProyecto();
         datosDisco = buscarNombreDisco.leerDatosMusica();
@@ -116,16 +120,19 @@ public class verificarDatos {
     }
 
     public void guardarMusicaEdidata(ArrayList datosNuevos) {
+        //the method of what it does is save the editd information of the music disc
         archivosProyecto guardar = new archivosProyecto();
         guardar.editarInfoMusica(datosNuevos, true);
     }
 
     public void eliminarDisco(ArrayList datosEliminar) {
+        //the method of what it does is remove the information of a music disc
         archivosProyecto eliminar = new archivosProyecto();
         eliminar.eliminarInfoMusica(datosEliminar);
     }
 
     public ArrayList eidtarPeliculas() {
+        //the method of what it does is send information of a movie so it can editd the information of the movie
         ArrayList datosPelicula = new ArrayList();
         archivosProyecto buscarNombrePelicula = new archivosProyecto();
         datosPelicula = buscarNombrePelicula.leerDatosPeliculas();
@@ -133,26 +140,29 @@ public class verificarDatos {
     }
 
     public void guardarPeliculaEditada(ArrayList datosMovieNuevos) {
+        //the method of what it does is save the editd information of a movie
         archivosProyecto guardar = new archivosProyecto();
         guardar.guardarInfoPelicEditada(datosMovieNuevos, true);
     }
 
-    public void eliminarPelicula(ArrayList elimarDateMovie) {
+    public void eliminarPelicula(ArrayList elimarDateMovie) { //the method of what it does is remove the information of a movie
         archivosProyecto eliminarMovie = new archivosProyecto();
         eliminarMovie.eliminarPelicula(elimarDateMovie);
     }
 
     public void controlCompras(String nombre, String precio, String cantidad, String nameUser, String verificar, String genero) {
+        //the method of what it does is send the information  of the purchases of the music discs and movies for save it in archivos proyecto
         archivosProyecto compras = new archivosProyecto();
         compras.guardarCompras(nombre, precio, cantidad, nameUser, verificar, genero);
     }
 
     public void registrarPreCompra(String usuario, String nombreArticulo, String cantida, String total, String genero) {
+        //the method of what it does is send the information of the pre-purchases of the music discs and movies for save it in archivos proyecto
         archivosProyecto precompra = new archivosProyecto();
         precompra.registrarPreCompra2(usuario, nombreArticulo, cantida, total, genero);
     }
 
-    public void enviarCorreo2(String usuario, String mensaje, String asunt) { // enviar Correo
+    public void enviarCorreo2(String usuario, String mensaje, String asunt) { // the method of what it does is check the user and password for send the email to the users
         c.setContraseña("ieyoydtabzekgfhl");
         c.setUsuarioCorreo("jennim2430@gmail.com");
         c.setAsunto(asunt);
@@ -167,8 +177,8 @@ public class verificarDatos {
         }
     }
 
-    public ArrayList reporte1Musica() {
-        //Merengue,Clasica,Salsa,PasoDoble,Cumbia  
+    public ArrayList reporte1Musica() { 
+   //The method the what does is to extract the information from the music disc purchase file to extract the genres of the discs and thus be able to graph the best selling and least sold disc.  
         ArrayList masMenoVendido = new ArrayList();
         ArrayList datosMusica = new ArrayList();
         ArrayList nombreDisco = new ArrayList();
@@ -345,6 +355,7 @@ public class verificarDatos {
     }
 
     public ArrayList reporte1Peliculas() {
+        //The method extract the information from  movie purchase file to extract the genres of the films and thus be able to graph the best-selling film and the least sold.
         ArrayList masMenoVendido = new ArrayList();
         ArrayList datosPelicula = new ArrayList();
         ArrayList nombrePelicula = new ArrayList();
@@ -521,6 +532,7 @@ public class verificarDatos {
     }
 
         public ArrayList datosMusicaPeliculasPrecio(String verificar, String genero, int precio1, int precio2){
+        //The method the what it does is to verify which discs of music or movies are among the prices that were typed on the screen to return them and thus show them to the user
         ArrayList musicaPelicula = new ArrayList();
         ArrayList datosMusicaPelicula = new ArrayList();
         ArrayList validarPrecios = new ArrayList();
@@ -677,6 +689,7 @@ public class verificarDatos {
     }
     
     public void validaFechaRep3(String fechaActual, String fechaDig) throws ParseException {
+        //The method the what it does is check what the date fingered do not  be higher or same to the date current.
         SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yyyy");
         Date fechaACT = formateador.parse(fechaActual);
         Date fechaDi = formateador.parse(fechaDig);
@@ -689,6 +702,7 @@ public class verificarDatos {
     }
 
     public void leerDatosPeli(String fechaDig) throws ParseException {
+        //The method what it does is verify that if there are purchases of music discs or movies before the selected date
         ArrayList datosDiscoArc = new ArrayList();
         ArrayList<Integer> cantiDis = new ArrayList<>();
         ArrayList DiscosComp = new ArrayList();

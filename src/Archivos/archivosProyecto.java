@@ -36,7 +36,7 @@ public class archivosProyecto {
     String usuario, nombreDisco, mensaje, asunto, nombrePelicula;
     int precio, monto;
 
-    public String datosAdmin() { //Lee el archivo del administrador
+    public String datosAdmin() { //The method the what does is read the administrator file to extract the information and return it to the companies
 
         File administrador;
         try {
@@ -72,7 +72,7 @@ public class archivosProyecto {
         return valores;
     }
 
-    public ArrayList datosUser() { //Lee el archivo de usuario
+    public ArrayList datosUser() { //The method the what does is read the file of registered users to extract the information and return it to businesses
         ArrayList User = new ArrayList();
         File usuarios;
         try {
@@ -105,7 +105,7 @@ public class archivosProyecto {
     }
 
     public void registrarDiscoMusica(String nombreDisco, String autor, String genero, String precio, String cantidadDisponible, String cancion1, String cancion2) {
-        //Se crea el archivo para registrar la infomacion de los discos de musica.
+        //the method what it does is record the information of the music discs
         File DiscosMusica;
         try {
             DiscosMusica = new File("archivoDiscosMusica.txt");
@@ -139,7 +139,7 @@ public class archivosProyecto {
         }
     }
 
-    public void registrosUsuarios(String nombre, String Clave, String Cedula, String correo) {
+    public void registrosUsuarios(String nombre, String Clave, String Cedula, String correo) {//the method what it does is record the information of the users
         File direccion = new File("archivoUser.txt");
 
         try {
@@ -158,7 +158,7 @@ public class archivosProyecto {
         }
     }
 
-    public void registrarPeliculas(String nombre, String autor, String categoria, String precio, String cantidad) {
+    public void registrarPeliculas(String nombre, String autor, String categoria, String precio, String cantidad) { //the method what it does is record the information of the movies
         File Peliculas;
         try {
             Peliculas = new File("archivoPeliculas.txt");
@@ -187,7 +187,7 @@ public class archivosProyecto {
         }
     }
 
-    public void buscarGeneroMusicaPelicual(String genero, DefaultTableModel tabla, boolean bus) {
+    public void buscarGeneroMusicaPelicual(String genero, DefaultTableModel tabla, boolean bus) { //the method what it does is to look for the movies or music discs by genre
         DefaultTableModel tempo = (DefaultTableModel) tabla;
         if (bus) {
 
@@ -231,7 +231,7 @@ public class archivosProyecto {
         }
     }
 
-    public ArrayList leerDatosMusica() {
+    public ArrayList leerDatosMusica() { // the method the what does is read the music file adde by the administrator to extract the information and return it to the companies.
         String linea7, linea8;
         String[] nombreDisco;
         ArrayList datosDisco = new ArrayList();
@@ -254,7 +254,7 @@ public class archivosProyecto {
         return datosDisco;
     }
 
-    public void editarInfoMusica(ArrayList datosNuevos, boolean valor) {
+    public void editarInfoMusica(ArrayList datosNuevos, boolean valor) {//the method the what does is save the information edited of the music discs
 
         File direccion = new File("archivoDiscosMusica.txt");
         try {
@@ -281,7 +281,7 @@ public class archivosProyecto {
         }
     }
 
-    public void eliminarInfoMusica(ArrayList datosEliminar) {
+    public void eliminarInfoMusica(ArrayList datosEliminar) { //the method the what does is remove the information a music disc in specific
         File direccion = new File("archivoDiscosMusica.txt");
         try {
             try (FileWriter escribir = new FileWriter(direccion)) {
@@ -303,7 +303,7 @@ public class archivosProyecto {
         }
     }
 
-    public ArrayList leerDatosPeliculas() { // lee el archivo de musica para extraer la informacion y agregarla en una lista para retornarla negocios
+    public ArrayList leerDatosPeliculas() { // the method the what does is read the movies file added by the administrator to extract the information and return it to the companies.
         String linea7, linea8;
         String[] nombrePeliculas;
         ArrayList datosPelicula = new ArrayList();
@@ -326,7 +326,7 @@ public class archivosProyecto {
         return datosPelicula;
     }
 
-    public void guardarInfoPelicEditada(ArrayList datosNuevos, boolean valor) {
+    public void guardarInfoPelicEditada(ArrayList datosNuevos, boolean valor) { //the method the what does is save the information edited of the movies
         File direccion = new File("archivoPeliculas.txt");
         try {
             try (FileWriter escribir = new FileWriter(direccion)) {
@@ -352,7 +352,7 @@ public class archivosProyecto {
         }
     }
 
-    public void eliminarPelicula(ArrayList datosEliminarMovie) {
+    public void eliminarPelicula(ArrayList datosEliminarMovie) { //the method the what does is remove the information  a movie in specific
         File direccion = new File("archivoPeliculas.txt");
         try {
             try (FileWriter escribir = new FileWriter(direccion)) {
@@ -375,7 +375,8 @@ public class archivosProyecto {
     }
 
     public void guardarCompras(String nombre, String precio, String cantidad, String nameUser, String verificar,String genero) {
-
+        //the method the what does is save the purchases of the music discs and of the movies
+        
         boolean valor1 = false;
         File direccion = new File("archivoUser.txt");
 
@@ -555,6 +556,8 @@ public class archivosProyecto {
     }
 
     public void registrarPreCompra2(String usuario, String nombreArticulo, String cantidad, String total, String Genero) {
+        //the method the what does is save the pre-purchases of the music discs and movies
+        
         ArrayList usuario5 = new ArrayList();
         usuario5 = datosUser();
         String correo4 = ""; //nombre1 
@@ -599,6 +602,8 @@ public class archivosProyecto {
     }
 
     public void mostrarPreOrden(DefaultTableModel tabla, String verificar, int cantidad, String articulo, String asunto, String tipo, String user) {
+        //the method the what does is read the file of pre-purchases of the music discs and movies
+        
         DefaultTableModel tempo = (DefaultTableModel) tabla;
         try {
             String temp = "";
@@ -683,7 +688,7 @@ public class archivosProyecto {
         }
     }
 
-    public void mostrarCompDisc(DefaultTableModel tabla) {
+    public void mostrarCompDisc(DefaultTableModel tabla) { //the method the what does is read the file of purchase of music discs for what the admin can see them.
         DefaultTableModel tempo = (DefaultTableModel) tabla;
         try {
             String temp = "";
@@ -703,7 +708,7 @@ public class archivosProyecto {
 
     }
 
-    public void mostrarCompPeli(DefaultTableModel tabla) {
+    public void mostrarCompPeli(DefaultTableModel tabla) { //the method the what does is read the file of purchases of the movies for what the admin can see them.
         DefaultTableModel tempo = (DefaultTableModel) tabla;
         try {
             String temp = "";
@@ -723,7 +728,7 @@ public class archivosProyecto {
 
     }
 
-    public ArrayList leerArchivoCompraMusica1() {
+    public ArrayList leerArchivoCompraMusica1() { // the method the what does is read the purchase file of the music discs to extract the informacion and return it
         ArrayList comprasMusica = new ArrayList();
         File direccion = new File("archivoCompras.txt");
 
@@ -745,6 +750,8 @@ public class archivosProyecto {
     }
 
     public void eliminarPreOrden(DefaultTableModel tabla, String nombre, String correo, String articulo, String tipo, String cantidad) {
+        //the method the what does is read the file of pre-purchases for what  it can remove the information of the pre-purchases of music discs and of the movies
+        
         DefaultTableModel tempo = (DefaultTableModel) tabla;
         try {
             String temp;
@@ -786,7 +793,7 @@ public class archivosProyecto {
         }
     }
     
-    public ArrayList leerArchivoCompraPelicula1() {
+    public ArrayList leerArchivoCompraPelicula1() {  //method the what does is read the film purchase file extract the information and return it
         ArrayList comprasMusica = new ArrayList();
         File direccion = new File("archivoComprasPeliculas.txt");
 
