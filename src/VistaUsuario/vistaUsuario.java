@@ -200,7 +200,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                     }
                 }
             } catch (IOException e) {
-                System.out.println("No se encontro el archivo" + e);
+                JOptionPane.showMessageDialog(null, "No se encontro el archivo" + e);
             }
         } else if (verificar.equals("Pelicula")) {
             String temp = "";
@@ -259,7 +259,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                     }
                 }
             } catch (IOException e) {
-                System.out.println("No se encontro el archivo" + e);
+                JOptionPane.showMessageDialog(null, "No se encontro el archivo" + e);
             }
         }
     }
@@ -649,7 +649,6 @@ public class vistaUsuario extends javax.swing.JFrame {
     private void menuItemMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMusicaActionPerformed
         bus = true;
         verificar = "Musica";
-//        ComboxCateg.setEnabled(true);
         nombre.setLabel("Nombre de la Canción"); //Lo que hace es cambiar el nombre del label para colocar nombre Musica
         ComboxCateg.removeAllItems();
         ComboxCateg.addItem("Seleccionar");
@@ -669,7 +668,6 @@ public class vistaUsuario extends javax.swing.JFrame {
     private void menuItemPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemPeliculasActionPerformed
         bus = false;
         verificar = "Pelicula";
-//        ComboxCateg.setEnabled(true);
         nombre.setLabel("Nombre de la Pelicula");//Lo que hace es cambiar el nombre del label para colocar nombre Pelcula
         ComboxCateg.removeAllItems();
         ComboxCateg.addItem("Seleccionar");

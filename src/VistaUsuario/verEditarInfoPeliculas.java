@@ -22,6 +22,7 @@ public class verEditarInfoPeliculas extends javax.swing.JFrame {
     String nombre, nombrePelicula, nombreMovie;
     String nombreP, autor, categoria, precio, cantidad;
     ArrayList editarPelicula = new ArrayList();
+    int precio1 = 0, cantidad1 = 0;
 
     public verEditarInfoPeliculas() {
         initComponents();
@@ -84,36 +85,51 @@ public class verEditarInfoPeliculas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No puede dejar ningun espacio en blanco");
         }
         if (categoria.equals("Comedia") || categoria.equals("Terror") || categoria.equals("Romanticas") || categoria.equals("Accion") || categoria.equals("Suspenso")) {
-            for (int x = 0; x < editarPelicula.size(); x = x + 6) {
-                if (editarPelicula.get(x).equals(nombrePelicula)) {
+            try {
+                precio1 = Integer.parseInt(precio);
+                cantidad1 = Integer.parseInt(cantidad);
 
-                    int Y = editarPelicula.indexOf(nombrePelicula);
-                    int cont = 0;
-                    while (cont != 6) {
-                        editarPelicula.remove(Y);
-                        cont++;
+                for (int x = 0; x < editarPelicula.size(); x = x + 6) {
+                    if (editarPelicula.get(x).equals(nombrePelicula)) {
+
+                        int Y = editarPelicula.indexOf(nombrePelicula);
+                        int cont = 0;
+                        while (cont != 6) {
+                            editarPelicula.remove(Y);
+                            cont++;
+                        }
+                        editarPelicula.add(nombreP);
+                        editarPelicula.add(autor);
+                        editarPelicula.add(categoria);
+                        editarPelicula.add(precio1);
+                        editarPelicula.add(cantidad1);
+                        editarPelicula.add("*");
+
+                        verificarDatos editar = new verificarDatos();
+                        editar.guardarPeliculaEditada(editarPelicula);
+                        
+                        txtNombre.setEditable(false);
+                        txtAutor.setEditable(false);
+                        txtCategoria.setEditable(false);
+                        txtPrecio.setEditable(false);
+                        txtCantidad.setEditable(false);
+                        btnGuardar.setEnabled(false);
+                        break;
                     }
-                    editarPelicula.add(nombreP);
-                    editarPelicula.add(autor);
-                    editarPelicula.add(categoria);
-                    editarPelicula.add(precio);
-                    editarPelicula.add(cantidad);
-                    editarPelicula.add("*");
-
-                    verificarDatos editar = new verificarDatos();
-                    editar.guardarPeliculaEditada(editarPelicula);
-                    break;
                 }
+            }catch(Exception e){
+                btnGuardar.setEnabled(true);
+                JOptionPane.showMessageDialog(null, "El espacio es de valor numerico. " + e);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Esa Genero de pelicula no se encuentra registrado");
         }
-        txtNombre.setEditable(false);
-        txtAutor.setEditable(false);
-        txtCategoria.setEditable(false);
-        txtPrecio.setEditable(false);
-        txtCantidad.setEditable(false);
-        btnGuardar.setEnabled(false);
+   
+        if (btnGuardar.isEnabled() == true) {
+            verificarNombrePeliculas();
+        } else if(btnGuardar.isEnabled() == false) {
+            btnGuardar.setEnabled(false);
+        }
     }
 
     public void eliminarInfoMovie() {
@@ -145,6 +161,23 @@ public class verEditarInfoPeliculas extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null, "No se puede eliminar ese disco");
+        }
+    }
+    public void verificarNombrePeliculas(){
+        if (nombrePelicula.equals("la mascara") || nombrePelicula.equals("todo todo")
+                || nombrePelicula.equals("ruta equivocada") || nombrePelicula.equals("guardianes de la galaxia")
+                || nombrePelicula.equals("saw 8")) {
+            txtNombre.setEditable(false);
+            txtAutor.setEditable(false);
+            txtCategoria.setEditable(false);
+            txtPrecio.setEditable(true);
+            txtCantidad.setEditable(true);
+        } else {
+            txtNombre.setEditable(true);
+            txtAutor.setEditable(true);
+            txtCategoria.setEditable(true);
+            txtPrecio.setEditable(true);
+            txtCantidad.setEditable(true);
         }
     }
 
@@ -358,21 +391,7 @@ public class verEditarInfoPeliculas extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         btnGuardar.setEnabled(true);
-        if (nombrePelicula.equals("la mascara") || nombrePelicula.equals("todo todo")
-                || nombrePelicula.equals("ruta equivocada") || nombrePelicula.equals("guardianes de la galaxia")
-                || nombrePelicula.equals("saw 8")) {
-            txtNombre.setEditable(false);
-            txtAutor.setEditable(false);
-            txtCategoria.setEditable(false);
-            txtPrecio.setEditable(true);
-            txtCantidad.setEditable(true);
-        } else {
-            txtNombre.setEditable(true);
-            txtAutor.setEditable(true);
-            txtCategoria.setEditable(true);
-            txtPrecio.setEditable(true);
-            txtCantidad.setEditable(true);
-        }
+        verificarNombrePeliculas();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed

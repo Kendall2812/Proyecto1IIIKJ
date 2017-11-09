@@ -21,6 +21,7 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
      */
     String nombre, nombreDisco;
     String nombred, autor, categoria, precio, disponibles, cancion1, cancion2;
+    int precio1 = 0, disponible1 = 0;
     ArrayList datosDisco = new ArrayList();
     boolean valor = false;
 
@@ -92,39 +93,54 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No puede dejar ningun espacio en blanco");
         }
         if (categoria.equals("Merengue") || categoria.equals("Clasica") || categoria.equals("Salsa") || categoria.equals("PasoDoble") || categoria.equals("Cumbia")) {
-            for (int x = 0; x < datosDisco.size(); x = x + 8) {
-                if (datosDisco.get(x).equals(nombreDisco)) {
-                    int y = datosDisco.indexOf(nombreDisco);
-                    int cont = 0;
-                    while (cont != 8) {
-                        datosDisco.remove(y);
-                        cont++;
-                    }
+            try {
+                precio1 = Integer.parseInt(precio);
+                disponible1 = Integer.parseInt(disponibles);
 
-                    datosDisco.add(nombred);
-                    datosDisco.add(autor);
-                    datosDisco.add(categoria);
-                    datosDisco.add(precio);
-                    datosDisco.add(disponibles);
-                    datosDisco.add(cancion1);
-                    datosDisco.add(cancion2);
-                    datosDisco.add("*");
-                    verificarDatos editar = new verificarDatos();
-                    editar.guardarMusicaEdidata(datosDisco);
-                    break;
+                for (int x = 0; x < datosDisco.size(); x = x + 8) {
+                    if (datosDisco.get(x).equals(nombreDisco)) {
+                        int y = datosDisco.indexOf(nombreDisco);
+                        int cont = 0;
+                        while (cont != 8) {
+                            datosDisco.remove(y);
+                            cont++;
+                        }
+
+                        datosDisco.add(nombred);
+                        datosDisco.add(autor);
+                        datosDisco.add(categoria);
+                        datosDisco.add(precio1);
+                        datosDisco.add(disponible1);
+                        datosDisco.add(cancion1);
+                        datosDisco.add(cancion2);
+                        datosDisco.add("*");
+                        verificarDatos editar = new verificarDatos();
+                        editar.guardarMusicaEdidata(datosDisco);
+
+                        txtNombre.setEditable(false);
+                        txtAutor.setEditable(false);
+                        txtCategoria.setEditable(false);
+                        txtPrecio.setEditable(false);
+                        txtDisponibles.setEditable(false);
+                        txtCancion1.setEditable(false);
+                        txtCancion2.setEditable(false);
+                        btnGuardar.setEnabled(false);
+                        break;
+                    }
                 }
+            }catch(Exception e){
+                btnGuardar.setEnabled(true);
+                JOptionPane.showMessageDialog(null, "El espacio es de valor numerico. " + e);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Esa Genero de musica no se encuentra registrado");
         }
-        txtNombre.setEditable(false);
-        txtAutor.setEditable(false);
-        txtCategoria.setEditable(false);
-        txtPrecio.setEditable(false);
-        txtDisponibles.setEditable(false);
-        txtCancion1.setEditable(false);
-        txtCancion2.setEditable(false);
-        btnGuardar.setEnabled(false);
+        
+        if (btnGuardar.isEnabled() == true) {
+            verificarNombreCancion();
+        } else if (btnGuardar.isEnabled() == false) {
+            btnGuardar.setEnabled(false);
+        }
     }
 
     public void eliminarDiscoMusica() {
@@ -151,6 +167,28 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null, "Este disco no se puede eliminar");
+        }
+    }
+    public void verificarNombreCancion(){
+        if (nombreDisco.equals("en vivo") || nombreDisco.equals("guayacan")
+                || nombreDisco.equals("azul vivo") || nombreDisco.equals("saturday night Fever")
+                || nombreDisco.equals("noches de fantasia")) {
+            txtNombre.setEditable(false);
+            txtAutor.setEditable(false);
+            txtCategoria.setEditable(false);
+            txtPrecio.setEditable(true);
+            txtDisponibles.setEditable(true);
+            txtCancion1.setEditable(false);
+            txtCancion2.setEditable(false);
+        } else {
+
+            txtNombre.setEditable(true);
+            txtAutor.setEditable(true);
+            txtCategoria.setEditable(true);
+            txtPrecio.setEditable(true);
+            txtDisponibles.setEditable(true);
+            txtCancion1.setEditable(true);
+            txtCancion2.setEditable(true);
         }
     }
 
@@ -394,26 +432,7 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         btnGuardar.setEnabled(true);
-        if (nombreDisco.equals("en vivo") || nombreDisco.equals("guayacan")
-                || nombreDisco.equals("azul vivo") || nombreDisco.equals("saturday night Fever")
-                || nombreDisco.equals("noches de fantasia")) {
-            txtNombre.setEditable(false);
-            txtAutor.setEditable(false);
-            txtCategoria.setEditable(false);
-            txtPrecio.setEditable(true);
-            txtDisponibles.setEditable(true);
-            txtCancion1.setEditable(false);
-            txtCancion2.setEditable(false);
-        } else {
-
-            txtNombre.setEditable(true);
-            txtAutor.setEditable(true);
-            txtCategoria.setEditable(true);
-            txtPrecio.setEditable(true);
-            txtDisponibles.setEditable(true);
-            txtCancion1.setEditable(true);
-            txtCancion2.setEditable(true);
-        }
+        verificarNombreCancion();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed

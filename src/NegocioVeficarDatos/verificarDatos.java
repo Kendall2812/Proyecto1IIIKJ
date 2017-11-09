@@ -61,7 +61,7 @@ public class verificarDatos {
 
         if (nombre1.equals(nombre)) {
             if (clave1.equals(Clave)) {
-                System.out.println("Entro a el programa");
+                //System.out.println("Entro a el programa");
                 valor = true;
             }
         }
@@ -88,18 +88,18 @@ public class verificarDatos {
         return valor1;
     }
 
-    public void guardarInfoRegistro(String nombre, String Clave, String Cedula, String correo) { // the method what it does is save the information of the new user
+    public void guardarInfoRegistro(String nombre, String Clave, int Cedula, String correo) { // the method what it does is save the information of the new user
         archivosProyecto informacionUsuario = new archivosProyecto();
         informacionUsuario.registrosUsuarios(nombre, Clave, Cedula, correo);
     }
 
-    public void registrarDiscoMusica(String nombreDisco, String autor, String genero, String precio, String cantidadDisponible, String cancion1, String cancion2) {
+    public void registrarDiscoMusica(String nombreDisco, String autor, String genero, int precio, int cantidadDisponible, String cancion1, String cancion2) {
         //the method the what does is send a list of music disc information to the project files to register it.
         archivosProyecto datosMusica = new archivosProyecto();
         datosMusica.registrarDiscoMusica(nombreDisco, autor, genero, precio, cantidadDisponible, cancion1, cancion2);
     }
 
-    public void registrarPelicula(String nombre, String autor, String categoria, String precio, String cantidad) {
+    public void registrarPelicula(String nombre, String autor, String categoria, int precio, int cantidad) {
         //the method the what does is send a list with the movie information to the project files to register it.
         archivosProyecto registroPelicula = new archivosProyecto();
         registroPelicula.registrarPeliculas(nombre, autor, categoria, precio, cantidad);
@@ -303,7 +303,7 @@ public class verificarDatos {
                                     if (Generos.get(u).equals(maximo6) && valor11 == true) {
                                         u = u + 1;
                                         cancion11 = (String) Generos.get(u);
-                                        System.out.println(cancion11);
+                                        //System.out.println(cancion11);
                                         valor11 = false;
                                     }
                                 }
@@ -322,12 +322,12 @@ public class verificarDatos {
                                     if (Generos.get(u).equals(maximo6) && valor10 == true) {
                                         u = u + 1;
                                         cancion11 = (String) Generos.get(u);
-                                        System.out.println(cancion11);
+                                        //System.out.println(cancion11);
                                         valor10 = false;
                                     } else if (Generos.get(u).equals(menor6) && valor11 == true) {
                                         u = u + 1;
                                         cancion12 = (String) Generos.get(u);
-                                        System.out.println(cancion12);
+                                        //System.out.println(cancion12);
                                         valor11 = false;
                                     }
                                 }
@@ -480,7 +480,7 @@ public class verificarDatos {
                                     if (Generos.get(u).equals(maximo6) && valor11 == true) {
                                         u = u + 1;
                                         pelicula1 = (String) Generos.get(u);
-                                        System.out.println(pelicula1);
+                                        //System.out.println(pelicula1);
                                         valor11 = false;
                                     }
                                 }
@@ -499,12 +499,12 @@ public class verificarDatos {
                                     if (Generos.get(u).equals(maximo6) && valor10 == true) {
                                         u = u + 1;
                                         pelicula1 = (String) Generos.get(u);
-                                        System.out.println(pelicula1);
+                                        //System.out.println(pelicula1);
                                         valor10 = false;
                                     } else if (Generos.get(u).equals(menor6) && valor11 == true) {
                                         u = u + 1;
                                         pelicula2 = (String) Generos.get(u);
-                                        System.out.println(pelicula2);
+                                        //System.out.println(pelicula2);
                                         valor11 = false;
                                     }
                                 }
@@ -694,7 +694,7 @@ public class verificarDatos {
         Date fechaACT = formateador.parse(fechaActual);
         Date fechaDi = formateador.parse(fechaDig);
         if ((fechaDi.before(fechaACT) || fechaDi.equals(fechaACT))) {
-            System.out.println("la fecha si es anterior");
+            //JOptionPane.showMessageDialog(null, "la fecha si es anterior");
             leerDatosPeli(fechaDig);
         } else {
             JOptionPane.showMessageDialog(null,"La fecha debe ser anterior a la actual");
@@ -721,8 +721,8 @@ public class verificarDatos {
                 datosDiscoArc.add(nombreDisco[0]);
                 cantidadTotal.add(0);
             }
-            System.out.println("datosDisc " + datosDiscoArc);
-            System.out.println("cantidadvacia " + cantidadTotal);
+            //System.out.println("datosDisc " + datosDiscoArc);
+            //System.out.println("cantidadvacia " + cantidadTotal);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
         }
@@ -747,8 +747,8 @@ public class verificarDatos {
             if (!bus) {
                 JOptionPane.showMessageDialog(null, "No hay datos menores a esa fecha");
             }
-            System.out.println("discosCompradosmenoresAlafecha " + DiscosComp);
-            System.out.println("Cantidadessegunfechas " + cantiDis);
+            //System.out.println("discosCompradosmenoresAlafecha " + DiscosComp);
+            //System.out.println("Cantidadessegunfechas " + cantiDis);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
         }
@@ -768,7 +768,7 @@ public class verificarDatos {
                 p++;
                 i = 0;
             }
-            System.out.println("sumatotal " + cantidadTotal);
+            //System.out.println("sumatotal " + cantidadTotal);
             int j;
             for (j = 0; j < cantidadTotal.size();) {
                 if (cantidadTotal.get(j).equals(0)) {
@@ -779,8 +779,8 @@ public class verificarDatos {
                     j++;
                 }
             }
-            System.out.println("los que quedaron fijos " + cantidadTotal);
-            System.out.println("los quedaron segun cantidad " + datosDiscoArc);
+            //System.out.println("los que quedaron fijos " + cantidadTotal);
+            //System.out.println("los quedaron segun cantidad " + datosDiscoArc);
             reportesPeliculas ver = new reportesPeliculas();
             ver.grafica3(datosDiscoArc, cantidadTotal, fechaDig);
         }
@@ -816,8 +816,8 @@ public class verificarDatos {
                 datosDiscoArc.add(nombreDisco[0]);
                 cantidadTotal.add(0);
             }
-            System.out.println("datosDisc " + datosDiscoArc);
-            System.out.println("cantidadvacia " + cantidadTotal);
+            //System.out.println("datosDisc " + datosDiscoArc);
+            //System.out.println("cantidadvacia " + cantidadTotal);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
         }
@@ -842,8 +842,8 @@ public class verificarDatos {
             if (!bus) {
                 JOptionPane.showMessageDialog(null, "No hay datos menores a esa fecha");
             }
-            System.out.println("discosCompradosmenoresAlafecha " + DiscosComp);
-            System.out.println("Cantidadessegunfechas " + cantiDis);
+            //System.out.println("discosCompradosmenoresAlafecha " + DiscosComp);
+            //System.out.println("Cantidadessegunfechas " + cantiDis);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
         }
@@ -863,7 +863,7 @@ public class verificarDatos {
                 p++;
                 i = 0;
             }
-            System.out.println("sumatotal " + cantidadTotal);
+            //System.out.println("sumatotal " + cantidadTotal);
             int j;
             for (j = 0; j < cantidadTotal.size();) {
                 if (cantidadTotal.get(j).equals(0)) {
@@ -874,8 +874,8 @@ public class verificarDatos {
                     j++;
                 }
             }
-            System.out.println("los que quedaron fijos " + cantidadTotal);
-            System.out.println("los quedaron segun cantidad " + datosDiscoArc);
+            //System.out.println("los que quedaron fijos " + cantidadTotal);
+            //System.out.println("los quedaron segun cantidad " + datosDiscoArc);
             reportesDiscosMusica ver = new reportesDiscosMusica();
             ver.grafica4(datosDiscoArc, cantidadTotal, fechaDig);
         }

@@ -19,6 +19,7 @@ public class registroPeliculas extends javax.swing.JFrame {
      * Creates new form registroPeliculas
      */
     String nombre, autor, categoria, precio, cantidad; 
+    int precio1 = 0, cantidad1 = 0;
     public registroPeliculas() {
         initComponents();
         this.getContentPane().setBackground(Color.gray);
@@ -37,12 +38,19 @@ public class registroPeliculas extends javax.swing.JFrame {
             if (nombre.equals("") || autor.equals("") || categoria.equals("") || precio.equals("") || cantidad.equals("")) {
                 JOptionPane.showMessageDialog(null, "Todos los campos deben de estar Completos");
             } else {
-                verificarDatos peliculas = new verificarDatos();
-                peliculas.registrarPelicula(nombre, autor, categoria, precio, cantidad);
-                txtNombrePelicula.setText(" ");
-                txtAutorPelicula.setText(" ");
-                txtPrecioPelicula.setText(" ");
-                txtPeliculasDiponibles.setText(" ");
+                try {
+                    precio1 = Integer.parseInt(precio);
+                    cantidad1 = Integer.parseInt(cantidad);
+                    
+                    verificarDatos peliculas = new verificarDatos();
+                    peliculas.registrarPelicula(nombre, autor, categoria, precio1, cantidad1);
+                    txtNombrePelicula.setText(" ");
+                    txtAutorPelicula.setText(" ");
+                    txtPrecioPelicula.setText(" ");
+                    txtPeliculasDiponibles.setText(" ");
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "El espacio es de valor numerico. " + e);
+                }
             }
         }
     }

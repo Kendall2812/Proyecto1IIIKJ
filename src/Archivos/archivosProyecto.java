@@ -67,7 +67,7 @@ public class archivosProyecto {
             valores = nombre2 + " " + clave2;
 
         } catch (IOException e) {
-            System.out.println("Error al leer el archivo: " + e);
+            JOptionPane.showMessageDialog(null, "Error al leer el archivo: " + e);
         }
         return valores;
     }
@@ -99,12 +99,12 @@ public class archivosProyecto {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error al leer el archivo: " + e);
+            JOptionPane.showMessageDialog(null, "Error al leer el archivo: " + e);
         }
         return User;
     }
 
-    public void registrarDiscoMusica(String nombreDisco, String autor, String genero, String precio, String cantidadDisponible, String cancion1, String cancion2) {
+    public void registrarDiscoMusica(String nombreDisco, String autor, String genero, int precio, int cantidadDisponible, String cancion1, String cancion2) {
         //the method what it does is record the information of the music discs
         File DiscosMusica;
         try {
@@ -139,7 +139,7 @@ public class archivosProyecto {
         }
     }
 
-    public void registrosUsuarios(String nombre, String Clave, String Cedula, String correo) {//the method what it does is record the information of the users
+    public void registrosUsuarios(String nombre, String Clave, int Cedula, String correo) {//the method what it does is record the information of the users
         File direccion = new File("archivoUser.txt");
 
         try {
@@ -158,7 +158,7 @@ public class archivosProyecto {
         }
     }
 
-    public void registrarPeliculas(String nombre, String autor, String categoria, String precio, String cantidad) { //the method what it does is record the information of the movies
+    public void registrarPeliculas(String nombre, String autor, String categoria, int precio, int cantidad) { //the method what it does is record the information of the movies
         File Peliculas;
         try {
             Peliculas = new File("archivoPeliculas.txt");
@@ -744,7 +744,7 @@ public class archivosProyecto {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error al leer el archivo: " + e);
+            JOptionPane.showMessageDialog(null, "Error al leer el archivo: " + e);
         }
         return comprasMusica;
     }
@@ -782,14 +782,14 @@ public class archivosProyecto {
                                 mostrarPreOrden(tabla, "abrir", 0, "", "", "", "");
                             }
                         } catch (IOException e) {
-                            System.out.println("No se encontro el archivo" + e);
+                            JOptionPane.showMessageDialog(null, "No se encontro el archivo" + e);
                         }
                         break;
                     }
                 }
             }
         } catch (IOException e) {
-            System.out.println("No se encontro el archivo" + e);
+            JOptionPane.showMessageDialog(null, "No se encontro el archivo" + e);
         }
     }
     
@@ -809,7 +809,7 @@ public class archivosProyecto {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error al leer el archivo: " + e);
+            JOptionPane.showMessageDialog(null, "Error al leer el archivo: " + e);
         }
         return comprasMusica;
     }

@@ -19,6 +19,7 @@ public class registroDiscoMusica extends javax.swing.JFrame {
      * Creates new form registroDiscoMusica
      */
     String nombreDisco, autor, genero, precio, cantidadDisponible, cancion1, cancion2;
+    int precio1 = 0, cantidad = 0;
     public registroDiscoMusica() {
         initComponents();
         this.getContentPane().setBackground(Color.gray);
@@ -38,15 +39,22 @@ public class registroDiscoMusica extends javax.swing.JFrame {
         }else{
             if (nombreDisco.equals("") || autor.equals("") || genero.equals("") || precio.equals("") || cantidadDisponible.equals("") || cancion1.equals("") || cancion2.equals("")) {
                 JOptionPane.showMessageDialog(null, "Todos los campos deben de estar Completos");
-            }else{
-                verificarDatos registroMusica = new verificarDatos();
-                registroMusica.registrarDiscoMusica(nombreDisco, autor, genero, precio, cantidadDisponible, cancion1, cancion2);
-                txtNombreDisco.setText(" ");
-                txtNombreAutor.setText(" ");
-                txtPrecioDisco.setText(" ");
-                txtDisponibleCantidDisco.setText(" ");
-                txtCancion1.setText(" ");
-                txtCancion2.setText(" ");
+            } else {
+                try {
+                    precio1 = Integer.parseInt(precio);
+                    cantidad = Integer.parseInt(cantidadDisponible);
+
+                    verificarDatos registroMusica = new verificarDatos();
+                    registroMusica.registrarDiscoMusica(nombreDisco, autor, genero, precio1, cantidad, cancion1, cancion2);
+                    txtNombreDisco.setText(" ");
+                    txtNombreAutor.setText(" ");
+                    txtPrecioDisco.setText(" ");
+                    txtDisponibleCantidDisco.setText(" ");
+                    txtCancion1.setText(" ");
+                    txtCancion2.setText(" ");
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "El espacio es de valor numerico. " + e);
+                }
             }
         }
     }

@@ -139,7 +139,7 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
                 datosDiscoArc.add(nombreDisco[0]);
                 cantidadTotal.add(0);
             }
-            System.out.println("1" + datosDiscoArc);
+            //System.out.println("1" + datosDiscoArc);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Error a la hora de leer el la informacion del archivo");
         }
@@ -175,9 +175,9 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
             i = 0;
         }
         int j;
-        System.out.println("CantidadTotal" + cantidadTotal);
-        System.out.println("discosComprados" + DiscosComp);
-        System.out.println("ArcDis" + datosDiscoArc);
+        //System.out.println("CantidadTotal" + cantidadTotal);
+        //System.out.println("discosComprados" + DiscosComp);
+        //System.out.println("ArcDis" + datosDiscoArc);
         for (j = 0; j < cantidadTotal.size();) {
             if (cantidadTotal.get(j).equals(0)) {
                 cantidadTotal.remove(j);
@@ -187,8 +187,8 @@ public class reportesDiscosMusica extends javax.swing.JFrame {
                 j++;
             }
         }
-        System.out.println("CantidadTotal" + cantidadTotal);
-        System.out.println("ArcDis" + datosDiscoArc);
+        //System.out.println("CantidadTotal" + cantidadTotal);
+        //System.out.println("ArcDis" + datosDiscoArc);
     }
 
     public void agregaCombo() {

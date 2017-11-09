@@ -19,6 +19,7 @@ public class registroUsuario extends javax.swing.JFrame {
      * Creates new form registroUsuario
      */
     String nombre, cedula, Email, Clave;
+    int cedula1 = 0;
     public registroUsuario() {
         initComponents();
         this.getContentPane().setBackground(Color.gray);
@@ -33,14 +34,20 @@ public class registroUsuario extends javax.swing.JFrame {
         Email = txtEmail.getText();
         if (nombre.equals("") || Clave.equals("") || cedula.equals("") || Email.equals("")) {
             JOptionPane.showMessageDialog(null, "Todos los espacios deben estar Completos");
-        }else{
-            verificarDatos registro = new verificarDatos();
-            registro.guardarInfoRegistro(nombre, Clave, cedula, Email);
+        } else {
+            try {
+                cedula1 = Integer.parseInt(cedula);
+                
+                verificarDatos registro = new verificarDatos();
+                registro.guardarInfoRegistro(nombre, Clave, cedula1, Email);
 
-            txtCedula.setText(" ");
-            txtClave.setText(" ");
-            txtEmail.setText(" ");
-            txtNombre.setText(" ");
+                txtCedula.setText(" ");
+                txtClave.setText(" ");
+                txtEmail.setText(" ");
+                txtNombre.setText(" ");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "El espacio es de valor numerico. " + e);
+            }
         }
     }
 
