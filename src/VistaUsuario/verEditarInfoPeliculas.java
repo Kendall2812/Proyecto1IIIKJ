@@ -19,42 +19,51 @@ public class verEditarInfoPeliculas extends javax.swing.JFrame {
     /**
      * Creates new form verEditarInfoPeliculas
      */
-    String nombre, nombrePelicula,nombreMovie;
-    String nombreP,autor,categoria,precio,cantidad;
+    String nombre, nombrePelicula, nombreMovie;
+    String nombreP, autor, categoria, precio, cantidad;
     ArrayList editarPelicula = new ArrayList();
+
     public verEditarInfoPeliculas() {
         initComponents();
         this.getContentPane().setBackground(Color.gray);
         this.setTitle("Vista de Datos y Edicion");
-        this.setBounds(0, 0,600, 330);
+        this.setBounds(0, 0, 600, 330);
         setLocationRelativeTo(null);
         editarPeliculas();
     }
-    public void editarPeliculas(){
+
+    public void editarPeliculas() {
         verificarDatos datosPelicula = new verificarDatos();
         editarPelicula = datosPelicula.eidtarPeliculas();
         optionComboBox();
     }
-    public void optionComboBox(){
+
+    public void optionComboBox() {
         jcbNombrePeliculas.addItem("Seleccionar");
-        for(int x = 0; x < editarPelicula.size(); x = x + 6){
+        for (int x = 0; x < editarPelicula.size(); x = x + 6) {
             nombre = (String) editarPelicula.get(x);
             jcbNombrePeliculas.addItem(nombre);
         }
     }
-    public void mostrarInfoPelicula(){
+
+    public void mostrarInfoPelicula() {
         nombrePelicula = jcbNombrePeliculas.getSelectedItem().toString();
-        
-        for(int y = 0; y < editarPelicula.size(); y = y + 6){
-            if(editarPelicula.get(y).equals(nombrePelicula)){
+        btnGuardar.setEnabled(false);
+        for (int y = 0; y < editarPelicula.size(); y = y + 6) {
+            if (editarPelicula.get(y).equals(nombrePelicula)) {
                 txtNombre.setText(editarPelicula.get(y).toString());
                 txtAutor.setText(editarPelicula.get(y + 1).toString());
                 txtCategoria.setText(editarPelicula.get(y + 2).toString());
                 txtPrecio.setText(editarPelicula.get(y + 3).toString());
                 txtCantidad.setText(editarPelicula.get(y + 4).toString());
+                txtNombre.setEditable(false);
+                txtAutor.setEditable(false);
+                txtCategoria.setEditable(false);
+                txtPrecio.setEditable(false);
+                txtCantidad.setEditable(false);
+                btnGuardar.setEnabled(false);
                 break;
-            }
-            else if(nombrePelicula.equals("Seleccionar")){
+            } else if (nombrePelicula.equals("Seleccionar")) {
                 txtNombre.setText("");
                 txtAutor.setText("");
                 txtCategoria.setText("");
@@ -63,7 +72,8 @@ public class verEditarInfoPeliculas extends javax.swing.JFrame {
             }
         }
     }
-    public void editarInfoPelicula(){
+
+    public void editarInfoPelicula() {
         //Comedia,Terror,Romantias,Accion,Suspenso
         nombreP = txtNombre.getText();
         autor = txtAutor.getText();
@@ -72,31 +82,31 @@ public class verEditarInfoPeliculas extends javax.swing.JFrame {
         cantidad = txtCantidad.getText();
         if (nombreP.equals("") || autor.equals("") || categoria.equals("") || precio.equals("") || cantidad.equals("")) {
             JOptionPane.showMessageDialog(null, "No puede dejar ningun espacio en blanco");
-        }else{
-           if (categoria.equals("Comedia") || categoria.equals("Terror") || categoria.equals("Romanticas") || categoria.equals("Accion") || categoria.equals("Suspenso")) {
-                for (int x = 0; x < editarPelicula.size(); x = x + 6) {
-                    if (editarPelicula.get(x).equals(nombrePelicula)) {
-                        int Y = editarPelicula.indexOf(nombrePelicula);
-                        int cont = 0;
-                        while (cont != 6) {
-                            editarPelicula.remove(Y);
-                            cont++;
-                        }
-                        editarPelicula.add(nombreP);
-                        editarPelicula.add(autor);
-                        editarPelicula.add(categoria);
-                        editarPelicula.add(precio);
-                        editarPelicula.add(cantidad);
-                        editarPelicula.add("*");
+        }
+        if (categoria.equals("Comedia") || categoria.equals("Terror") || categoria.equals("Romanticas") || categoria.equals("Accion") || categoria.equals("Suspenso")) {
+            for (int x = 0; x < editarPelicula.size(); x = x + 6) {
+                if (editarPelicula.get(x).equals(nombrePelicula)) {
 
-                        verificarDatos editar = new verificarDatos();
-                        editar.guardarPeliculaEditada(editarPelicula);
-                        break;
+                    int Y = editarPelicula.indexOf(nombrePelicula);
+                    int cont = 0;
+                    while (cont != 6) {
+                        editarPelicula.remove(Y);
+                        cont++;
                     }
+                    editarPelicula.add(nombreP);
+                    editarPelicula.add(autor);
+                    editarPelicula.add(categoria);
+                    editarPelicula.add(precio);
+                    editarPelicula.add(cantidad);
+                    editarPelicula.add("*");
+
+                    verificarDatos editar = new verificarDatos();
+                    editar.guardarPeliculaEditada(editarPelicula);
+                    break;
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Esa Genero de pelicula no se encuentra registrado");
-            } 
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Esa Genero de pelicula no se encuentra registrado");
         }
         txtNombre.setEditable(false);
         txtAutor.setEditable(false);
@@ -105,14 +115,22 @@ public class verEditarInfoPeliculas extends javax.swing.JFrame {
         txtCantidad.setEditable(false);
         btnGuardar.setEnabled(false);
     }
-    public void eliminarInfoMovie(){
+
+    public void eliminarInfoMovie() {
         nombreMovie = jcbNombrePeliculas.getSelectedItem().toString();
         if (nombreMovie.equals("Seleccionar")) {
             JOptionPane.showMessageDialog(null, "Primero debe Seleccionar el nombre de una pelicula para que la pueda eliminar");
-        }else{
+        } else if (!nombreMovie.equals("la mascara") & !nombreMovie.equals("todo todo")
+                & !nombreMovie.equals("ruta equivocada") & !nombreMovie.equals("guardianes de la galaxia")
+                & !nombreMovie.equals("saw 8")) {
             for (int x = 0; x < editarPelicula.size(); x = x + 6) {
                 if (editarPelicula.get(x).equals(nombreMovie)) {
 
+                    txtNombre.setEditable(false);
+                    txtAutor.setEditable(false);
+                    txtCategoria.setEditable(false);
+                    txtPrecio.setEditable(true);
+                    txtCantidad.setEditable(true);
                     int y = editarPelicula.indexOf(nombreMovie);
                     int cont = 0;
                     while (cont != 6) {
@@ -125,9 +143,11 @@ public class verEditarInfoPeliculas extends javax.swing.JFrame {
                     break;
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "No se puede eliminar ese disco");
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -337,12 +357,22 @@ public class verEditarInfoPeliculas extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbNombrePeliculasActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        txtNombre.setEditable(true);
-        txtAutor.setEditable(true);
-        txtCategoria.setEditable(true);
-        txtPrecio.setEditable(true);
-        txtCantidad.setEditable(true);
         btnGuardar.setEnabled(true);
+        if (nombrePelicula.equals("la mascara") || nombrePelicula.equals("todo todo")
+                || nombrePelicula.equals("ruta equivocada") || nombrePelicula.equals("guardianes de la galaxia")
+                || nombrePelicula.equals("saw 8")) {
+            txtNombre.setEditable(false);
+            txtAutor.setEditable(false);
+            txtCategoria.setEditable(false);
+            txtPrecio.setEditable(true);
+            txtCantidad.setEditable(true);
+        } else {
+            txtNombre.setEditable(true);
+            txtAutor.setEditable(true);
+            txtCategoria.setEditable(true);
+            txtPrecio.setEditable(true);
+            txtCantidad.setEditable(true);
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -373,16 +403,24 @@ public class verEditarInfoPeliculas extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(verEditarInfoPeliculas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(verEditarInfoPeliculas.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(verEditarInfoPeliculas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(verEditarInfoPeliculas.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(verEditarInfoPeliculas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(verEditarInfoPeliculas.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(verEditarInfoPeliculas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(verEditarInfoPeliculas.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

@@ -50,7 +50,7 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
 
     public void VerInformacion() {
         nombreDisco = jCb1NombreDiscos.getSelectedItem().toString();
-
+        btnGuardar.setEnabled(false);
         for (int y = 0; y < datosDisco.size(); y = y + 8) {
             if (datosDisco.get(y).equals(nombreDisco)) {
                 txtNombre.setText(datosDisco.get(y).toString());
@@ -60,6 +60,13 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
                 txtDisponibles.setText(datosDisco.get(y + 4).toString());
                 txtCancion1.setText(datosDisco.get(y + 5).toString());
                 txtCancion2.setText(datosDisco.get(y + 6).toString());
+                txtNombre.setEditable(false);
+                txtAutor.setEditable(false);
+                txtCategoria.setEditable(false);
+                txtPrecio.setEditable(false);
+                txtDisponibles.setEditable(false);
+                txtCancion1.setEditable(false);
+                txtCancion2.setEditable(false);
                 break;
             } else if (nombreDisco.equals("Seleccionar")) {
                 txtNombre.setText("");
@@ -83,39 +90,32 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
         cancion2 = txtCancion2.getText();
         if (nombred.equals("") || autor.equals("") || categoria.equals("") || precio.equals("") || disponibles.equals("") || cancion1.equals("") || cancion2.equals("")) {
             JOptionPane.showMessageDialog(null, "No puede dejar ningun espacio en blanco");
-        } else {
-            if (categoria.equals("Merengue") || categoria.equals("Clasica") || categoria.equals("Salsa") || categoria.equals("PasoDoble") || categoria.equals("Cumbia")) {
-                for (int x = 0; x < datosDisco.size(); x = x + 8) {
-                    if (datosDisco.get(x).equals(nombreDisco)) {
-                        if (nombreDisco.equals("en vivo") || nombreDisco.equals("guayacan")
-                                || nombreDisco.equals("azul vivo") || nombreDisco.equals("saturday night Fever")
-                                || nombreDisco.equals("noches de fantasia")) {
-                            JOptionPane.showMessageDialog(null, "Este disco no se puede eliminar");
-                        } else {
-                            int y = datosDisco.indexOf(nombreDisco);
-                            int cont = 0;
-                            while (cont != 8) {
-                                datosDisco.remove(y);
-                                cont++;
-                            }
-
-                            datosDisco.add(nombred);
-                            datosDisco.add(autor);
-                            datosDisco.add(categoria);
-                            datosDisco.add(precio);
-                            datosDisco.add(disponibles);
-                            datosDisco.add(cancion1);
-                            datosDisco.add(cancion2);
-                            datosDisco.add("*");
-                            verificarDatos editar = new verificarDatos();
-                            editar.guardarMusicaEdidata(datosDisco);
-                            break;
-                        }
+        }
+        if (categoria.equals("Merengue") || categoria.equals("Clasica") || categoria.equals("Salsa") || categoria.equals("PasoDoble") || categoria.equals("Cumbia")) {
+            for (int x = 0; x < datosDisco.size(); x = x + 8) {
+                if (datosDisco.get(x).equals(nombreDisco)) {
+                    int y = datosDisco.indexOf(nombreDisco);
+                    int cont = 0;
+                    while (cont != 8) {
+                        datosDisco.remove(y);
+                        cont++;
                     }
+
+                    datosDisco.add(nombred);
+                    datosDisco.add(autor);
+                    datosDisco.add(categoria);
+                    datosDisco.add(precio);
+                    datosDisco.add(disponibles);
+                    datosDisco.add(cancion1);
+                    datosDisco.add(cancion2);
+                    datosDisco.add("*");
+                    verificarDatos editar = new verificarDatos();
+                    editar.guardarMusicaEdidata(datosDisco);
+                    break;
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Esa Genero de musica no se encuentra registrado");
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Esa Genero de musica no se encuentra registrado");
         }
         txtNombre.setEditable(false);
         txtAutor.setEditable(false);
@@ -129,13 +129,14 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
 
     public void eliminarDiscoMusica() {
         nombreDisco = jCb1NombreDiscos.getSelectedItem().toString();
-        for (int x = 0; x < datosDisco.size(); x = x + 8) {
-            if (datosDisco.get(x).equals(nombreDisco)) {
-                if (nombreDisco.equals("en vivo") || nombreDisco.equals("guayacan")
-                        || nombreDisco.equals("azul vivo") || nombreDisco.equals("saturday night Fever")
-                        || nombreDisco.equals("noches de fantasia")) {
-                    JOptionPane.showMessageDialog(null, "Este disco no se puede eliminar");
-                } else {
+        if (nombreDisco.equals("Seleccionar")) {
+            JOptionPane.showMessageDialog(null, "Primero debe Seleccionar el nombre de un disco para que lo pueda eliminar");
+        } else if (!nombreDisco.equals("en vivo") & !nombreDisco.equals("guayacan")
+                & !nombreDisco.equals("azul vivo") & !nombreDisco.equals("saturday night Fever")
+                & !nombreDisco.equals("noches de fantasia")) {
+            for (int x = 0; x < datosDisco.size(); x = x + 8) {
+                if (datosDisco.get(x).equals(nombreDisco)) {
+
                     int y = datosDisco.indexOf(nombreDisco);
                     int cont = 0;
                     while (cont != 8) {
@@ -148,6 +149,8 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
                     break;
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Este disco no se puede eliminar");
         }
     }
 
@@ -390,14 +393,27 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        txtNombre.setEditable(true);
-        txtAutor.setEditable(true);
-        txtCategoria.setEditable(true);
-        txtPrecio.setEditable(true);
-        txtDisponibles.setEditable(true);
-        txtCancion1.setEditable(true);
-        txtCancion2.setEditable(true);
         btnGuardar.setEnabled(true);
+        if (nombreDisco.equals("en vivo") || nombreDisco.equals("guayacan")
+                || nombreDisco.equals("azul vivo") || nombreDisco.equals("saturday night Fever")
+                || nombreDisco.equals("noches de fantasia")) {
+            txtNombre.setEditable(false);
+            txtAutor.setEditable(false);
+            txtCategoria.setEditable(false);
+            txtPrecio.setEditable(true);
+            txtDisponibles.setEditable(true);
+            txtCancion1.setEditable(false);
+            txtCancion2.setEditable(false);
+        } else {
+
+            txtNombre.setEditable(true);
+            txtAutor.setEditable(true);
+            txtCategoria.setEditable(true);
+            txtPrecio.setEditable(true);
+            txtDisponibles.setEditable(true);
+            txtCancion1.setEditable(true);
+            txtCancion2.setEditable(true);
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -436,16 +452,24 @@ public class verEditarInfoMusica extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(verEditarInfoMusica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(verEditarInfoMusica.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(verEditarInfoMusica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(verEditarInfoMusica.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(verEditarInfoMusica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(verEditarInfoMusica.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(verEditarInfoMusica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(verEditarInfoMusica.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
