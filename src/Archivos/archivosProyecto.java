@@ -140,6 +140,7 @@ public class archivosProyecto {
     }
 
     public void registrosUsuarios(String nombre, String Clave, int Cedula, String correo) {//the method what it does is record the information of the users
+        
         ArrayList verificarID = new ArrayList();
         verificarID = datosUser();
         boolean valor1 = true;
@@ -156,6 +157,7 @@ public class archivosProyecto {
 
         if (valor1 == false) {
             JOptionPane.showMessageDialog(null, "Este numero de cedula ya se encuentra registrado.");
+            
         } else if (valor1 == true) {
             File direccion = new File("archivoUser.txt");
 
@@ -206,6 +208,7 @@ public class archivosProyecto {
     }
 
     public void buscarGeneroMusicaPelicual(String genero, DefaultTableModel tabla, boolean bus) { //the method what it does is to look for the movies or music discs by genre
+        
         DefaultTableModel tempo = (DefaultTableModel) tabla;
         if (bus) {
 
