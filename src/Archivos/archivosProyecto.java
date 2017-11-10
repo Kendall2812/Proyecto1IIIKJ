@@ -140,7 +140,6 @@ public class archivosProyecto {
     }
 
     public void registrosUsuarios(String nombre, String Clave, int Cedula, String correo) {//the method what it does is record the information of the users
-        
         ArrayList verificarID = new ArrayList();
         verificarID = datosUser();
         boolean valor1 = true;
