@@ -176,7 +176,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                                     direccion = "noche_de_fantasia.wav";
                                     reproducirMusica(direccion);
                                     btnRepro.setVisible(true);
-                                }else{
+                                } else {
                                     btnRepro.setVisible(false);
                                 }
                             }
@@ -205,7 +205,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                                     direccion = "noche_de_fantasia.wav";
                                     reproducirMusica(direccion);
                                     btnRepro.setVisible(true);
-                                }else{
+                                } else {
                                     btnRepro.setVisible(false);
                                 }
                             }
@@ -249,7 +249,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                                     direccion = "Wrong Turn (2003) Trailer.mp4";
                                     reproducirMusica(direccion);
                                     btnRepro.setVisible(true);
-                                }else{
+                                } else {
                                     btnRepro.setVisible(false);
                                 }
                             }
@@ -278,6 +278,8 @@ public class vistaUsuario extends javax.swing.JFrame {
                                     direccion = "Wrong Turn (2003) Trailer.mp4";
                                     reproducirMusica(direccion);
                                     btnRepro.setVisible(true);
+                                } else {
+                                    btnRepro.setVisible(false);
                                 }
                             }
                         }
@@ -369,6 +371,89 @@ public class vistaUsuario extends javax.swing.JFrame {
         }
     }
 
+    public void validaMouseClicked(String nombre, String dato) {
+        if (verificar.equals("Musica")) {
+            String temp = "";
+            try {
+                try (BufferedReader bf = new BufferedReader(new FileReader("archivoDiscosMusica.txt"))) {
+                    String bfRead;
+                    while ((bfRead = bf.readLine()) != null) {
+                        temp = bfRead;
+                        String lista = temp;
+                        String[] lista1 = lista.split(",");
+
+                        if (lista1[0].equals(nombre) && (lista1[2].equals(dato))) {                       
+                            if (lista1[0].equals("saturday night Fever")) {
+                                direccion = "Stayin-Alive.wav";
+                                reproducirMusica(direccion);
+                                btnRepro.setVisible(true);
+                            } else if (lista1[0].equals("guayacan")) {
+                                direccion = "Pasodobles.wav";
+                                reproducirMusica(direccion);
+                                btnRepro.setVisible(true);
+                            } else if (lista1[0].equals("azul vivo")) {
+                                direccion = "como_te_voy_a_olvidar.wav";
+                                reproducirMusica(direccion);
+                                btnRepro.setVisible(true);
+                            } else if (lista1[0].equals("en vivo")) {
+                                direccion = "lloraras.wav";
+                                reproducirMusica(direccion);
+                                btnRepro.setVisible(true);
+                            } else if (lista1[0].equals("noches de fantasia")) {
+                                direccion = "noche_de_fantasia.wav";
+                                reproducirMusica(direccion);
+                                btnRepro.setVisible(true);
+                            } else {
+                                btnRepro.setVisible(false);
+                            }
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "No se encontro el archivo" + e);
+            }
+        } else if (verificar.equals("Pelicula")) {
+            String temp = "";
+            try {
+                try (BufferedReader bf = new BufferedReader(new FileReader("archivoPeliculas.txt"))) {
+                    String bfRead;
+                    while ((bfRead = bf.readLine()) != null) {
+                        temp = bfRead;
+                        String lista = temp;
+                        String[] lista1 = lista.split(",");
+                        if (lista1[0].equals(nombre) && (lista1[2].equals(dato))) {                         
+                            if (lista1[0].equals("todo todo")) {
+                                direccion = "TODO TODO   Trailer Banda Sonora   Oficial Warner Bros Pictures.mp4";
+                                reproducirMusica(direccion);
+                                btnRepro.setVisible(true);
+                            } else if (lista1[0].equals("guardianes de la galaxia")) {
+                                direccion = "Guardianes de la Galaxia Vol2   Nuevo Tráiler.mp4";
+                                reproducirMusica(direccion);
+                                btnRepro.setVisible(true);
+                            } else if (lista1[0].equals("saw 8")) {
+                                direccion = "Saw VIII Trailer Oficial Español.mp4";
+                                reproducirMusica(direccion);
+                                btnRepro.setVisible(true);
+                            } else if (lista1[0].equals("la mascara")) {
+                                direccion = "Trailer La Mascara.mp4";
+                                reproducirMusica(direccion);
+                                btnRepro.setVisible(true);
+                            } else if (lista1[0].equals("ruta equivocada")) {
+                                direccion = "Wrong Turn (2003) Trailer.mp4";
+                                reproducirMusica(direccion);
+                                btnRepro.setVisible(true);
+                            } else {
+                                btnRepro.setVisible(false);
+                            }
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "No se encontro el archivo" + e);
+            }
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -424,6 +509,11 @@ public class vistaUsuario extends javax.swing.JFrame {
                 "Nombre del disco", "Autor", "Categoria", "Precio", "Cantidad", "Cancion 1", "Cancion 2"
             }
         ));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table);
 
         nombre.setBackground(java.awt.Color.gray);
@@ -798,6 +888,30 @@ public class vistaUsuario extends javax.swing.JFrame {
             Logger.getLogger(vistaUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnReproActionPerformed
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        // TODO add your handling code here:
+        TableModel tablaModelo1;
+        tablaModelo1 = (TableModel) table.getModel();
+        int row = table.getSelectedRow();
+        try {
+            try {
+                if (verificar.equals("Musica")) {
+                    String name = tablaModelo1.getValueAt(row, 0).toString();
+                    String genero= tablaModelo1.getValueAt(row, 2).toString();
+                    validaMouseClicked(name, genero);
+                }else if(verificar.equals("Pelicula")){
+                    String name = tablaModelo1.getValueAt(row, 0).toString();
+                    String genero= tablaModelo1.getValueAt(row, 2).toString();
+                    validaMouseClicked(name, genero);
+                }
+            } catch (java.lang.NullPointerException e) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar");
+            }
+        } catch (java.lang.NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar");
+        }
+    }//GEN-LAST:event_tableMouseClicked
 
     /**
      * @param args the command line arguments
