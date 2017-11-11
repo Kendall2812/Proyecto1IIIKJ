@@ -1,4 +1,3 @@
-ruta equivocada,Alan,Suspenso,1500,6,*,
 todo todo,nicola yoon,Romanticas,12000,18,*,
 Enrredados,james,Comedia,15000,9,*,
 Titanic,James Cameron,Romanticas,10000,11,*,
@@ -6,4 +5,5 @@ guardianes de la galaxia,James Gunn,Accion,1000,15,*,
 MagoOz,jerry,Comedia,30000,10,*,
 la mascara,mike werb,Comedia,14000,15,*,
 saw 8,James Wan,Terror,1000,9,*,
-Los tres Chiflados,Maynor,Comedia,16000,15,*
+Los tres Chiflados,Maynor,Comedia,16000,15,*,
+ruta equivocada,Alan,Suspenso,1500,0,*,
