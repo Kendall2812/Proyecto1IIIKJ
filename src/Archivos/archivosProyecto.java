@@ -140,21 +140,40 @@ public class archivosProyecto {
     }
 
     public void registrosUsuarios(String nombre, String Clave, int Cedula, String correo) {//the method what it does is record the information of the users
-        File direccion = new File("archivoUser.txt");
-
-        try {
-            try (FileWriter escribir = new FileWriter(direccion, true)) {
-                escribir.write(nombre + " ");
-                escribir.write(Clave + " ");
-                escribir.write(Cedula + " ");
-                escribir.write(correo + "\n");
-                escribir.close();
-
-                JOptionPane.showMessageDialog(null, "Se registro con exito");
+        ArrayList verificarID = new ArrayList();
+        verificarID = datosUser();
+        boolean valor1 = true;
+        String id = String.valueOf(Cedula);
+        
+        for (int x = 1; x < verificarID.size(); x++) {
+            if (verificarID.get(x).equals(id)) {
+                valor1 = false;
+                break;
+            }else if(x >= 2){
+                x = x + 3;
             }
+        }
 
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error no se pudo registrar la informacion en el archivo" + e);
+        if (valor1 == false) {
+            JOptionPane.showMessageDialog(null, "Este numero de cedula ya se encuentra registrado.");
+            
+        } else if (valor1 == true) {
+            File direccion = new File("archivoUser.txt");
+
+            try {
+                try (FileWriter escribir = new FileWriter(direccion, true)) {
+                    escribir.write(nombre + " ");
+                    escribir.write(Clave + " ");
+                    escribir.write(Cedula + " ");
+                    escribir.write(correo + "\n");
+                    escribir.close();
+
+                    JOptionPane.showMessageDialog(null, "Se registro con exito");
+                }
+
+            } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "Error no se pudo registrar la informacion en el archivo" + e);
+            }
         }
     }
 
@@ -188,6 +207,7 @@ public class archivosProyecto {
     }
 
     public void buscarGeneroMusicaPelicual(String genero, DefaultTableModel tabla, boolean bus) { //the method what it does is to look for the movies or music discs by genre
+        
         DefaultTableModel tempo = (DefaultTableModel) tabla;
         if (bus) {
 
