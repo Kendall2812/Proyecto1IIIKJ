@@ -12,8 +12,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -28,7 +29,6 @@ public class vistaUsuario extends javax.swing.JFrame {
      * Creates new form vistaUsuario
      */
     ArrayList nombreUser = new ArrayList();
-    URL urlArchivoMusica;
     String direccion = "";
     int precio1;
     int cantidad;
@@ -37,7 +37,7 @@ public class vistaUsuario extends javax.swing.JFrame {
     boolean bus;
     TableModel tablaModelo;
     ArrayList discoPrecio = new ArrayList();
-    
+    File path;
 
     public vistaUsuario() {
         initComponents();
@@ -46,14 +46,13 @@ public class vistaUsuario extends javax.swing.JFrame {
         jLabelpre.setVisible(false);
         txtRangoPrecio.setBackground(Color.GRAY);
         txtPrecio2.setBackground(Color.GRAY);
-        
+
         txtRangoPrecio.setEnabled(false);
         txtPrecio2.setEnabled(false);
-        
+
         this.getContentPane().setBackground(Color.gray);
         this.setLocationRelativeTo(null);
         this.setTitle("Vista Usuario");
-//        ComboxCateg.setEnabled(false);
         btnPrecompra.setEnabled(false);
         nombre.setEnabled(false);
         autor.setEnabled(false);
@@ -66,7 +65,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                     "", "", "", "", ""
                 }
         ));
-
+        btnRepro.setVisible(false);
     }
 
     public void filtroBusqueda() {
@@ -74,7 +73,7 @@ public class vistaUsuario extends javax.swing.JFrame {
         String genero = ComboxCateg.getSelectedItem().toString();
         ArrayList discosMostrar = new ArrayList();
         //String genero1 = menuItemMusica.getSelectedObjects().toString();
-        
+
         if (nombre.isSelected()) {
             String bus1 = "nom";
             valida(genero, selec, bus1);
@@ -89,11 +88,11 @@ public class vistaUsuario extends javax.swing.JFrame {
             } else {
                 int precio = Integer.parseInt(numero);
                 int precio2 = Integer.parseInt(numero2);
-                
+
                 if (precio < 0 || precio2 < 0) {
                     JOptionPane.showMessageDialog(null, "Los valores no deben ser negativos");
-                }else{
-                    
+                } else {
+
                     if (precio == 0 || precio2 == 0) {
                         JOptionPane.showMessageDialog(null, "Ambas casillas deben estar llenas. No se puede buscar con un solo precio");
                     } else {
@@ -132,7 +131,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                             } else {
                                 JOptionPane.showMessageDialog(null, "El primer precio debe ser menor a el segundo precio para poder realizar la consulta");
                             }
-                        }else{
+                        } else {
                             JOptionPane.showMessageDialog(null, "Los precios no pueden ser los mismos");
                         }
                     }
@@ -160,18 +159,25 @@ public class vistaUsuario extends javax.swing.JFrame {
                                 if (lista1[5].equals("stayin alive") || lista1[6].equals("stayin alive")) {
                                     direccion = "Stayin-Alive.wav";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
                                 } else if (lista1[5].equals("pasodobles") || lista1[6].equals("pasodobles")) {
                                     direccion = "Pasodobles.wav";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
                                 } else if (lista1[5].equals("como te voy a olvidar") || lista1[6].equals("como te voy a olvidar")) {
                                     direccion = "como_te_voy_a_olvidar.wav";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
                                 } else if (lista1[5].equals("lloraras") || lista1[6].equals("lloraras")) {
                                     direccion = "lloraras.wav";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
                                 } else if (lista1[5].equals("noche de fantasia") || lista1[6].equals("noche de fantasia")) {
                                     direccion = "noche_de_fantasia.wav";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
+                                }else{
+                                    btnRepro.setVisible(false);
                                 }
                             }
                         } else if (bus.equals("aut")) {
@@ -180,20 +186,27 @@ public class vistaUsuario extends javax.swing.JFrame {
                                 Object nuevo[] = {lista1[0], lista1[1], lista1[2], lista1[3], lista1[4], lista1[5], lista1[6]};
                                 tempo.addRow(nuevo);
                                 if (lista1[5].equals("stayin alive") || lista1[6].equals("stayin alive")) {
-                                    direccion = "Stayin-Alive.wav";//src\canciones
+                                    direccion = "Stayin-Alive.wav";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
                                 } else if (lista1[5].equals("pasodobles") || lista1[6].equals("pasodobles")) {
                                     direccion = "Pasodobles.wav";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
                                 } else if (lista1[5].equals("como te voy a olvidar") || lista1[6].equals("como te voy a olvidar")) {
                                     direccion = "como_te_voy_a_olvidar.wav";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
                                 } else if (lista1[5].equals("lloraras") || lista1[6].equals("lloraras")) {
                                     direccion = "lloraras.wav";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
                                 } else if (lista1[5].equals("noche de fantasia") || lista1[6].equals("noche de fantasia")) {
                                     direccion = "noche_de_fantasia.wav";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
+                                }else{
+                                    btnRepro.setVisible(false);
                                 }
                             }
                         }
@@ -219,18 +232,25 @@ public class vistaUsuario extends javax.swing.JFrame {
                                 if (lista1[0].equals("todo todo")) {
                                     direccion = "TODO TODO   Trailer Banda Sonora   Oficial Warner Bros Pictures.mp4";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
                                 } else if (lista1[0].equals("guardianes de la galaxia")) {
                                     direccion = "Guardianes de la Galaxia Vol2   Nuevo Tráiler.mp4";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
                                 } else if (lista1[0].equals("saw 8")) {
                                     direccion = "Saw VIII Trailer Oficial Español.mp4";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
                                 } else if (lista1[0].equals("la mascara")) {
                                     direccion = "Trailer La Mascara.mp4";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
                                 } else if (lista1[0].equals("ruta equivocada")) {
                                     direccion = "Wrong Turn (2003) Trailer.mp4";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
+                                }else{
+                                    btnRepro.setVisible(false);
                                 }
                             }
                         } else if (bus.equals("aut")) {
@@ -241,18 +261,23 @@ public class vistaUsuario extends javax.swing.JFrame {
                                 if (lista1[0].equals("todo todo")) {
                                     direccion = "TODO TODO   Trailer Banda Sonora   Oficial Warner Bros Pictures.mp4";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
                                 } else if (lista1[0].equals("guadianes de la galaxia 2")) {
                                     direccion = "Guardianes de la Galaxia Vol2   Nuevo Tráiler.mp4";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
                                 } else if (lista1[0].equals("saw 8")) {
                                     direccion = "Saw VIII Trailer Oficial Español.mp4";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
                                 } else if (lista1[0].equals("la mascara")) {
                                     direccion = "Trailer La Mascara.mp4";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
                                 } else if (lista1[0].equals("ruta equivocada")) {
                                     direccion = "Wrong Turn (2003) Trailer.mp4";
                                     reproducirMusica(direccion);
+                                    btnRepro.setVisible(true);
                                 }
                             }
                         }
@@ -265,9 +290,9 @@ public class vistaUsuario extends javax.swing.JFrame {
     }
 
     public void reproducirMusica(String direccion) throws IOException {
-        String file = new String(direccion);
-        File path = new File(file);
-        Desktop.getDesktop().open(path);
+        String file = direccion;
+        path = new File(file);
+//        Desktop.getDesktop().open(path);
     }
 
     public void compraDiscosMusicaPeliculas(String nombreU, boolean valor, String verificar) {
@@ -280,7 +305,7 @@ public class vistaUsuario extends javax.swing.JFrame {
         try {
             try {
                 if (valor == false) {
-                    
+
                 } else {
 
                     if (numero.equals("-1")) {//validad que se aya seleccionado una cancion en el Jtable
@@ -307,7 +332,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                             String genero = tablaModelo.getValueAt(row, 2).toString();
 
                             ventanaCompras compra = new ventanaCompras(); //llama ventana compra
-                            compra.registrarCompra(strResultado, Precio, canti, User, verificar,genero);
+                            compra.registrarCompra(strResultado, Precio, canti, User, verificar, genero);
                             compra.setVisible(true);
                             dispose();
                         }
@@ -332,17 +357,18 @@ public class vistaUsuario extends javax.swing.JFrame {
                 String Precio = tablaModelo.getValueAt(row, 3).toString();
 
                 vetanaPreCompra preorden = new vetanaPreCompra();
-                preorden.preCompra(nombreDiscoPelicula, Precio, canti, User,verificar);
+                preorden.preCompra(nombreDiscoPelicula, Precio, canti, User, verificar);
                 preorden.setVisible(true);
                 dispose();
-                
+
             } else {
                 JOptionPane.showMessageDialog(null, "Debe indicar la cantidad de Discos o de Peliculas para realizar la Pre Orden");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar en la tabla el nombre de la pelicula o el nombre del Disco de Musica para realizar la Pre Compra");
         }
-     }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -372,6 +398,7 @@ public class vistaUsuario extends javax.swing.JFrame {
         jLabel3pre = new javax.swing.JLabel();
         jLabel4pre = new javax.swing.JLabel();
         jLabelpre = new javax.swing.JLabel();
+        btnRepro = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
         menuOpciones = new javax.swing.JMenu();
         menuItemMusica = new javax.swing.JMenuItem();
@@ -493,6 +520,13 @@ public class vistaUsuario extends javax.swing.JFrame {
         jLabelpre.setForeground(new java.awt.Color(255, 255, 255));
         jLabelpre.setText("Indique Rango Precios");
 
+        btnRepro.setText("Reproducir");
+        btnRepro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReproActionPerformed(evt);
+            }
+        });
+
         menuOpciones.setText("Opciones");
 
         menuItemMusica.setText("MUSICA");
@@ -539,20 +573,6 @@ public class vistaUsuario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(precio)
-                            .addComponent(autor)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(nombre)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addComponent(btnBuscar)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4pre)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -567,7 +587,26 @@ public class vistaUsuario extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnCompra)))
                         .addGap(18, 18, 18)
-                        .addComponent(btnPrecompra)))
+                        .addComponent(btnPrecompra))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(nombre)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(precio)
+                            .addComponent(autor))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnRepro)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBuscar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(69, 69, 69))
         );
         layout.setVerticalGroup(
@@ -592,10 +631,15 @@ public class vistaUsuario extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(autor)
-                .addGap(6, 6, 6)
-                .addComponent(precio)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(autor)
+                        .addGap(6, 6, 6)
+                        .addComponent(precio))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(btnRepro)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
@@ -639,6 +683,7 @@ public class vistaUsuario extends javax.swing.JFrame {
             precio.setEnabled(true);
             txtSeleccion.setEditable(true);
             btnBuscar.setEnabled(true);
+            btnRepro.setVisible(false);
         }
     }//GEN-LAST:event_ComboxCategActionPerformed
 
@@ -663,6 +708,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                     "NOMBRE DISCO", "AUTOR", "GENERO", "PRECIO", "CANTIDAD", "CANCION 1", "CANCION 2"
                 }
         ));
+        btnRepro.setVisible(false);
     }//GEN-LAST:event_menuItemMusicaActionPerformed
 
     private void menuItemPeliculasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemPeliculasActionPerformed
@@ -683,6 +729,7 @@ public class vistaUsuario extends javax.swing.JFrame {
                     "NOMBRE PELICULA", "AUTOR", "CATEGORIA", "PRECIO", "CANTIDAD"
                 }
         ));
+        btnRepro.setVisible(false);
     }//GEN-LAST:event_menuItemPeliculasActionPerformed
 
     private void btnCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompraActionPerformed
@@ -697,53 +744,60 @@ public class vistaUsuario extends javax.swing.JFrame {
 
     private void precioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioActionPerformed
         //consulta por precio del disco o pelicula
-        
+
         txtSeleccion.setEditable(false);
         jLabel3pre.setVisible(true);
         jLabel4pre.setVisible(true);
         jLabelpre.setVisible(true);
         txtRangoPrecio.setBackground(Color.WHITE);
         txtPrecio2.setBackground(Color.WHITE);
-        
         txtRangoPrecio.setEnabled(true);
         txtPrecio2.setEnabled(true);
-        
         txtSeleccion.setText("");
+        btnRepro.setVisible(false);
     }//GEN-LAST:event_precioActionPerformed
 
     private void autorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_autorActionPerformed
         //consulta por nombre de autor del disco o pelicula
-        
+
         txtSeleccion.setEditable(true);
         jLabel3pre.setVisible(false);
         jLabel4pre.setVisible(false);
         jLabelpre.setVisible(false);
         txtRangoPrecio.setBackground(Color.GRAY);
         txtPrecio2.setBackground(Color.GRAY);
-        
         txtRangoPrecio.setEnabled(false);
         txtPrecio2.setEnabled(false);
-        
         txtRangoPrecio.setText("");
         txtPrecio2.setText("");
+        btnRepro.setVisible(false);
     }//GEN-LAST:event_autorActionPerformed
 
     private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
         //consulta por nombre del disco o pelicula
-        
+
         txtSeleccion.setEditable(true);
         jLabel3pre.setVisible(false);
         jLabel4pre.setVisible(false);
         jLabelpre.setVisible(false);
         txtRangoPrecio.setBackground(Color.GRAY);
         txtPrecio2.setBackground(Color.GRAY);
-        
+
         txtRangoPrecio.setEnabled(false);
         txtPrecio2.setEnabled(false);
-        
+
         txtRangoPrecio.setText("");
         txtPrecio2.setText("");
+        btnRepro.setVisible(false);
     }//GEN-LAST:event_nombreActionPerformed
+
+    private void btnReproActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReproActionPerformed
+        try {
+            Desktop.getDesktop().open(path);
+        } catch (IOException ex) {
+            Logger.getLogger(vistaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnReproActionPerformed
 
     /**
      * @param args the command line arguments
@@ -787,6 +841,7 @@ public class vistaUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnCerrarCesion;
     private javax.swing.JButton btnCompra;
     private javax.swing.JButton btnPrecompra;
+    private javax.swing.JButton btnRepro;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
